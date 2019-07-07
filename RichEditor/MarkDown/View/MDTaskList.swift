@@ -27,7 +27,7 @@ class MDTaskList: MDControl {
     
     required init(state: State, size: CGSize = CGSize(width: 25, height: 15)) {
         self.state = state
-        let button = ZoomResponseButton(type: .custom)
+        let button = UIButton(type: .custom)
         button.isSelected = state == .done
         button.setImage(UIImage(named: "rich_text_todo_done"), for: .selected)
         button.setImage(UIImage(named: "rich_text_todo_undone"), for: .normal)
@@ -46,7 +46,7 @@ class MDTaskList: MDControl {
     @objc func changeState(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         state = sender.isSelected ? .done : .undone
-        VibrationUril.vibrationUril(type: .light)
+//        VibrationUril.vibrationUril(type: .light)
     }
     
     deinit { print("被释放了😔") }

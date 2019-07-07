@@ -73,7 +73,7 @@ struct MDUtil {
                 }
             }
             range?.pointee = selectedRange
-            print( "============= \(textLayout.text)" )
+//            print( "============= \(textLayout.text)" )
         }
     }
     

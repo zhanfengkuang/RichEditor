@@ -17,7 +17,6 @@ class MDParser: YYTextSimpleMarkdownParser {
     }
     
     override func parseText(_ text: NSMutableAttributedString?, selectedRange: NSRangePointer?) -> Bool {
-        printLog(text?.string)
         text?.yy_lineSpacing = 8
         let result = super.parseText(text, selectedRange: selectedRange)
 //        text?.yy_font = .systemFont(ofSize: 15)

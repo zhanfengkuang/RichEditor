@@ -175,15 +175,3 @@ extension String {
     }
 }
 
-// MARK: - url
-extension String {
-    /// OSS 路径
-    var ossUrlString: String {
-        if self.contains("http") { return self }
-        return ossUrl + self
-    }
-    
-    var url: URL? {
-        return URL(string: self)
-    }
-}

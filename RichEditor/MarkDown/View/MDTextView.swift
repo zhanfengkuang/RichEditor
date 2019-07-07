@@ -57,9 +57,10 @@ public class MDTextView: DynamicTextView {
             }
             selectedRange = NSRange(location: location, length: 0)
         case .time:  // 时间
-            if let textRange = selectedTextRange {
-                replace(textRange, withText: " \(TimeUtil.currentDateString(dateFormatter: .mandarin)) ")
-            }
+            break
+//            if let textRange = selectedTextRange {
+//                replace(textRange, withText: " \(TimeUtil.currentDateString(dateFormatter: .mandarin)) ")
+//            }
         case .line:  // 分割线
             index = 0
             let location = selectedRange.location + 1 + line.count + 1

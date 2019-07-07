@@ -80,6 +80,15 @@
 		C6EAA78E22D1926600896913 /* YYCGUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA75222D1926600896913 /* YYCGUtilities.m */; };
 		C6EAA78F22D1926600896913 /* CALayer+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA75322D1926600896913 /* CALayer+YYAdd.m */; };
 		C6EAA79222D1929600896913 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA79122D1929500896913 /* UIViewExt.swift */; };
+		C6EAA79422D1941D00896913 /* CGRectExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA79322D1941D00896913 /* CGRectExt.swift */; };
+		C6EAA79622D1942B00896913 /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA79522D1942B00896913 /* UIColorExt.swift */; };
+		C6EAA79822D1945A00896913 /* IntExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA79722D1945A00896913 /* IntExt.swift */; };
+		C6EAA79B22D194AF00896913 /* UIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA79A22D194AF00896913 /* UIConfig.swift */; };
+		C6EAA79D22D194C900896913 /* DoubleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA79C22D194C900896913 /* DoubleExt.swift */; };
+		C6EAA79F22D1954700896913 /* DynamicTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA79E22D1954600896913 /* DynamicTextView.swift */; };
+		C6EAA7A122D195D100896913 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA7A022D195D100896913 /* KeyboardManager.swift */; };
+		C6EAA7A322D1974200896913 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA7A222D1974200896913 /* ArrayExt.swift */; };
+		C6EAA7A522D1977000896913 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA7A422D1976F00896913 /* StringExt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -220,6 +229,15 @@
 		C6EAA75422D1926600896913 /* CALayer+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+YYAdd.h"; sourceTree = "<group>"; };
 		C6EAA75522D1926600896913 /* YYCGUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYCGUtilities.h; sourceTree = "<group>"; };
 		C6EAA79122D1929500896913 /* UIViewExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
+		C6EAA79322D1941D00896913 /* CGRectExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRectExt.swift; sourceTree = "<group>"; };
+		C6EAA79522D1942B00896913 /* UIColorExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExt.swift; sourceTree = "<group>"; };
+		C6EAA79722D1945A00896913 /* IntExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntExt.swift; sourceTree = "<group>"; };
+		C6EAA79A22D194AF00896913 /* UIConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIConfig.swift; sourceTree = "<group>"; };
+		C6EAA79C22D194C900896913 /* DoubleExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleExt.swift; sourceTree = "<group>"; };
+		C6EAA79E22D1954600896913 /* DynamicTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicTextView.swift; sourceTree = "<group>"; };
+		C6EAA7A022D195D100896913 /* KeyboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
+		C6EAA7A222D1974200896913 /* ArrayExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
+		C6EAA7A422D1976F00896913 /* StringExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +270,7 @@
 		C6EAA6AA22D191C100896913 /* RichEditor */ = {
 			isa = PBXGroup;
 			children = (
+				C6EAA79922D194A300896913 /* Config */,
 				C6EAA79022D1927200896913 /* add */,
 				C6EAA6D522D1926600896913 /* YYKit */,
 				C6EAA6C122D1923A00896913 /* MarkDown */,
@@ -277,6 +296,7 @@
 		C6EAA6C222D1923A00896913 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C6EAA79E22D1954600896913 /* DynamicTextView.swift */,
 				C6EAA6C322D1923A00896913 /* MDTextView.swift */,
 				C6EAA6C422D1923A00896913 /* MDParser.swift */,
 				C6EAA6C522D1923A00896913 /* RichEditorToobar.swift */,
@@ -491,9 +511,24 @@
 		C6EAA79022D1927200896913 /* add */ = {
 			isa = PBXGroup;
 			children = (
+				C6EAA7A422D1976F00896913 /* StringExt.swift */,
+				C6EAA7A222D1974200896913 /* ArrayExt.swift */,
+				C6EAA79C22D194C900896913 /* DoubleExt.swift */,
+				C6EAA79722D1945A00896913 /* IntExt.swift */,
+				C6EAA79522D1942B00896913 /* UIColorExt.swift */,
+				C6EAA79322D1941D00896913 /* CGRectExt.swift */,
 				C6EAA79122D1929500896913 /* UIViewExt.swift */,
 			);
 			path = add;
+			sourceTree = "<group>";
+		};
+		C6EAA79922D194A300896913 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				C6EAA7A022D195D100896913 /* KeyboardManager.swift */,
+				C6EAA79A22D194AF00896913 /* UIConfig.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -577,9 +612,11 @@
 				C6EAA6CC22D1923B00896913 /* MDTextView.swift in Sources */,
 				C6EAA6D222D1923B00896913 /* MDElement.swift in Sources */,
 				C6EAA76322D1926600896913 /* YYTextKeyboardManager.m in Sources */,
+				C6EAA79822D1945A00896913 /* IntExt.swift in Sources */,
 				C6EAA75A22D1926600896913 /* YYAnimatedImageView.m in Sources */,
 				C6EAA77822D1926600896913 /* UITableView+YYAdd.m in Sources */,
 				C6EAA76A22D1926600896913 /* YYTextRubyAnnotation.m in Sources */,
+				C6EAA79B22D194AF00896913 /* UIConfig.swift in Sources */,
 				C6EAA75722D1926600896913 /* YYImage.m in Sources */,
 				C6EAA78022D1926600896913 /* UIFont+YYAdd.m in Sources */,
 				C6EAA6AE22D191C200896913 /* ViewController.swift in Sources */,
@@ -595,15 +632,19 @@
 				C6EAA75D22D1926600896913 /* YYTextContainerView.m in Sources */,
 				C6EAA77722D1926600896913 /* UIApplication+YYAdd.m in Sources */,
 				C6EAA78522D1926600896913 /* NSData+YYAdd.m in Sources */,
+				C6EAA7A322D1974200896913 /* ArrayExt.swift in Sources */,
 				C6EAA6D122D1923B00896913 /* MDTaskList.swift in Sources */,
 				C6EAA77C22D1926600896913 /* UIBarButtonItem+YYAdd.m in Sources */,
+				C6EAA79422D1941D00896913 /* CGRectExt.swift in Sources */,
 				C6EAA6D422D1923B00896913 /* MDTheme.swift in Sources */,
 				C6EAA76D22D1926600896913 /* NSAttributedString+YYText.m in Sources */,
+				C6EAA79D22D194C900896913 /* DoubleExt.swift in Sources */,
 				C6EAA75F22D1926600896913 /* YYTextInput.m in Sources */,
 				C6EAA78322D1926600896913 /* NSBundle+YYAdd.m in Sources */,
 				C6EAA77D22D1926600896913 /* UIGestureRecognizer+YYAdd.m in Sources */,
 				C6EAA78C22D1926600896913 /* NSDictionary+YYAdd.m in Sources */,
 				C6EAA6AC22D191C200896913 /* AppDelegate.swift in Sources */,
+				C6EAA7A122D195D100896913 /* KeyboardManager.swift in Sources */,
 				C6EAA75C22D1926600896913 /* YYTextMagnifier.m in Sources */,
 				C6EAA77322D1926600896913 /* UITextField+YYAdd.m in Sources */,
 				C6EAA78F22D1926600896913 /* CALayer+YYAdd.m in Sources */,
@@ -616,10 +657,13 @@
 				C6EAA77922D1926600896913 /* UIScrollView+YYAdd.m in Sources */,
 				C6EAA76722D1926600896913 /* YYTextParser.m in Sources */,
 				C6EAA75E22D1926600896913 /* YYTextEffectWindow.m in Sources */,
+				C6EAA79622D1942B00896913 /* UIColorExt.swift in Sources */,
+				C6EAA79F22D1954700896913 /* DynamicTextView.swift in Sources */,
 				C6EAA78E22D1926600896913 /* YYCGUtilities.m in Sources */,
 				C6EAA6CE22D1923B00896913 /* RichEditorToobar.swift in Sources */,
 				C6EAA77B22D1926600896913 /* UIView+YYAdd.m in Sources */,
 				C6EAA78722D1926600896913 /* NSKeyedUnarchiver+YYAdd.m in Sources */,
+				C6EAA7A522D1977000896913 /* StringExt.swift in Sources */,
 				C6EAA77222D1926600896913 /* YYTextWeakProxy.m in Sources */,
 				C6EAA78D22D1926600896913 /* NSObject+YYAddForKVO.m in Sources */,
 				C6EAA6CD22D1923B00896913 /* MDParser.swift in Sources */,

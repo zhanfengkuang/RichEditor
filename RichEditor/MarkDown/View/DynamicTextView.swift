@@ -9,7 +9,7 @@
 import UIKit
 
 // text view 会根据文本内容的高度而改变
-public class DynamicTextView: TextView {
+public class DynamicTextView: YYTextView {
     /// 默认高度
     var defaultHeight: CGFloat = 60,
     /// textView 的最大高度
@@ -24,7 +24,7 @@ public class DynamicTextView: TextView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+//        addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         KeyboardManager.shared.keyboardDidShow = { [weak self] in
             guard let weakSelf = self else { return }
             weakSelf.sizeThatFits(weakSelf.bounds.size)
@@ -38,13 +38,13 @@ public class DynamicTextView: TextView {
             currentHeight = contentSize.height
             if (defaultHeight...maxHeight).contains(currentHeight) { // 将文本的高度控制在该范围内
                 // jarmon_tip: 不设置动画 会出现 textview 跳动问题
-                UIView.defaultAnimate(animations: {
+                UIView.animate(withDuration: 0.25) {
                     self.frame = CGRect(origin: self.frame.origin,
                                         size: CGSize(width: self.bounds.size.width,
                                                      height: self.currentHeight))
-                })
+                }
 //                extraContainerView.frame = bounds
-                printLog(currentHeight)
+//                printLog(currentHeight)
                 observeHeight?(currentHeight)
             }
         }
