@@ -146,6 +146,9 @@ public enum RichEditorElement: Int, CaseIterable {
     case todo
     /// 无序
     
+    /// 图片
+    case image
+    
 //    var index: Int {
 //        switch self {
 //        case .bold:
@@ -201,6 +204,8 @@ public enum RichEditorElement: Int, CaseIterable {
             return "line"
         case .todo:
             return "todo"
+        case .image:
+            return "image"
         }
         
     }

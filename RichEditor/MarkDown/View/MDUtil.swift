@@ -12,6 +12,8 @@ import Foundation
 struct MDUtil {
     static var controls: [MDControl] = [ ]
     
+    static var images: [MDImage] = [ ]
+    
     /// 将富文本转为 md 标记
     ///
     /// - Parameter textLayout: 富文本信息
@@ -35,6 +37,8 @@ struct MDUtil {
                     control = MDTaskList(state: btn.isSelected ? .done : .undone)
                 case .line:
                     control = MDLine()
+                case .image:
+                    control = MDImage()
                 }
                 location += offset
                 md.insert(contentsOf: control.md, at: md.index(md.startIndex, offsetBy: location))
@@ -110,6 +114,26 @@ struct MDUtil {
                     }
                     offset += line.md.count - $0.count
                 }
+            case .image:
+                var offset: Int = 0
+                let regular = try! NSRegularExpression(pattern: "^(!\\p{Z}{0,1})\\[{0,1}(.+?)\\]\\({1}(.+?)\\)$", options: [.anchorsMatchLines])
+                regular.enumerateMatches(in: text.string,
+                                         options: [],
+                                         range: NSRange(location: 0, length: text.string.count),
+                                         using: { (result, flags, stop) in
+                                            if let range = result?.range {
+                                                let location = range.location - offset
+                                                if location >= 0 {
+                                                    let replaceRange = NSRange(location: location , length: range.length)
+                                                    let image = MDImage(size: CGSize(width: 100, height: 50))
+                                                    MDUtil.images.append(image)
+                                                    if let attributedString = image.attributedString {
+                                                        text.replaceCharacters(in: replaceRange, with: attributedString)
+                                                    }
+                                                    offset += image.md.count - 1
+                                                }
+                                            }
+                })
             }
         }
     }

@@ -3,10 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B59DC3CE50040418B49EA9D1 /* Pods_RichEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D09F41A2DA1D5A02A39642 /* Pods_RichEditor.framework */; };
+		C606DE3622D57B5600F425B3 /* MDImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606DE3522D57B5600F425B3 /* MDImage.swift */; };
+		C610CFF422E5B608001F9C35 /* WechatIMG4306.png in Resources */ = {isa = PBXBuildFile; fileRef = C610CFF322E5B607001F9C35 /* WechatIMG4306.png */; };
+		C610CFF622E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png in Resources */ = {isa = PBXBuildFile; fileRef = C610CFF522E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png */; };
+		C67834E422D6D88E00BE08B0 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67834E322D6D88E00BE08B0 /* NextViewController.swift */; };
+		C67834F922D70ACD00BE08B0 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67834F822D70ACD00BE08B0 /* TextElement.swift */; };
 		C6EAA6AC22D191C200896913 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6AB22D191C200896913 /* AppDelegate.swift */; };
 		C6EAA6AE22D191C200896913 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6AD22D191C200896913 /* ViewController.swift */; };
 		C6EAA6B122D191C200896913 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6EAA6AF22D191C200896913 /* Main.storyboard */; };
@@ -92,6 +98,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A2CB99E4AA93F1D6D425C565 /* Pods-RichEditor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RichEditor.release.xcconfig"; path = "Target Support Files/Pods-RichEditor/Pods-RichEditor.release.xcconfig"; sourceTree = "<group>"; };
+		A77C52299ACD51FC275CFB1C /* Pods-RichEditor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RichEditor.debug.xcconfig"; path = "Target Support Files/Pods-RichEditor/Pods-RichEditor.debug.xcconfig"; sourceTree = "<group>"; };
+		C606DE3522D57B5600F425B3 /* MDImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDImage.swift; sourceTree = "<group>"; };
+		C610CFF322E5B607001F9C35 /* WechatIMG4306.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WechatIMG4306.png; sourceTree = "<group>"; };
+		C610CFF522E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "屏幕快照 2019-07-22 16.18.15.png"; sourceTree = "<group>"; };
+		C67834E322D6D88E00BE08B0 /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
+		C67834F822D70ACD00BE08B0 /* TextElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextElement.swift; sourceTree = "<group>"; };
 		C6EAA6A822D191C100896913 /* RichEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RichEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6EAA6AB22D191C200896913 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6EAA6AD22D191C200896913 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -238,6 +251,7 @@
 		C6EAA7A022D195D100896913 /* KeyboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		C6EAA7A222D1974200896913 /* ArrayExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		C6EAA7A422D1976F00896913 /* StringExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
+		E2D09F41A2DA1D5A02A39642 /* Pods_RichEditor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RichEditor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,17 +259,45 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B59DC3CE50040418B49EA9D1 /* Pods_RichEditor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4566808DB669B88335C2FECD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E2D09F41A2DA1D5A02A39642 /* Pods_RichEditor.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		690D18E0064011123D686FC0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A77C52299ACD51FC275CFB1C /* Pods-RichEditor.debug.xcconfig */,
+				A2CB99E4AA93F1D6D425C565 /* Pods-RichEditor.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C67834F722D70AB200BE08B0 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				C67834F822D70ACD00BE08B0 /* TextElement.swift */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		C6EAA69F22D191C100896913 = {
 			isa = PBXGroup;
 			children = (
 				C6EAA6AA22D191C100896913 /* RichEditor */,
 				C6EAA6A922D191C100896913 /* Products */,
+				690D18E0064011123D686FC0 /* Pods */,
+				4566808DB669B88335C2FECD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -270,12 +312,15 @@
 		C6EAA6AA22D191C100896913 /* RichEditor */ = {
 			isa = PBXGroup;
 			children = (
+				C610CFF322E5B607001F9C35 /* WechatIMG4306.png */,
+				C610CFF522E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png */,
 				C6EAA79922D194A300896913 /* Config */,
 				C6EAA79022D1927200896913 /* add */,
 				C6EAA6D522D1926600896913 /* YYKit */,
 				C6EAA6C122D1923A00896913 /* MarkDown */,
 				C6EAA6AB22D191C200896913 /* AppDelegate.swift */,
 				C6EAA6AD22D191C200896913 /* ViewController.swift */,
+				C67834E322D6D88E00BE08B0 /* NextViewController.swift */,
 				C6EAA6AF22D191C200896913 /* Main.storyboard */,
 				C6EAA6B222D191C300896913 /* Assets.xcassets */,
 				C6EAA6B422D191C300896913 /* LaunchScreen.storyboard */,
@@ -288,6 +333,7 @@
 		C6EAA6C122D1923A00896913 /* MarkDown */ = {
 			isa = PBXGroup;
 			children = (
+				C67834F722D70AB200BE08B0 /* New Group */,
 				C6EAA6C222D1923A00896913 /* View */,
 			);
 			path = MarkDown;
@@ -306,6 +352,7 @@
 				C6EAA6C922D1923A00896913 /* MDElement.swift */,
 				C6EAA6CA22D1923A00896913 /* MDControl.swift */,
 				C6EAA6CB22D1923A00896913 /* MDTheme.swift */,
+				C606DE3522D57B5600F425B3 /* MDImage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -324,15 +371,15 @@
 			isa = PBXGroup;
 			children = (
 				C6EAA6D722D1926600896913 /* YYImage.h */,
+				C6EAA6DC22D1926600896913 /* YYImage.m */,
 				C6EAA6D822D1926600896913 /* YYImageCoder.h */,
+				C6EAA6DD22D1926600896913 /* YYImageCoder.m */,
 				C6EAA6D922D1926600896913 /* YYFrameImage.h */,
+				C6EAA6DE22D1926600896913 /* YYFrameImage.m */,
+				C6EAA6E022D1926600896913 /* YYSpriteSheetImage.h */,
 				C6EAA6DA22D1926600896913 /* YYSpriteSheetImage.m */,
 				C6EAA6DB22D1926600896913 /* YYAnimatedImageView.h */,
-				C6EAA6DC22D1926600896913 /* YYImage.m */,
-				C6EAA6DD22D1926600896913 /* YYImageCoder.m */,
-				C6EAA6DE22D1926600896913 /* YYFrameImage.m */,
 				C6EAA6DF22D1926600896913 /* YYAnimatedImageView.m */,
-				C6EAA6E022D1926600896913 /* YYSpriteSheetImage.h */,
 			);
 			path = YYImage;
 			sourceTree = "<group>";
@@ -341,12 +388,12 @@
 			isa = PBXGroup;
 			children = (
 				C6EAA6E222D1926600896913 /* YYText.h */,
-				C6EAA6E322D1926600896913 /* YYTextView.m */,
-				C6EAA6E422D1926600896913 /* Component */,
+				C6EAA70422D1926600896913 /* YYLabel.h */,
 				C6EAA6F722D1926600896913 /* YYLabel.m */,
 				C6EAA6F822D1926600896913 /* YYTextView.h */,
+				C6EAA6E322D1926600896913 /* YYTextView.m */,
+				C6EAA6E422D1926600896913 /* Component */,
 				C6EAA6F922D1926600896913 /* String */,
-				C6EAA70422D1926600896913 /* YYLabel.h */,
 				C6EAA70522D1926600896913 /* Utility */,
 			);
 			path = YYText;
@@ -356,23 +403,23 @@
 			isa = PBXGroup;
 			children = (
 				C6EAA6E522D1926600896913 /* YYTextSelectionView.h */,
-				C6EAA6E622D1926600896913 /* YYTextLine.h */,
 				C6EAA6E722D1926600896913 /* YYTextMagnifier.m */,
-				C6EAA6E822D1926600896913 /* YYTextLayout.h */,
 				C6EAA6E922D1926600896913 /* YYTextKeyboardManager.h */,
 				C6EAA6EA22D1926600896913 /* YYTextContainerView.m */,
 				C6EAA6EB22D1926600896913 /* YYTextEffectWindow.m */,
-				C6EAA6EC22D1926600896913 /* YYTextDebugOption.h */,
+				C6EAA6F522D1926600896913 /* YYTextInput.h */,
 				C6EAA6ED22D1926600896913 /* YYTextInput.m */,
+				C6EAA6E822D1926600896913 /* YYTextLayout.h */,
 				C6EAA6EE22D1926600896913 /* YYTextLayout.m */,
 				C6EAA6EF22D1926600896913 /* YYTextMagnifier.h */,
+				C6EAA6E622D1926600896913 /* YYTextLine.h */,
 				C6EAA6F022D1926600896913 /* YYTextLine.m */,
 				C6EAA6F122D1926600896913 /* YYTextSelectionView.m */,
 				C6EAA6F222D1926600896913 /* YYTextEffectWindow.h */,
 				C6EAA6F322D1926600896913 /* YYTextContainerView.h */,
 				C6EAA6F422D1926600896913 /* YYTextKeyboardManager.m */,
-				C6EAA6F522D1926600896913 /* YYTextInput.h */,
 				C6EAA6F622D1926600896913 /* YYTextDebugOption.m */,
+				C6EAA6EC22D1926600896913 /* YYTextDebugOption.h */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -420,10 +467,10 @@
 		C6EAA71622D1926600896913 /* YYCategories */ = {
 			isa = PBXGroup;
 			children = (
+				C6EAA75022D1926600896913 /* YYCategoriesMacro.h */,
 				C6EAA71722D1926600896913 /* YYCategories.h */,
 				C6EAA71822D1926600896913 /* UIKit */,
 				C6EAA73522D1926600896913 /* Foundation */,
-				C6EAA75022D1926600896913 /* YYCategoriesMacro.h */,
 				C6EAA75122D1926600896913 /* Quartz */,
 			);
 			path = YYCategories;
@@ -434,8 +481,9 @@
 			children = (
 				C6EAA71922D1926600896913 /* UITextField+YYAdd.m */,
 				C6EAA71A22D1926600896913 /* UIBezierPath+YYAdd.m */,
-				C6EAA71B22D1926600896913 /* UIColor+YYAdd.m */,
+				C6EAA72822D1926600896913 /* UIColor+YYAdd.h */,
 				C6EAA71C22D1926600896913 /* UIControl+YYAdd.h */,
+				C6EAA71B22D1926600896913 /* UIColor+YYAdd.m */,
 				C6EAA71D22D1926600896913 /* UIDevice+YYAdd.m */,
 				C6EAA71E22D1926600896913 /* UIApplication+YYAdd.m */,
 				C6EAA71F22D1926600896913 /* UITableView+YYAdd.m */,
@@ -447,7 +495,6 @@
 				C6EAA72522D1926600896913 /* UIBarButtonItem+YYAdd.m */,
 				C6EAA72622D1926600896913 /* UIGestureRecognizer+YYAdd.m */,
 				C6EAA72722D1926600896913 /* UITextField+YYAdd.h */,
-				C6EAA72822D1926600896913 /* UIColor+YYAdd.h */,
 				C6EAA72922D1926600896913 /* UIBezierPath+YYAdd.h */,
 				C6EAA72A22D1926600896913 /* UIScreen+YYAdd.h */,
 				C6EAA72B22D1926600896913 /* UIScrollView+YYAdd.h */,
@@ -500,10 +547,10 @@
 		C6EAA75122D1926600896913 /* Quartz */ = {
 			isa = PBXGroup;
 			children = (
-				C6EAA75222D1926600896913 /* YYCGUtilities.m */,
-				C6EAA75322D1926600896913 /* CALayer+YYAdd.m */,
 				C6EAA75422D1926600896913 /* CALayer+YYAdd.h */,
+				C6EAA75322D1926600896913 /* CALayer+YYAdd.m */,
 				C6EAA75522D1926600896913 /* YYCGUtilities.h */,
+				C6EAA75222D1926600896913 /* YYCGUtilities.m */,
 			);
 			path = Quartz;
 			sourceTree = "<group>";
@@ -538,6 +585,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C6EAA6BA22D191C300896913 /* Build configuration list for PBXNativeTarget "RichEditor" */;
 			buildPhases = (
+				6BA13A8D1E3F0C104F1C29DE /* [CP] Check Pods Manifest.lock */,
 				C6EAA6A422D191C100896913 /* Sources */,
 				C6EAA6A522D191C100896913 /* Frameworks */,
 				C6EAA6A622D191C100896913 /* Resources */,
@@ -590,13 +638,40 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C610CFF622E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png in Resources */,
 				C6EAA6B622D191C300896913 /* LaunchScreen.storyboard in Resources */,
 				C6EAA6B322D191C300896913 /* Assets.xcassets in Resources */,
+				C610CFF422E5B608001F9C35 /* WechatIMG4306.png in Resources */,
 				C6EAA6B122D191C200896913 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6BA13A8D1E3F0C104F1C29DE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RichEditor-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C6EAA6A422D191C100896913 /* Sources */ = {
@@ -631,6 +706,7 @@
 				C6EAA76E22D1926600896913 /* UIPasteboard+YYText.m in Sources */,
 				C6EAA75D22D1926600896913 /* YYTextContainerView.m in Sources */,
 				C6EAA77722D1926600896913 /* UIApplication+YYAdd.m in Sources */,
+				C606DE3622D57B5600F425B3 /* MDImage.swift in Sources */,
 				C6EAA78522D1926600896913 /* NSData+YYAdd.m in Sources */,
 				C6EAA7A322D1974200896913 /* ArrayExt.swift in Sources */,
 				C6EAA6D122D1923B00896913 /* MDTaskList.swift in Sources */,
@@ -672,6 +748,7 @@
 				C6EAA76122D1926600896913 /* YYTextLine.m in Sources */,
 				C6EAA76F22D1926600896913 /* YYTextTransaction.m in Sources */,
 				C6EAA78622D1926600896913 /* NSThread+YYAdd.m in Sources */,
+				C67834E422D6D88E00BE08B0 /* NextViewController.swift in Sources */,
 				C6EAA76522D1926600896913 /* YYLabel.m in Sources */,
 				C6EAA76022D1926600896913 /* YYTextLayout.m in Sources */,
 				C6EAA76922D1926600896913 /* YYTextArchiver.m in Sources */,
@@ -680,6 +757,7 @@
 				C6EAA77E22D1926600896913 /* UIImage+YYAdd.m in Sources */,
 				C6EAA6D022D1923B00896913 /* MDLine.swift in Sources */,
 				C6EAA78B22D1926600896913 /* NSNotificationCenter+YYAdd.m in Sources */,
+				C67834F922D70ACD00BE08B0 /* TextElement.swift in Sources */,
 				C6EAA78122D1926600896913 /* NSArray+YYAdd.m in Sources */,
 				C6EAA76422D1926600896913 /* YYTextDebugOption.m in Sources */,
 			);
@@ -825,6 +903,7 @@
 		};
 		C6EAA6BB22D191C300896913 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A77C52299ACD51FC275CFB1C /* Pods-RichEditor.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -846,6 +925,7 @@
 		};
 		C6EAA6BC22D191C300896913 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2CB99E4AA93F1D6D425C565 /* Pods-RichEditor.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

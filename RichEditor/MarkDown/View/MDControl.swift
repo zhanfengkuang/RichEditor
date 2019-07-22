@@ -11,6 +11,7 @@ import Foundation
 public enum MDControlType: Int, CaseIterable {
     case task = 56
     case line
+    case image
     
     // 控件的长度
     var count: Int {
@@ -18,6 +19,8 @@ public enum MDControlType: Int, CaseIterable {
         case .task:
             return 1
         case .line:
+            return 1
+        case .image:
             return 1
         }
     }
@@ -28,6 +31,8 @@ public enum MDControlType: Int, CaseIterable {
             return MDTaskList.self
         case .line:
             return MDLine.self
+        case .image:
+            return MDImage.self
         }
     }
 }

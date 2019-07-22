@@ -24,7 +24,6 @@ public class DynamicTextView: YYTextView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         KeyboardManager.shared.keyboardDidShow = { [weak self] in
             guard let weakSelf = self else { return }
             weakSelf.sizeThatFits(weakSelf.bounds.size)
@@ -37,14 +36,6 @@ public class DynamicTextView: YYTextView {
             currentHeight != contentSize.height { // 文本高度为改变不处理
             currentHeight = contentSize.height
             if (defaultHeight...maxHeight).contains(currentHeight) { // 将文本的高度控制在该范围内
-                // jarmon_tip: 不设置动画 会出现 textview 跳动问题
-                UIView.animate(withDuration: 0.25) {
-                    self.frame = CGRect(origin: self.frame.origin,
-                                        size: CGSize(width: self.bounds.size.width,
-                                                     height: self.currentHeight))
-                }
-//                extraContainerView.frame = bounds
-//                printLog(currentHeight)
                 observeHeight?(currentHeight)
             }
         }

@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     /// rich text parser
     var parser: MDParser = MDParser()
     
+    var button: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,8 +33,23 @@ class ViewController: UIViewController {
             self.richEditor.textParser = self.parser
             self.view.addSubview(self.richEditor)
             
+            self.richEditor.attributedText = NSAttributedString(string: "- [x] halzi\n![image](https://www.baidu.com/123.com)\n- [x] halzi\n![image](https://www.baidu.com/123.com)\n- [x] halzi\n![image](https://www.baidu.com/123.com)")
+            
             self.richEditorToolbar.textView = self.richEditor
         }
+        
+        let btn = UIButton(type: .custom)
+        btn.setTitle("next", for: .normal)
+        btn.setTitleColor(.red, for: .normal)
+        btn.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
+        view.addSubview(btn)
+        btn.frame = CGRect(x: 100, y: 400, width: 200, height: 30)
+    }
+    
+    @objc func nextAction() {
+        let vc = NextViewController()
+//        richEditor.isEditable = false
+        present(vc, animated: true, completion: nil)
     }
     
     deinit {

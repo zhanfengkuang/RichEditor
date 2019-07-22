@@ -36,16 +36,17 @@ class MDTaskList: MDControl {
         button.addTarget(self, action: #selector(changeState), for: .touchUpInside)
         button.tag = type.rawValue
         
-         attributedString = NSMutableAttributedString.yy_attachmentString(withContent: button,
-                                                                          contentMode: .left,
-                                                                          attachmentSize: size,
-                                                                          alignTo: .systemFont(ofSize: 14),
-                                                                          alignment: .center)
+        attributedString = NSMutableAttributedString.yy_attachmentString(withContent: button,
+                                                                         contentMode: .left,
+                                                                         attachmentSize: size,
+                                                                         alignTo: .systemFont(ofSize: 14),
+                                                                         alignment: .center)
     }
     
     @objc func changeState(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         state = sender.isSelected ? .done : .undone
+        
 //        VibrationUril.vibrationUril(type: .light)
     }
     

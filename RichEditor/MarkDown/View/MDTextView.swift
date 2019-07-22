@@ -9,6 +9,7 @@
 import UIKit
 
 public class MDTextView: DynamicTextView {
+    var imageView: MDImage?
     
     var state: RichEditorElement?
     var isAddMD: Bool = false
@@ -57,10 +58,25 @@ public class MDTextView: DynamicTextView {
             }
             selectedRange = NSRange(location: location, length: 0)
         case .time:  // 时间
-            break
-//            if let textRange = selectedTextRange {
-//                replace(textRange, withText: " \(TimeUtil.currentDateString(dateFormatter: .mandarin)) ")
-//            }
+            self.state = nil
+            index = 0
+            let attachment = MDImage(size: CGSize(width: jr_width, height: 200))
+            let text = attributedText.map { NSMutableAttributedString(attributedString: $0) }
+            
+            print("------- \(selectedRange)")
+            
+            let currentLocation = selectedRange.location + selectedRange.length
+            text?.insert(attachment.attributedString!, at: currentLocation)
+//            text?.append(attachment.attributedString!)
+            text?.append(NSAttributedString(string: "\r\n"))
+            attributedText = text
+            imageView = attachment
+            
+            print("======= \(selectedRange)")
+            selectedRange = NSRange(location: currentLocation + 1, length: 0)
+            print("+++++++ \(selectedRange)")
+            
+            print(attributedText)
         case .line:  // 分割线
             index = 0
             let location = selectedRange.location + 1 + line.count + 1
