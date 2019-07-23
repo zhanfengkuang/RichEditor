@@ -289,6 +289,10 @@
     [_regexList enumerateMatchesInString:str options:0 range:NSMakeRange(0, str.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
         NSRange r = result.range;
         [text yy_setColor:_controlTextColor range:r];
+        // https://www.jianshu.com/p/b1094746368b 段落
+        NSMutableParagraphStyle *style = [text.yy_paragraphStyle mutableCopy];
+        style.headIndent = _fontSize;
+        [text addAttributes:@{NSParagraphStyleAttributeName : style} range:r];
     }];
     
     [_regexBlockQuote enumerateMatchesInString:str options:0 range:NSMakeRange(0, str.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {

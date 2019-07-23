@@ -33,17 +33,24 @@ class ViewController: UIViewController {
             self.richEditor.textParser = self.parser
             self.view.addSubview(self.richEditor)
             
-            self.richEditor.attributedText = NSAttributedString(string: "- [x] halzi\n![image](https://www.baidu.com/123.com)\n- [x] halzi\n![image](https://www.baidu.com/123.com)\n- [x] halzi\n![image](https://www.baidu.com/123.com)")
+//            self.richEditor.attributedText = NSAttributedString(string: "- [x] halzi\n![image](https://www.baidu.com/123.com)\n- [x] halzi\n![image](https://www.baidu.com/123.com)\n- [x] halzi\n![image](https://www.baidu.com/123.com)")
+            
+             self.richEditor.attributedText = NSAttributedString(string: "")
+            
+//            self.richEditor.attributedText?.yy_paragraphStyle =
             
             self.richEditorToolbar.textView = self.richEditor
+//            self.richEditor.delegate = self
         }
         
-        let btn = UIButton(type: .custom)
-        btn.setTitle("next", for: .normal)
-        btn.setTitleColor(.red, for: .normal)
-        btn.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
-        view.addSubview(btn)
-        btn.frame = CGRect(x: 100, y: 400, width: 200, height: 30)
+//        let btn = UIButton(type: .custom)
+//        btn.setTitle("next", for: .normal)
+//        btn.setTitleColor(.red, for: .normal)
+//        btn.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
+//        view.addSubview(btn)
+//        btn.frame = CGRect(x: 100, y: 400, width: 200, height: 30)
+        
+        
     }
     
     @objc func nextAction() {
@@ -54,6 +61,19 @@ class ViewController: UIViewController {
     
     deinit {
         MDUtil.controls = [ ]
+    }
+}
+
+extension ViewController: YYTextViewDelegate {
+    func textViewDidChange(_ textView: YYTextView) {
+        guard let text = textView.attributedText,
+            var style = text.yy_paragraphStyle else { return }
+        
+//        var tab = NSTextTab(textAlignment: .natural, location: 15 * 6, options: [:])
+//        style.tabStops = [tab]
+//
+//
+//        [ addAttribute:NSParagraphStyleAttributeName value:style range: NSRange];
     }
 }
 
