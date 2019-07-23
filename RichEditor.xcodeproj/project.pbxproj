@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		C606DE3622D57B5600F425B3 /* MDImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606DE3522D57B5600F425B3 /* MDImage.swift */; };
 		C610CFF422E5B608001F9C35 /* WechatIMG4306.png in Resources */ = {isa = PBXBuildFile; fileRef = C610CFF322E5B607001F9C35 /* WechatIMG4306.png */; };
 		C610CFF622E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png in Resources */ = {isa = PBXBuildFile; fileRef = C610CFF522E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png */; };
+		C62EBC4422E6F357005F3C12 /* MarkdownElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62EBC4322E6F357005F3C12 /* MarkdownElement.swift */; };
 		C67834E422D6D88E00BE08B0 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67834E322D6D88E00BE08B0 /* NextViewController.swift */; };
 		C67834F922D70ACD00BE08B0 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67834F822D70ACD00BE08B0 /* TextElement.swift */; };
 		C6EAA6AC22D191C200896913 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6AB22D191C200896913 /* AppDelegate.swift */; };
@@ -103,6 +104,7 @@
 		C606DE3522D57B5600F425B3 /* MDImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDImage.swift; sourceTree = "<group>"; };
 		C610CFF322E5B607001F9C35 /* WechatIMG4306.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WechatIMG4306.png; sourceTree = "<group>"; };
 		C610CFF522E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "屏幕快照 2019-07-22 16.18.15.png"; sourceTree = "<group>"; };
+		C62EBC4322E6F357005F3C12 /* MarkdownElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownElement.swift; sourceTree = "<group>"; };
 		C67834E322D6D88E00BE08B0 /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
 		C67834F822D70ACD00BE08B0 /* TextElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextElement.swift; sourceTree = "<group>"; };
 		C6EAA6A822D191C100896913 /* RichEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RichEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -335,6 +337,7 @@
 			children = (
 				C67834F722D70AB200BE08B0 /* New Group */,
 				C6EAA6C222D1923A00896913 /* View */,
+				C62EBC4322E6F357005F3C12 /* MarkdownElement.swift */,
 			);
 			path = MarkDown;
 			sourceTree = "<group>";
@@ -704,6 +707,7 @@
 				C6EAA78822D1926600896913 /* NSTimer+YYAdd.m in Sources */,
 				C6EAA6CF22D1923B00896913 /* MDUtil.swift in Sources */,
 				C6EAA76E22D1926600896913 /* UIPasteboard+YYText.m in Sources */,
+				C62EBC4422E6F357005F3C12 /* MarkdownElement.swift in Sources */,
 				C6EAA75D22D1926600896913 /* YYTextContainerView.m in Sources */,
 				C6EAA77722D1926600896913 /* UIApplication+YYAdd.m in Sources */,
 				C606DE3622D57B5600F425B3 /* MDImage.swift in Sources */,

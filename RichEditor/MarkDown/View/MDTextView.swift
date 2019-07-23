@@ -9,7 +9,7 @@
 import UIKit
 
 public class MDTextView: DynamicTextView {
-    var imageView: MDImage?
+    var imageView: [MDImage] = [ ]
     
     var state: RichEditorElement?
     var isAddMD: Bool = false
@@ -70,11 +70,14 @@ public class MDTextView: DynamicTextView {
 //            text?.append(attachment.attributedString!)
             text?.append(NSAttributedString(string: "\r\n"))
             attributedText = text
-            imageView = attachment
+            imageView.append(attachment) 
+            attachment.textLayout = textLayout
             
             print("======= \(selectedRange)")
             selectedRange = NSRange(location: currentLocation + 1, length: 0)
             print("+++++++ \(selectedRange)")
+            
+            
             
             print(attributedText)
         case .line:  // 分割线
@@ -118,6 +121,8 @@ extension MDTextView: YYTextViewDelegate {
     public func textView(_ textView: YYTextView,
                          shouldChangeTextIn range: NSRange,
                          replacementText text: String) -> Bool {
+        
+        
         if text == "\n" {
             isAddMD = true
         }

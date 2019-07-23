@@ -19,6 +19,10 @@ class MDImage: MDControl {
         return "![image](https://www.baidu.com/123.com)"
     }
     
+    var textLayout: YYTextLayout?
+    
+    var content: UIButton!
+    
     required init(size: CGSize = CGSize(width: 100, height: 100)) {
         let button = UIButton(type: .custom)
         button.addTarget(self, action: #selector(selectedPicker(_:)), for: .touchUpInside)
@@ -29,14 +33,26 @@ class MDImage: MDControl {
         button.layer.borderColor = UIColor.red.cgColor
         button.layer.borderWidth = 1
         
+        content = button
+        
         attributedString = NSMutableAttributedString.yy_attachmentString(withContent: button,
                                                                          contentMode: .left,
                                                                          attachmentSize: size,
                                                                          alignTo: .systemFont(ofSize: 14),
                                                                          alignment: .center)
+        
     }
     
     @objc func selectedPicker(_ sender: UIButton) {
         sender.setImage(UIImage(named: "屏幕快照 2019-07-22 16.18.15"), for: .normal)
+        if let attachments = textLayout?.attachments {
+            for (index, attachment) in attachments.enumerated() {
+                guard let button = attachment.content as? UIButton else { return }
+                if content == button {
+                    let range = textLayout?.attachmentRanges?.element(at: index)
+                    
+                }
+            }
+        }
     }
 }

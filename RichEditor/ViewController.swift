@@ -36,11 +36,8 @@ class ViewController: UIViewController {
 //            self.richEditor.attributedText = NSAttributedString(string: "- [x] halzi\n![image](https://www.baidu.com/123.com)\n- [x] halzi\n![image](https://www.baidu.com/123.com)\n- [x] halzi\n![image](https://www.baidu.com/123.com)")
             
              self.richEditor.attributedText = NSAttributedString(string: "")
-            
-//            self.richEditor.attributedText?.yy_paragraphStyle =
-            
             self.richEditorToolbar.textView = self.richEditor
-//            self.richEditor.delegate = self
+            self.richEditor.delegate = self
         }
         
 //        let btn = UIButton(type: .custom)
@@ -60,11 +57,29 @@ class ViewController: UIViewController {
     }
     
     deinit {
+        NSAttributedString.Key.font
         MDUtil.controls = [ ]
     }
 }
 
 extension ViewController: YYTextViewDelegate {
+    
+    func textView(_ textView: YYTextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        print(textView.attributedText, range)
+        
+        if let att = textView.attributedText {
+            
+            
+            att.enumerateAttribute(.font, in: att.yy_rangeOfAll(), options: .longestEffectiveRangeNotRequired) { (value, range, stop) in
+                print("===============  value: \(value), range: \(range)")
+            }
+        }
+        
+        
+        
+        return true
+    }
+    
     func textViewDidChange(_ textView: YYTextView) {
         guard let text = textView.attributedText,
             var style = text.yy_paragraphStyle else { return }

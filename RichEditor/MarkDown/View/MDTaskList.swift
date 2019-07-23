@@ -14,6 +14,8 @@ class MDTaskList: MDControl {
     
     var attributedString: NSMutableAttributedString?
     
+    var textLayout: YYTextLayout?
+    
     enum State: String, CaseIterable {
         /// 已完成
         case done = "- [x] "

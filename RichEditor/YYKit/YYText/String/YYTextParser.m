@@ -194,6 +194,15 @@
     text.yy_font = _font;
     text.yy_color = _textColor;
     
+    
+    
+    [text enumerateAttribute:NSFontAttributeName inRange:text.yy_rangeOfAll options:NSAttributedStringEnumerationLongestEffectiveRangeNotRequired usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+        
+        if (value == _boldFont) {
+            NSLog(@"======== value: %@, range: %@", value, range);
+        }
+    }];
+    
     NSMutableString *str = text.string.mutableCopy;
     [_regexEscape replaceMatchesInString:str options:kNilOptions range:NSMakeRange(0, str.length) withTemplate:@"@@"];
     

@@ -21,6 +21,8 @@ class MDParser: YYTextSimpleMarkdownParser {
         let result = super.parseText(text, selectedRange: selectedRange)
         print(text?.string ?? "")
         
+        
+        
         if let att = text {
             MDUtil.parserToControl(text: att, range: selectedRange)
         }
