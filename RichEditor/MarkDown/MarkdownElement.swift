@@ -8,22 +8,22 @@
 
 import Foundation
 
-public enum MarkdownElement {
-    /// 链接
-    case link
-    /// 图片
-    case image
-    /// todo
-    case todo
-    /// 标题
-    case header1
-    case header2
-    case header3
-    /// 中划线
-    case strikeThroungh
-    /// 斜体
-    case italic
-}
+//public enum MarkdownElement {
+//    /// 链接
+//    case link
+//    /// 图片
+//    case image
+//    /// todo
+//    case todo
+//    /// 标题
+//    case header1
+//    case header2
+//    case header3
+//    /// 中划线
+//    case strikeThroungh
+//    /// 斜体
+//    case italic
+//}
 
 public protocol MarkdownItem {
     /// 编辑状态 所占的长度

@@ -14,20 +14,22 @@ class MDParser: YYTextSimpleMarkdownParser {
         fontSize = 15
         textColor = UIColor(hex: 0x6D7278)
         headerTextColor = textColor
+        
+        
     }
     
     override func parseText(_ text: NSMutableAttributedString?, selectedRange: NSRangePointer?) -> Bool {
-        text?.yy_lineSpacing = 8
-        let result = super.parseText(text, selectedRange: selectedRange)
-        print(text?.string ?? "")
+//        text?.yy_lineSpacing = 8
+//        let result = super.parseText(text, selectedRange: selectedRange)
+//        print(text?.string ?? "")
+//
+//        print("+++++++++ pointer: \(selectedRange?.pointee)")
+//
+//        if let att = text {
+//            MDUtil.parserToControl(text: att, range: selectedRange)
+//        }
         
-        
-        
-        if let att = text {
-            MDUtil.parserToControl(text: att, range: selectedRange)
-        }
-        
-        return result
+        return true
     }
     
     @objc func change(_ sender: UIButton) {

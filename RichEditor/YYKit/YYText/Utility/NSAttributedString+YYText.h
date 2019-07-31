@@ -725,6 +725,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)yy_setAttribute:(NSString *)name value:(nullable id)value;
 
+- (void)yy_removeAttributes:(NSString *)key;
+
+- (void)yy_removeAllAttributes;
+
 /**
  Sets an attribute with the given name and value to the characters in the specified range.
  

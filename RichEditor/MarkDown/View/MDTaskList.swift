@@ -38,6 +38,8 @@ class MDTaskList: MDControl {
         button.addTarget(self, action: #selector(changeState), for: .touchUpInside)
         button.tag = type.rawValue
         
+        
+        
         attributedString = NSMutableAttributedString.yy_attachmentString(withContent: button,
                                                                          contentMode: .left,
                                                                          attachmentSize: size,

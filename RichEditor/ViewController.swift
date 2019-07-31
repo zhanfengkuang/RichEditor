@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     
     var button: UIButton!
     
+    var textProcessor: TextProcessor?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,9 +37,13 @@ class ViewController: UIViewController {
             
 //            self.richEditor.attributedText = NSAttributedString(string: "- [x] halzi\n![image](https://www.baidu.com/123.com)\n- [x] halzi\n![image](https://www.baidu.com/123.com)\n- [x] halzi\n![image](https://www.baidu.com/123.com)")
             
+            
+            
              self.richEditor.attributedText = NSAttributedString(string: "")
             self.richEditorToolbar.textView = self.richEditor
-            self.richEditor.delegate = self
+//            self.richEditor.delegate = self
+            self.textProcessor = TextProcessor(textView: self.richEditor)
+//            self.richEditor.typingAttributes = [NSAttributedString.Key.foregroundColor.rawValue: UIColor.red];
         }
         
 //        let btn = UIButton(type: .custom)
@@ -46,7 +52,6 @@ class ViewController: UIViewController {
 //        btn.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
 //        view.addSubview(btn)
 //        btn.frame = CGRect(x: 100, y: 400, width: 200, height: 30)
-        
         
     }
     
@@ -57,7 +62,6 @@ class ViewController: UIViewController {
     }
     
     deinit {
-        NSAttributedString.Key.font
         MDUtil.controls = [ ]
     }
 }
@@ -65,16 +69,27 @@ class ViewController: UIViewController {
 extension ViewController: YYTextViewDelegate {
     
     func textView(_ textView: YYTextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        print(textView.typingAttributes)
+        if let attributes = textProcessor?.addAttributes(text) {
+            textView.typingAttributes = attributes
+        }
+        if text.isEmpty {
+            print("======== 删除")
+        }
+        
+        
+        let attachment = YYTextAttachment()
+        attachment.userInfo = [ : ]
+        
 //        print(textView.attributedText, range)
         
         if let att = textView.attributedText {
             
             
             att.enumerateAttribute(.font, in: att.yy_rangeOfAll(), options: .longestEffectiveRangeNotRequired) { (value, range, stop) in
-                print("===============  value: \(value), range: \(range)")
+//                print("===============  value: \(value), range: \(range)")
             }
         }
-        
         
         
         return true

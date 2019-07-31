@@ -194,8 +194,6 @@
     text.yy_font = _font;
     text.yy_color = _textColor;
     
-    
-    
     [text enumerateAttribute:NSFontAttributeName inRange:text.yy_rangeOfAll options:NSAttributedStringEnumerationLongestEffectiveRangeNotRequired usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
         
         if (value == _boldFont) {

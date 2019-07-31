@@ -1520,6 +1520,7 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
         
         [_inputDelegate textWillChange:self];
         BOOL textChanged = [self.textParser parseText:_innerText selectedRange:&newRange];
+        
         [_inputDelegate textDidChange:self];
         
         YYTextRange *newTextRange = [YYTextRange rangeWithRange:newRange];
@@ -2143,8 +2144,17 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
 - (void)setTypingAttributes:(NSDictionary *)typingAttributes {
     [self _setTypingAttributes:typingAttributes];
     _state.typingAttributesOnce = YES;
+    
+    if (!typingAttributes || [typingAttributes isEqual:[NSNull null]]) {
+        [_typingAttributesHolder yy_removeAllAttributes];
+    }
+    
     [typingAttributes enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [_typingAttributesHolder yy_setAttribute:key value:obj];
+        if ([obj isEqual:[NSNull null]]) {
+            [_typingAttributesHolder yy_removeAttributes:key];
+        } else {
+            [_typingAttributesHolder yy_setAttribute:key value:obj];
+        }
     }];
     [self _commitUpdate];
 }

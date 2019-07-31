@@ -12,6 +12,9 @@
 		C610CFF422E5B608001F9C35 /* WechatIMG4306.png in Resources */ = {isa = PBXBuildFile; fileRef = C610CFF322E5B607001F9C35 /* WechatIMG4306.png */; };
 		C610CFF622E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png in Resources */ = {isa = PBXBuildFile; fileRef = C610CFF522E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png */; };
 		C62EBC4422E6F357005F3C12 /* MarkdownElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62EBC4322E6F357005F3C12 /* MarkdownElement.swift */; };
+		C633896422F0156A004F703B /* TextProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633896322F01569004F703B /* TextProcessor.swift */; };
+		C633896722F03B05004F703B /* MarkDownStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633896622F03B05004F703B /* MarkDownStyle.swift */; };
+		C633896922F05BAC004F703B /* AttributeProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633896822F05BAC004F703B /* AttributeProcessor.swift */; };
 		C67834E422D6D88E00BE08B0 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67834E322D6D88E00BE08B0 /* NextViewController.swift */; };
 		C67834F922D70ACD00BE08B0 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67834F822D70ACD00BE08B0 /* TextElement.swift */; };
 		C6EAA6AC22D191C200896913 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6AB22D191C200896913 /* AppDelegate.swift */; };
@@ -101,10 +104,14 @@
 /* Begin PBXFileReference section */
 		A2CB99E4AA93F1D6D425C565 /* Pods-RichEditor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RichEditor.release.xcconfig"; path = "Target Support Files/Pods-RichEditor/Pods-RichEditor.release.xcconfig"; sourceTree = "<group>"; };
 		A77C52299ACD51FC275CFB1C /* Pods-RichEditor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RichEditor.debug.xcconfig"; path = "Target Support Files/Pods-RichEditor/Pods-RichEditor.debug.xcconfig"; sourceTree = "<group>"; };
+		C60679B222F1249000D4CAF8 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C606DE3522D57B5600F425B3 /* MDImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDImage.swift; sourceTree = "<group>"; };
 		C610CFF322E5B607001F9C35 /* WechatIMG4306.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WechatIMG4306.png; sourceTree = "<group>"; };
 		C610CFF522E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "屏幕快照 2019-07-22 16.18.15.png"; sourceTree = "<group>"; };
 		C62EBC4322E6F357005F3C12 /* MarkdownElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownElement.swift; sourceTree = "<group>"; };
+		C633896322F01569004F703B /* TextProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextProcessor.swift; sourceTree = "<group>"; };
+		C633896622F03B05004F703B /* MarkDownStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownStyle.swift; sourceTree = "<group>"; };
+		C633896822F05BAC004F703B /* AttributeProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeProcessor.swift; sourceTree = "<group>"; };
 		C67834E322D6D88E00BE08B0 /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
 		C67834F822D70ACD00BE08B0 /* TextElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextElement.swift; sourceTree = "<group>"; };
 		C6EAA6A822D191C100896913 /* RichEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RichEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +296,10 @@
 			isa = PBXGroup;
 			children = (
 				C67834F822D70ACD00BE08B0 /* TextElement.swift */,
+				C633896322F01569004F703B /* TextProcessor.swift */,
+				C633896622F03B05004F703B /* MarkDownStyle.swift */,
+				C633896822F05BAC004F703B /* AttributeProcessor.swift */,
+				C6EAA6C322D1923A00896913 /* MDTextView.swift */,
 			);
 			path = "New Group";
 			sourceTree = "<group>";
@@ -328,6 +339,7 @@
 				C6EAA6B422D191C300896913 /* LaunchScreen.storyboard */,
 				C6EAA6B722D191C300896913 /* Info.plist */,
 				C6EAA6BD22D1921700896913 /* RichEditor-Bridging-Header.h */,
+				C60679B222F1249000D4CAF8 /* MyPlayground.playground */,
 			);
 			path = RichEditor;
 			sourceTree = "<group>";
@@ -346,7 +358,6 @@
 			isa = PBXGroup;
 			children = (
 				C6EAA79E22D1954600896913 /* DynamicTextView.swift */,
-				C6EAA6C322D1923A00896913 /* MDTextView.swift */,
 				C6EAA6C422D1923A00896913 /* MDParser.swift */,
 				C6EAA6C522D1923A00896913 /* RichEditorToobar.swift */,
 				C6EAA6C622D1923A00896913 /* MDUtil.swift */,
@@ -712,10 +723,12 @@
 				C6EAA77722D1926600896913 /* UIApplication+YYAdd.m in Sources */,
 				C606DE3622D57B5600F425B3 /* MDImage.swift in Sources */,
 				C6EAA78522D1926600896913 /* NSData+YYAdd.m in Sources */,
+				C633896922F05BAC004F703B /* AttributeProcessor.swift in Sources */,
 				C6EAA7A322D1974200896913 /* ArrayExt.swift in Sources */,
 				C6EAA6D122D1923B00896913 /* MDTaskList.swift in Sources */,
 				C6EAA77C22D1926600896913 /* UIBarButtonItem+YYAdd.m in Sources */,
 				C6EAA79422D1941D00896913 /* CGRectExt.swift in Sources */,
+				C633896422F0156A004F703B /* TextProcessor.swift in Sources */,
 				C6EAA6D422D1923B00896913 /* MDTheme.swift in Sources */,
 				C6EAA76D22D1926600896913 /* NSAttributedString+YYText.m in Sources */,
 				C6EAA79D22D194C900896913 /* DoubleExt.swift in Sources */,
@@ -740,6 +753,7 @@
 				C6EAA79622D1942B00896913 /* UIColorExt.swift in Sources */,
 				C6EAA79F22D1954700896913 /* DynamicTextView.swift in Sources */,
 				C6EAA78E22D1926600896913 /* YYCGUtilities.m in Sources */,
+				C633896722F03B05004F703B /* MarkDownStyle.swift in Sources */,
 				C6EAA6CE22D1923B00896913 /* RichEditorToobar.swift in Sources */,
 				C6EAA77B22D1926600896913 /* UIView+YYAdd.m in Sources */,
 				C6EAA78722D1926600896913 /* NSKeyedUnarchiver+YYAdd.m in Sources */,

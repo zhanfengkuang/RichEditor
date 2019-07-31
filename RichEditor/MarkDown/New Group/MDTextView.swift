@@ -29,6 +29,11 @@ public class MDTextView: DynamicTextView {
     /// 光标 坐标更新回调
     var caretBlock: ((CGRect) -> Void)?
     
+    var style = MarkDownStyle()
+    
+    var currentAttributes: [String: Any] = [ : ]
+    var processor: AttributesProcessor?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.delegate = self
@@ -38,6 +43,19 @@ public class MDTextView: DynamicTextView {
         isScrollEnabled = false
         
         maxHeight = 10000
+        
+        processor = AttributesProcessor(textView: self, style: style)
+        
+    }
+    
+    public override var typingAttributes: [String : Any]? {
+        willSet {
+            print("old: \(typingAttributes), new:\(newValue)")
+        }
+    }
+    
+    func currentParagraph() -> NSRange {
+        return (text as NSString).paragraphRange(for: selectedRange)
     }
     
     public func editMarkdown(_ element: RichEditorElement, isNewLine: Bool = true) {
@@ -95,11 +113,37 @@ public class MDTextView: DynamicTextView {
                 replace(textRange, withText: line + element.md)
             }
         case .header1, .header2, .header3:  // 标题
-            index = 0
-            self.state = nil
-            if let textRange = selectedTextRange {
-                replace(textRange, withText: line + element.md)
+            var level: MarkDownHeader.Level = .header3
+            var item: MarkDownItem?
+            switch element {
+            case .header3: level = .header3; item = .header3
+            case .header2: level = .header2; item = .header2
+            case .header1: level = .header1; item = .header1
+            default: break
             }
+            
+            let mutableAttributedString = NSMutableAttributedString(attributedString: attributedText!)
+            let header = MarkDownHeader(level: level, style: style)
+            if let item = item, let attributes = style.attributes(with: item) { // 设置该段落的字体属性
+                for attribute in attributes.enumerated() {
+                    mutableAttributedString.yy_setAttribute(attribute.element.key,
+                                                            value: attribute.element.value,
+                                                            range: currentParagraph())
+                }
+            }
+            let startRange = NSRange(location: currentParagraph().location, length: 1)
+            let location: Int
+            if let result = textLayout?.attachmentRanges?.contains(startRange as NSValue), result {
+                mutableAttributedString.replaceCharacters(in: startRange, with: header.attributedString!)
+                location = selectedRange.location
+            } else {
+                mutableAttributedString.insert(header.attributedString!, at: currentParagraph().location)
+                location = selectedRange.location + 1
+            }
+            
+            let range = NSRange(location: location, length: selectedRange.length)
+            attributedText = mutableAttributedString
+            selectedRange = range
         case .ordered:  // 有序
             index += 1
             self.state = element
@@ -121,8 +165,8 @@ extension MDTextView: YYTextViewDelegate {
     public func textView(_ textView: YYTextView,
                          shouldChangeTextIn range: NSRange,
                          replacementText text: String) -> Bool {
-        
-        
+        textView.typingAttributes = processor?.attributes
+//        print("typing attributes: \(typingAttributes)")
         if text == "\n" {
             isAddMD = true
         }

@@ -771,6 +771,14 @@ return style. _attr_;
     [self yy_setAttribute:name value:value range:NSMakeRange(0, self.length)];
 }
 
+- (void)yy_removeAttributes:(NSString *)key {
+    [self removeAttribute:key range:NSMakeRange(0, self.length)];
+}
+
+- (void)yy_removeAllAttributes {
+    self.yy_attributes = [[NSDictionary alloc] initWithObjectsAndKeys: nil];
+}
+
 - (void)yy_setAttribute:(NSString *)name value:(id)value range:(NSRange)range {
     if (!name || [NSNull isEqual:name]) return;
     if (value && ![NSNull isEqual:value]) [self addAttribute:name value:value range:range];

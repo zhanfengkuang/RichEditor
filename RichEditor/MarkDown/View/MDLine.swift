@@ -19,6 +19,7 @@ class MDLine: MDControl {
         line.backgroundColor = UIColor(hex: 0xEEEEEE)
         line.tag = type.rawValue
         
+
         attributedString = NSMutableAttributedString.yy_attachmentString(withContent: line,
                                                                          contentMode: .center,
                                                                          attachmentSize: size,
