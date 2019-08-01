@@ -12,15 +12,19 @@ import Foundation
 //typealias RichControl = (String) -> TextElementView
 
 public enum MarkDownItem: Int {
-    /// 标题
+    /// title
     case header1 = 56
     case header2 = 57
     case header3 = 58
     /// todo
     case done = 59
     case undone = 60
-    /// separator
+    /// 分割线
     case separator = 61
+    /// 无序
+    case unordered = 62
+    /// 有序
+    case ordered = 63
 }
 
 public protocol MarkDownElement {
@@ -161,5 +165,46 @@ class MarkDownSeparator: MarkDownElement {
                                                                          attachmentSize: separatorStyle.size,
                                                                          alignTo: .systemFont(ofSize: 15),
                                                                          alignment: .top)
+    }
+}
+
+// MARK: - Ordered
+class MarkDownOrdered: MarkDownElement {
+    var text: String { return "" }
+    var style: MarkDownStyle
+    var attributedString: NSMutableAttributedString?
+    
+    required init(style: MarkDownStyle) {
+        self.style = style
+//        let orderedStyle = style.attributes[.ordered] as? MarkDown
+    }
+}
+
+class MarkDownUnordered: MarkDownElement {
+    var text: String { return "* " }
+    var style: MarkDownStyle
+    var attributedString: NSMutableAttributedString?
+    
+    required init(style: MarkDownStyle) {
+        self.style = style
+        let unorderedStyle = style.attributes[.unordered] as? MarkDownUnorderedStyle ?? MarkDownUnorderedStyle()
+        // unordered view
+        let unordered = UIView()
+        unordered.jr_size = unorderedStyle.size
+        unordered.tag = MarkDownItem.unordered.rawValue
+        // dot
+        let dot = UIView()
+        let radius = unorderedStyle.dotRadius
+        dot.jr_size = CGSize(width: radius*2, height: radius*2)
+        dot.center = unordered.center
+        dot.layer.cornerRadius = unorderedStyle.dotRadius
+        dot.backgroundColor = unorderedStyle.dotColor
+        unordered.addSubview(dot)
+        
+        attributedString = NSMutableAttributedString.yy_attachmentString(withContent: unordered,
+                                                                         contentMode: .left,
+                                                                         attachmentSize: unorderedStyle.size,
+                                                                         alignTo: .systemFont(ofSize: 15),
+                                                                         alignment: .center)
     }
 }

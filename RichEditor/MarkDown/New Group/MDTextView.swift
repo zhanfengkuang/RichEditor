@@ -167,11 +167,28 @@ public class MDTextView: DynamicTextView {
             selectedRange = range
             
         case .unordered:  // 无序
-            index = 0
-            self.state = element
-            if let textRange = selectedTextRange {
-                replace(textRange, withText: line + element.md)
+            let unordered = MarkDownUnordered(style: style)
+            let string = NSMutableAttributedString(attributedString: currentAttributedString)
+            if let attributes = style.attributes(with: .unordered) { // 设置该段落的字体属性
+                for attribute in attributes.enumerated() {
+                    string.yy_setAttribute(attribute.element.key,
+                                                        value: attribute.element.value,
+                                                        range: currentParagraph())
+                }
             }
+            let startRange = NSRange(location: currentParagraph().location, length: 1)
+            let location: Int
+            if let result = textLayout?.attachmentRanges?.contains(startRange as NSValue), result {
+                string.replaceCharacters(in: startRange, with: unordered.attributedString!)
+                location = selectedRange.location
+            } else {
+                string.insert(unordered.attributedString!, at: currentParagraph().location)
+                location = selectedRange.location + 1
+            }
+            let range = NSRange(location: location, length: selectedRange.length)
+            attributedText = string
+            selectedRange = range
+            
         case .header1, .header2, .header3:  // 标题
             var level: MarkDownHeader.Level = .header3
             var item: MarkDownItem?

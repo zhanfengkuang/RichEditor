@@ -81,7 +81,14 @@ public class MarkDownStyle {
             return result
         case .separator:
             return nil
-            
+        case .unordered:
+            let unorderedStyle = attributes[.unordered] as? MarkDownUnorderedStyle ?? MarkDownUnorderedStyle()
+            paragraphStyle.headIndent = headIndent
+            return [
+                .font: unorderedStyle.font,
+                .foregroundColor: unorderedStyle.color,
+                .paragraphStyle: paragraphStyle,
+            ]
         }
     }
 }
@@ -134,7 +141,7 @@ struct MarkDownTodoStyle: MarkDownElementStyle {
 
 // MARK: - Separator
 struct MarkDownSeparatorStyle {
-    /// separator
+    /// separator color
     var color: UIColor
     var size: CGSize
     
@@ -142,6 +149,55 @@ struct MarkDownSeparatorStyle {
          size: CGSize = CGSize(width: screenWidth, height: 1)) {
         self.color = color
         self.size = size
+    }
+}
+
+// MARK: - Unordered
+struct MarkDownUnorderedStyle {
+    /// 圆点 颜色
+    var dotColor: UIColor
+    /// 圆点 半径
+    var dotRadius: CGFloat
+    /// 文本 颜色
+    var color: UIColor
+    /// 控件大小
+    var size: CGSize
+    /// 文本 字体
+    var font: UIFont
+    
+    init(dotColor: UIColor = UIColor(hex: 0x6D7278),
+         dotRadius: CGFloat = 3,
+         color: UIColor = UIColor(hex: 0x6D7278),
+         size: CGSize = CGSize(width: 25, height: 16),
+         font: UIFont = UIFont.systemFont(ofSize: 15)) {
+        self.dotColor = dotColor
+        self.dotRadius = dotRadius
+        self.color = color
+        self.size = size
+        self.font = font
+    }
+}
+
+// MARK: - Ordered
+struct MarkDownOrderedStyle: MarkDownElementStyle {
+    /// 有序 字体 颜色
+    var titleColor: UIColor
+    /// 有序 字体
+    var titleFont: UIFont
+    var size: CGSize
+    var color: UIColor
+    var font: UIFont
+    
+    init(titleColor: UIColor = UIColor(hex: 0x6D7278),
+         titleFont: UIFont = UIFont.boldSystemFont(ofSize: 15),
+         size: CGSize = CGSize(width: 25, height: 16),
+         color: UIColor = UIColor(hex: 0x6D7278),
+         font: UIFont = UIFont.systemFont(ofSize: 15)) {
+        self.titleFont = titleFont
+        self.titleColor = titleColor
+        self.size = size
+        self.color = color
+        self.font = font
     }
 }
 
@@ -156,6 +212,10 @@ extension MarkDownStyle.Key {
     public static let link = MarkDownStyle.Key("mark_down_link")
     /// separator
     public static let separator = MarkDownStyle.Key("mark_down_separator")
+    /// 无序
+    public static let unordered = MarkDownStyle.Key("mark_down_unordered")
+    /// 有序
+    public static let ordered = MarkDownStyle.Key("mark_down_ordered")
 }
 
 extension MarkDownStyle {
