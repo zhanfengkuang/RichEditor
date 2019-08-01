@@ -727,6 +727,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)yy_removeAttributes:(NSString *)key;
 
+- (void)yy_removeAttributes:(NSString *)key range:(NSRange)range;
+
 - (void)yy_removeAllAttributes;
 
 /**

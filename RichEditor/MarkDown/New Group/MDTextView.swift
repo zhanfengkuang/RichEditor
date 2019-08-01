@@ -34,6 +34,8 @@ public class MDTextView: DynamicTextView {
     var currentAttributes: [String: Any] = [ : ]
     var processor: AttributesProcessor?
     
+    var elements: [MarkDownElement] = [ ]
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.delegate = self
@@ -41,6 +43,9 @@ public class MDTextView: DynamicTextView {
         placeholderFont = .systemFont(ofSize: 15)
         placeholderText = "请输入详情描述"
         isScrollEnabled = false
+        
+        font = UIFont.systemFont(ofSize: 15)
+        textColor = UIColor(hex: 0x6D7278)
         
         maxHeight = 10000
         
@@ -68,13 +73,62 @@ public class MDTextView: DynamicTextView {
                 selectedRange = NSRange(location: location, length: 0)
             }
         case .todo:  // task 任务
-            self.state = element
-            index = 0
-            let location = selectedRange.location + 1 + line.count
-            if let textRange = selectedTextRange {
-                replace(textRange, withText: line + element.md)
+            let mutableAttributedString = NSMutableAttributedString(attributedString: attributedText!)
+            let todo = MarkDownTodo(style: style, state: .undone)
+            todo.tapBlock = { [weak self] button in
+                guard let weakSelf = self else { return }
+                guard let attachments = self?.textLayout?.attachments,
+                    let attachmentRanges = self?.textLayout?.attachmentRanges else { return }
+                var index: Int?
+                for (i, attachment) in attachments.enumerated() {
+                    if let temp = attachment.content as? UIButton,
+                        temp === button {
+                        index = i
+                    }
+                }
+                if index != nil, let tapRange = attachmentRanges.element(at: index!) as? NSRange {
+                    var paragraphRange = (weakSelf.text as NSString).paragraphRange(for: tapRange)
+                    paragraphRange = NSRange(location: paragraphRange.location + 1, length: paragraphRange.length - 1)
+                    let oldRange = weakSelf.selectedRange
+                    let item: MarkDownItem = button.isSelected ? .done : .undone
+                    if let attributes = weakSelf.style.attributes(with: item) {
+                        let changeText = NSMutableAttributedString(attributedString: weakSelf.attributedText!)
+                        for attribute in attributes.enumerated() {
+                            changeText.yy_setAttribute(attribute.element.key,
+                                                       value: attribute.element.value,
+                                                       range: paragraphRange)
+                            if item == .undone {
+                                changeText.yy_removeAttributes(YYTextStrikethroughAttributeName,
+                                                               range: paragraphRange)
+                            }
+                        }
+                        weakSelf.attributedText = changeText
+                        weakSelf.selectedRange = oldRange
+                    }
+                }
             }
-            selectedRange = NSRange(location: location, length: 0)
+            if let attributes = style.attributes(with: .undone) {
+                for attribute in attributes.enumerated() {
+                    mutableAttributedString.yy_setAttribute(attribute.element.key,
+                                                            value: attribute.element.value,
+                                                            range: currentParagraph())
+                }
+            }
+            let startRange = NSRange(location: currentParagraph().location, length: 1)
+            let location: Int
+            if let result = textLayout?.attachmentRanges?.contains(startRange as NSValue), result {
+                mutableAttributedString.replaceCharacters(in: startRange, with: todo.attributedString!)
+                location = selectedRange.location
+            } else {
+                mutableAttributedString.insert(todo.attributedString!, at: currentParagraph().location)
+                location = selectedRange.location + 1
+            }
+            
+            let range = NSRange(location: location, length: selectedRange.length)
+            attributedText = mutableAttributedString
+            selectedRange = range
+            elements.append(todo)
+
         case .time:  // 时间
             self.state = nil
             index = 0

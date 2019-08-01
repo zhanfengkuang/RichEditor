@@ -775,6 +775,10 @@ return style. _attr_;
     [self removeAttribute:key range:NSMakeRange(0, self.length)];
 }
 
+- (void)yy_removeAttributes:(NSString *)key range:(NSRange)range {
+    [self removeAttribute:key range:range];
+}
+
 - (void)yy_removeAllAttributes {
     self.yy_attributes = [[NSDictionary alloc] initWithObjectsAndKeys: nil];
 }
