@@ -79,6 +79,9 @@ public class MarkDownStyle {
 //                result[.baselineOffset] = 0
             }
             return result
+        case .separator:
+            return nil
+            
         }
     }
 }
@@ -129,6 +132,19 @@ struct MarkDownTodoStyle: MarkDownElementStyle {
     }
 }
 
+// MARK: - Separator
+struct MarkDownSeparatorStyle {
+    /// separator
+    var color: UIColor
+    var size: CGSize
+    
+    init(color: UIColor = UIColor(hex: 0xEEEEEE),
+         size: CGSize = CGSize(width: screenWidth, height: 1)) {
+        self.color = color
+        self.size = size
+    }
+}
+
 extension MarkDownStyle.Key {
     /// 标题
     public static let header = MarkDownStyle.Key("mark_down_header")
@@ -138,6 +154,8 @@ extension MarkDownStyle.Key {
     public static let image = MarkDownStyle.Key("mark_down_image")
     /// link
     public static let link = MarkDownStyle.Key("mark_down_link")
+    /// separator
+    public static let separator = MarkDownStyle.Key("mark_down_separator")
 }
 
 extension MarkDownStyle {

@@ -64,6 +64,8 @@ public class MDTextView: DynamicTextView {
     }
     
     public func editMarkdown(_ element: RichEditorElement, isNewLine: Bool = true) {
+        let currentAttributedString = attributedText ?? NSMutableAttributedString(string: "")
+        
         let line = (!text.isEmpty && !text.hasSuffix("\n")) ? "\n" : ""
         switch element {
         case .bold:  // 黑体
@@ -135,6 +137,7 @@ public class MDTextView: DynamicTextView {
             let attachment = MDImage(size: CGSize(width: jr_width, height: 200))
             let text = attributedText.map { NSMutableAttributedString(attributedString: $0) }
             
+            
             print("------- \(selectedRange)")
             
             let currentLocation = selectedRange.location + selectedRange.length
@@ -153,13 +156,16 @@ public class MDTextView: DynamicTextView {
             
             print(attributedText)
         case .line:  // 分割线
-            index = 0
-            let location = selectedRange.location + 1 + line.count + 1
-            self.state = nil
-            if let textRange = selectedTextRange {
-                replace(textRange, withText: line + element.md + "\n")
-            }
-            selectedRange = NSRange(location: location, length: 0)
+            
+            let separator = MarkDownSeparator(style: style)
+            let string = NSMutableAttributedString(attributedString: currentAttributedString)
+            let replaceRange = NSRange(location: selectedRange.location + selectedRange.length, length: 0)
+            string.insert(separator.attributedString!, at: replaceRange.location)
+            let location = selectedRange.location + 1
+            let range = NSRange(location: location, length: selectedRange.length)
+            attributedText = string
+            selectedRange = range
+            
         case .unordered:  // 无序
             index = 0
             self.state = element
