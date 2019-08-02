@@ -21,7 +21,7 @@ public class MarkDownStyle {
     /// 文本颜色
     var color: UIColor = UIColor(hex: 0x6D7278)
     
-    init(attributes: Attributes = [ .header: MarkDownHeaderStyle() ]) {
+    init(attributes: Attributes = [ : ]) {
         self.attributes = attributes
         paragraphStyle.lineSpacing = 5
         paragraphStyle.paragraphSpacing = 10

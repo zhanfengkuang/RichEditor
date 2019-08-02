@@ -42,7 +42,7 @@ public class DynamicTextView: YYTextView {
     }
     
     deinit {
-        removeObserver(self, forKeyPath: "contentSize")
+//        removeObserver(self, forKeyPath: "contentSize")
     }
     
     required init?(coder aDecoder: NSCoder) {

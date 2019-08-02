@@ -127,6 +127,11 @@ public class MDTextView: DynamicTextView {
 
         case .time:  // 时间
             print("mark down string: \(MarkDownTransform.text(at: self))")
+            let string = MarkDownTransform.text(at: self)
+            let attributedString = NSAttributedString(string: string)
+            let nextVC = NextViewController(attributedString: attributedString)
+            AppUtil.fetchCurrentVC()?.present(nextVC, animated: true, completion: nil)
+            
             return
             self.state = nil
             index = 0
@@ -147,6 +152,7 @@ public class MDTextView: DynamicTextView {
             print("======= \(selectedRange)")
             selectedRange = NSRange(location: currentLocation + 1, length: 0)
             print("+++++++ \(selectedRange)")
+            
             
             
             

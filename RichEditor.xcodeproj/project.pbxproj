@@ -20,6 +20,7 @@
 		C69485B322F3D54500D5CC02 /* MarkDownPaser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B222F3D54500D5CC02 /* MarkDownPaser.swift */; };
 		C69485B522F3D65E00D5CC02 /* MarkDownTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B422F3D65E00D5CC02 /* MarkDownTransform.swift */; };
 		C69485B722F3DF0600D5CC02 /* MarkDownTransformUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B622F3DF0600D5CC02 /* MarkDownTransformUtil.swift */; };
+		C69485B922F4424F00D5CC02 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B822F4424F00D5CC02 /* AppUtil.swift */; };
 		C6EAA6AC22D191C200896913 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6AB22D191C200896913 /* AppDelegate.swift */; };
 		C6EAA6AE22D191C200896913 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6AD22D191C200896913 /* ViewController.swift */; };
 		C6EAA6B122D191C200896913 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6EAA6AF22D191C200896913 /* Main.storyboard */; };
@@ -120,6 +121,7 @@
 		C69485B222F3D54500D5CC02 /* MarkDownPaser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownPaser.swift; sourceTree = "<group>"; };
 		C69485B422F3D65E00D5CC02 /* MarkDownTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownTransform.swift; sourceTree = "<group>"; };
 		C69485B622F3DF0600D5CC02 /* MarkDownTransformUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownTransformUtil.swift; sourceTree = "<group>"; };
+		C69485B822F4424F00D5CC02 /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
 		C6EAA6A822D191C100896913 /* RichEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RichEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6EAA6AB22D191C200896913 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6EAA6AD22D191C200896913 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 		C67834F722D70AB200BE08B0 /* New Group */ = {
 			isa = PBXGroup;
 			children = (
+				C69485B822F4424F00D5CC02 /* AppUtil.swift */,
 				C67834F822D70ACD00BE08B0 /* TextElement.swift */,
 				C633896322F01569004F703B /* TextProcessor.swift */,
 				C633896622F03B05004F703B /* MarkDownStyle.swift */,
@@ -734,6 +737,7 @@
 				C606DE3622D57B5600F425B3 /* MDImage.swift in Sources */,
 				C6EAA78522D1926600896913 /* NSData+YYAdd.m in Sources */,
 				C633896922F05BAC004F703B /* AttributeProcessor.swift in Sources */,
+				C69485B922F4424F00D5CC02 /* AppUtil.swift in Sources */,
 				C6EAA7A322D1974200896913 /* ArrayExt.swift in Sources */,
 				C6EAA6D122D1923B00896913 /* MDTaskList.swift in Sources */,
 				C6EAA77C22D1926600896913 /* UIBarButtonItem+YYAdd.m in Sources */,

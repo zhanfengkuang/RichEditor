@@ -56,9 +56,9 @@ class ViewController: UIViewController {
     }
     
     @objc func nextAction() {
-        let vc = NextViewController()
+//        let vc = NextViewController()
 //        richEditor.isEditable = false
-        present(vc, animated: true, completion: nil)
+//        present(vc, animated: true, completion: nil)
     }
     
     deinit {
