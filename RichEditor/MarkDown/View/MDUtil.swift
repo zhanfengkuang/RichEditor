@@ -28,7 +28,8 @@ struct MDUtil {
         var offset: Int = 0
         for (index, att) in attachments.enumerated() {
             if let view = att.content as? UIView,
-                var location = (textRange.element(at: index) as? NSRange)?.location,
+                var location = (textRange.element(at: index) as? NSRange)?.location
+                ,
                 let type = MDControlType(rawValue: view.tag) {
                 let control: MDControl
                 switch type {

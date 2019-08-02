@@ -25,6 +25,8 @@ public enum MarkDownItem: Int {
     case unordered = 62
     /// 有序
     case ordered = 63
+    /// 图片
+//    case image
 }
 
 public protocol MarkDownElement {
@@ -34,6 +36,8 @@ public protocol MarkDownElement {
     var style: MarkDownStyle { set get }
     /// 控件富文本
     var attributedString: NSMutableAttributedString? { set get }
+    /// content
+    var content: UIView? { get }
 }
 
 // MARK: - Header
@@ -62,6 +66,9 @@ class MarkDownHeader: MarkDownElement {
     
     var style: MarkDownStyle
     var headerStyle: MarkDownHeaderStyle
+    var content: UIView? { return header }
+    
+    private var header: UIView!
     
     var text: String {
         return level.text
@@ -80,6 +87,7 @@ class MarkDownHeader: MarkDownElement {
         headerView.contentMode = .left
         headerView.jr_size = headerStyle.size
         headerView.tag = level.rawValue
+        self.header = headerView
         
         attributedString = NSMutableAttributedString(string: "\n")
         let string = NSMutableAttributedString.yy_attachmentString(withContent: headerView,
@@ -99,8 +107,8 @@ class MarkDownTodo: MarkDownElement {
         
         var text: String {
             switch self {
-            case .done: return "- [ ] "
-            case .undone: return "- [x] "
+            case .done: return "- [x] "
+            case .undone: return "- [ ] "
             }
         }
     }
@@ -109,6 +117,9 @@ class MarkDownTodo: MarkDownElement {
     var state: State = .undone
     var style: MarkDownStyle
     var attributedString: NSMutableAttributedString?
+    var content: UIView? { return todo }
+    
+    private var todo: UIView!
     
     var tapBlock: ((UIButton) -> Void)?
     
@@ -116,8 +127,6 @@ class MarkDownTodo: MarkDownElement {
         self.style = style
         self.state = state
         let todoStyle = style.attributes[.todo] as? MarkDownTodoStyle ?? MarkDownTodoStyle()
-        
-        
         
         let todoBtn = UIButton(type: .custom)
         todoBtn.isSelected = state == .done
@@ -128,6 +137,7 @@ class MarkDownTodo: MarkDownElement {
         todoBtn.imageView?.contentMode = .left
         todoBtn.jr_size = todoStyle.size
         todoBtn.addTarget(self, action: #selector(changeSate(_:)), for: .touchUpInside)
+        self.todo = todoBtn
         
         attributedString = NSMutableAttributedString.yy_attachmentString(withContent: todoBtn,
                                                                          contentMode: .left,
@@ -151,12 +161,15 @@ class MarkDownSeparator: MarkDownElement {
     var text: String { return "----" }
     var attributedString: NSMutableAttributedString?
     var style: MarkDownStyle
+    var content: UIView? { return separator }
+    
+    private var separator: UIView!
     
     required init(style: MarkDownStyle) {
         self.style = style
         let separatorStyle = style.attributes[.separator] as? MarkDownSeparatorStyle ?? MarkDownSeparatorStyle()
         
-        let separator = UIView()
+        separator = UIView()
         separator.tag = MarkDownItem.separator.rawValue
         separator.backgroundColor = separatorStyle.color
         separator.size = separatorStyle.size
@@ -170,13 +183,31 @@ class MarkDownSeparator: MarkDownElement {
 
 // MARK: - Ordered
 class MarkDownOrdered: MarkDownElement {
-    var text: String { return "" }
+    var text: String { return "\(index). " }
     var style: MarkDownStyle
     var attributedString: NSMutableAttributedString?
+    var index: Int
     
-    required init(style: MarkDownStyle) {
+    var content: UIView? { return ordered }
+    private var ordered: UIView!
+    
+    required init(style: MarkDownStyle, index: Int) {
         self.style = style
-//        let orderedStyle = style.attributes[.ordered] as? MarkDown
+        self.index = index
+        let orderedStyle = style.attributes[.ordered] as? MarkDownOrderedStyle ?? MarkDownOrderedStyle()
+        let ordered = UILabel()
+        ordered.font = orderedStyle.font
+        ordered.textColor = orderedStyle.color
+        ordered.text = "\(index)."
+        ordered.jr_size = orderedStyle.size
+        ordered.textAlignment = .left
+        ordered.tag = MarkDownItem.ordered.rawValue
+        
+        attributedString = NSMutableAttributedString.yy_attachmentString(withContent: ordered,
+                                                                         contentMode: .center,
+                                                                         attachmentSize: orderedStyle.size,
+                                                                         alignTo: .systemFont(ofSize: 15),
+                                                                         alignment: .center)
     }
 }
 
@@ -185,18 +216,21 @@ class MarkDownUnordered: MarkDownElement {
     var style: MarkDownStyle
     var attributedString: NSMutableAttributedString?
     
+    var content: UIView? { return unordered }
+    private var unordered: UIView!
+    
     required init(style: MarkDownStyle) {
         self.style = style
         let unorderedStyle = style.attributes[.unordered] as? MarkDownUnorderedStyle ?? MarkDownUnorderedStyle()
         // unordered view
-        let unordered = UIView()
+        unordered = UIView()
         unordered.jr_size = unorderedStyle.size
         unordered.tag = MarkDownItem.unordered.rawValue
         // dot
         let dot = UIView()
         let radius = unorderedStyle.dotRadius
         dot.jr_size = CGSize(width: radius*2, height: radius*2)
-        dot.center = unordered.center
+        dot.center = CGPoint(x: radius, y: unordered.center.y)
         dot.layer.cornerRadius = unorderedStyle.dotRadius
         dot.backgroundColor = unorderedStyle.dotColor
         unordered.addSubview(dot)
@@ -208,3 +242,16 @@ class MarkDownUnordered: MarkDownElement {
                                                                          alignment: .center)
     }
 }
+
+//// MARK: - Image
+//class MarkDownImage: MarkDownElement {
+//    var text: String { return "" }
+//    var style: MarkDownStyle
+//    var attributedString: NSMutableAttributedString?
+//
+//    var url: String?
+//
+//    required init(style: MarkDownStyle, size: CGSize) {
+//
+//    }
+//}

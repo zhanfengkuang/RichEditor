@@ -53,12 +53,6 @@ public class MDTextView: DynamicTextView {
         
     }
     
-    public override var typingAttributes: [String : Any]? {
-        willSet {
-            print("old: \(typingAttributes), new:\(newValue)")
-        }
-    }
-    
     func currentParagraph() -> NSRange {
         return (text as NSString).paragraphRange(for: selectedRange)
     }
@@ -132,6 +126,8 @@ public class MDTextView: DynamicTextView {
             elements.append(todo)
 
         case .time:  // 时间
+            print("mark down string: \(MarkDownTransform.text(at: self))")
+            return
             self.state = nil
             index = 0
             let attachment = MDImage(size: CGSize(width: jr_width, height: 200))
@@ -165,6 +161,7 @@ public class MDTextView: DynamicTextView {
             let range = NSRange(location: location, length: selectedRange.length)
             attributedText = string
             selectedRange = range
+            elements.append(separator)
             
         case .unordered:  // 无序
             let unordered = MarkDownUnordered(style: style)
@@ -188,6 +185,7 @@ public class MDTextView: DynamicTextView {
             let range = NSRange(location: location, length: selectedRange.length)
             attributedText = string
             selectedRange = range
+            elements.append(unordered)
             
         case .header1, .header2, .header3:  // 标题
             var level: MarkDownHeader.Level = .header3
@@ -221,14 +219,39 @@ public class MDTextView: DynamicTextView {
             let range = NSRange(location: location, length: selectedRange.length)
             attributedText = mutableAttributedString
             selectedRange = range
+            elements.append(header)
         case .ordered:  // 有序
-            index += 1
-            self.state = element
-            if let textRange = selectedTextRange {
-                replace(textRange, withText: line + index.description + element.md)
+            let string = NSMutableAttributedString(attributedString: currentAttributedString)
+            if let state = processor?.style(range: selectedRange) {
+                if state.0 == .ordered {
+                    
+                } else { // 其他状态时 替换掉
+                    let ordered = MarkDownOrdered(style: style, index: 1)
+                    let paragraphRange = currentParagraph()
+                    let textRange = NSRange(location: 1, length: max(0, paragraphRange.length - 1))
+                    setAttributes(string, item: .ordered, range: textRange)
+                    string.replaceCharacters(in: NSRange(location: 0, length: 1), with: ordered.attributedString!)
+                    let range = selectedRange
+                    attributedText = string
+                    selectedRange = range
+                    elements.append(ordered)
+                }
             }
         default:
             return
+        }
+    }
+    
+    // 设置文本属性
+    func setAttributes(_ attributedString: NSMutableAttributedString,
+                       item: MarkDownItem,
+                       range: NSRange) {
+        if let attributes = style.attributes(with: item) { // 设置该段落的字体属性
+            for attribute in attributes.enumerated() {
+                attributedString.yy_setAttribute(attribute.element.key,
+                                                 value: attribute.element.value,
+                                                 range: range)
+            }
         }
     }
     

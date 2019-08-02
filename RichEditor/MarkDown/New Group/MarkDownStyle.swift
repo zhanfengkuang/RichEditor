@@ -89,6 +89,14 @@ public class MarkDownStyle {
                 .foregroundColor: unorderedStyle.color,
                 .paragraphStyle: paragraphStyle,
             ]
+        case .ordered:
+            let orderedStyle = attributes[.ordered] as? MarkDownOrderedStyle ?? MarkDownOrderedStyle()
+            paragraphStyle.headIndent = headIndent
+            return [
+                .font: orderedStyle.font,
+                .foregroundColor: orderedStyle.color,
+                .paragraphStyle: paragraphStyle
+            ]
         }
     }
 }
@@ -200,6 +208,9 @@ struct MarkDownOrderedStyle: MarkDownElementStyle {
         self.font = font
     }
 }
+
+// MARK: - image
+
 
 extension MarkDownStyle.Key {
     /// 标题

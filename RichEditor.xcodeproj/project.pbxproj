@@ -17,6 +17,9 @@
 		C633896922F05BAC004F703B /* AttributeProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633896822F05BAC004F703B /* AttributeProcessor.swift */; };
 		C67834E422D6D88E00BE08B0 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67834E322D6D88E00BE08B0 /* NextViewController.swift */; };
 		C67834F922D70ACD00BE08B0 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67834F822D70ACD00BE08B0 /* TextElement.swift */; };
+		C69485B322F3D54500D5CC02 /* MarkDownPaser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B222F3D54500D5CC02 /* MarkDownPaser.swift */; };
+		C69485B522F3D65E00D5CC02 /* MarkDownTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B422F3D65E00D5CC02 /* MarkDownTransform.swift */; };
+		C69485B722F3DF0600D5CC02 /* MarkDownTransformUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B622F3DF0600D5CC02 /* MarkDownTransformUtil.swift */; };
 		C6EAA6AC22D191C200896913 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6AB22D191C200896913 /* AppDelegate.swift */; };
 		C6EAA6AE22D191C200896913 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6AD22D191C200896913 /* ViewController.swift */; };
 		C6EAA6B122D191C200896913 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6EAA6AF22D191C200896913 /* Main.storyboard */; };
@@ -114,6 +117,9 @@
 		C633896822F05BAC004F703B /* AttributeProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeProcessor.swift; sourceTree = "<group>"; };
 		C67834E322D6D88E00BE08B0 /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
 		C67834F822D70ACD00BE08B0 /* TextElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextElement.swift; sourceTree = "<group>"; };
+		C69485B222F3D54500D5CC02 /* MarkDownPaser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownPaser.swift; sourceTree = "<group>"; };
+		C69485B422F3D65E00D5CC02 /* MarkDownTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownTransform.swift; sourceTree = "<group>"; };
+		C69485B622F3DF0600D5CC02 /* MarkDownTransformUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownTransformUtil.swift; sourceTree = "<group>"; };
 		C6EAA6A822D191C100896913 /* RichEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RichEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6EAA6AB22D191C200896913 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6EAA6AD22D191C200896913 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -300,6 +306,9 @@
 				C633896622F03B05004F703B /* MarkDownStyle.swift */,
 				C633896822F05BAC004F703B /* AttributeProcessor.swift */,
 				C6EAA6C322D1923A00896913 /* MDTextView.swift */,
+				C69485B222F3D54500D5CC02 /* MarkDownPaser.swift */,
+				C69485B422F3D65E00D5CC02 /* MarkDownTransform.swift */,
+				C69485B622F3DF0600D5CC02 /* MarkDownTransformUtil.swift */,
 			);
 			path = "New Group";
 			sourceTree = "<group>";
@@ -693,6 +702,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6EAA76C22D1926600896913 /* NSParagraphStyle+YYText.m in Sources */,
+				C69485B522F3D65E00D5CC02 /* MarkDownTransform.swift in Sources */,
 				C6EAA77122D1926600896913 /* YYTextAsyncLayer.m in Sources */,
 				C6EAA77022D1926600896913 /* UIView+YYText.m in Sources */,
 				C6EAA78222D1926600896913 /* NSNumber+YYAdd.m in Sources */,
@@ -759,6 +769,7 @@
 				C6EAA78722D1926600896913 /* NSKeyedUnarchiver+YYAdd.m in Sources */,
 				C6EAA7A522D1977000896913 /* StringExt.swift in Sources */,
 				C6EAA77222D1926600896913 /* YYTextWeakProxy.m in Sources */,
+				C69485B322F3D54500D5CC02 /* MarkDownPaser.swift in Sources */,
 				C6EAA78D22D1926600896913 /* NSObject+YYAddForKVO.m in Sources */,
 				C6EAA6CD22D1923B00896913 /* MDParser.swift in Sources */,
 				C6EAA76622D1926600896913 /* YYTextRunDelegate.m in Sources */,
@@ -778,6 +789,7 @@
 				C67834F922D70ACD00BE08B0 /* TextElement.swift in Sources */,
 				C6EAA78122D1926600896913 /* NSArray+YYAdd.m in Sources */,
 				C6EAA76422D1926600896913 /* YYTextDebugOption.m in Sources */,
+				C69485B722F3DF0600D5CC02 /* MarkDownTransformUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -42,4 +42,27 @@ struct AttributesProcessor {
         self.textView = textView
         self.style = style
     }
+    
+    // 文本处于的状态
+    func style(range: NSRange) -> (MarkDownItem, UIView)? {
+        guard let textView = self.textView,
+            let textLayout = textView.textLayout else { return nil }
+        let paragraphRange = (textView.text as NSString).paragraphRange(for: range)
+        let prefixRange = NSRange(location: paragraphRange.location, length: 1)
+        if let attachmentRanges = textLayout.attachmentRanges {
+            var index: Int?
+            for (i, value) in attachmentRanges.enumerated() {
+                if let range = value as? NSRange, range == prefixRange {
+                    index = i
+                }
+            }
+            if index != nil,
+                let attachment = textLayout.attachments?.element(at: index!),
+                let content = attachment.content as? UIView,
+                let item = MarkDownItem(rawValue: content.tag) {
+                return (item, content)
+            }
+        }
+        return nil
+    }
 }
