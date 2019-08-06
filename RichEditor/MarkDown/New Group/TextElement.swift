@@ -8,9 +8,6 @@
 
 import Foundation
 
-//typealias RichText = (TextElementView) -> String
-//typealias RichControl = (String) -> TextElementView
-
 public enum MarkDownItem: Int {
     /// title
     case header1 = 56
@@ -38,6 +35,8 @@ public protocol MarkDownElement {
     var attributedString: NSMutableAttributedString? { set get }
     /// content
     var content: UIView? { get }
+    /// item
+    var item: MarkDownItem { get }
 }
 
 // MARK: - Header
@@ -62,8 +61,14 @@ class MarkDownHeader: MarkDownElement {
             case .header3: return #imageLiteral(resourceName: "editor_toolbar_header3_normal")
             }
         }
+        
+        init?(_ item: MarkDownItem) {
+            guard let level = Level(rawValue: item.rawValue) else { return nil }
+            self = level
+        }
     }
     
+    var item: MarkDownItem { return MarkDownItem(rawValue: level.rawValue) ?? .header1 }
     var style: MarkDownStyle
     var headerStyle: MarkDownHeaderStyle
     var content: UIView? { return header }
@@ -89,13 +94,11 @@ class MarkDownHeader: MarkDownElement {
         headerView.tag = level.rawValue
         self.header = headerView
         
-        attributedString = NSMutableAttributedString(string: "\n")
-        let string = NSMutableAttributedString.yy_attachmentString(withContent: headerView,
+        attributedString = NSMutableAttributedString.yy_attachmentString(withContent: headerView,
                                                                    contentMode: .center,
                                                                    attachmentSize: headerStyle.size,
                                                                    alignTo: .systemFont(ofSize: 15),
                                                                    alignment: .top)
-        attributedString?.append(string)
     }
 }
 
@@ -112,6 +115,7 @@ class MarkDownTodo: MarkDownElement {
             }
         }
     }
+    var item: MarkDownItem { return state == .undone ? .undone : .done  }
     var text: String { return state.text }
     // 完成状态
     var state: State = .undone
@@ -158,6 +162,7 @@ class MarkDownTodo: MarkDownElement {
 
 // MARK: - Separator
 class MarkDownSeparator: MarkDownElement {
+    var item: MarkDownItem { return .separator }
     var text: String { return "----" }
     var attributedString: NSMutableAttributedString?
     var style: MarkDownStyle
@@ -173,16 +178,19 @@ class MarkDownSeparator: MarkDownElement {
         separator.tag = MarkDownItem.separator.rawValue
         separator.backgroundColor = separatorStyle.color
         separator.size = separatorStyle.size
-        attributedString = NSMutableAttributedString.yy_attachmentString(withContent: separator,
+        attributedString = NSMutableAttributedString(string: "\n")
+        let string = NSMutableAttributedString.yy_attachmentString(withContent: separator,
                                                                          contentMode: .center,
                                                                          attachmentSize: separatorStyle.size,
                                                                          alignTo: .systemFont(ofSize: 15),
                                                                          alignment: .top)
+        attributedString?.append(string)
     }
 }
 
 // MARK: - Ordered
 class MarkDownOrdered: MarkDownElement {
+    var item: MarkDownItem { return .ordered }
     var text: String { return "\(index). " }
     var style: MarkDownStyle
     var attributedString: NSMutableAttributedString?
@@ -202,6 +210,7 @@ class MarkDownOrdered: MarkDownElement {
         ordered.jr_size = orderedStyle.size
         ordered.textAlignment = .left
         ordered.tag = MarkDownItem.ordered.rawValue
+        self.ordered = ordered
         
         attributedString = NSMutableAttributedString.yy_attachmentString(withContent: ordered,
                                                                          contentMode: .center,
@@ -212,6 +221,7 @@ class MarkDownOrdered: MarkDownElement {
 }
 
 class MarkDownUnordered: MarkDownElement {
+    var item: MarkDownItem { return .unordered }
     var text: String { return "* " }
     var style: MarkDownStyle
     var attributedString: NSMutableAttributedString?

@@ -16,17 +16,16 @@ public class RichEditorToobar: UIView {
         // 待办
         case todo
         
-        var elements: [RichEditorElement] {
-            return [.header1, .header2, .header3,
-                    .bold, .todo, .time, .line, .ordered, .unordered]
+        var elements: [MarkDownItem] {
+            return [.header1, .header2, .header3, .undone, .separator, .ordered, .unordered]
         }
     }
     
     // 关闭按钮
     private var closeBtn: UIButton!
     private var scrollView: UIScrollView!
-    weak var textView: MDTextView?
     private(set) var module: Module
+    weak var textView: MarkDownView?
     
     required init(frame: CGRect, module: Module) {
         self.module = module
@@ -68,9 +67,9 @@ extension RichEditorToobar {
     // 按钮 编辑 富文本
     @objc func editAction(_ sender: UIButton) {
         // 不是处于编辑状态 禁止编辑
-        guard let richEditor = textView, richEditor.isFirstResponder else { return }
-        guard let element = RichEditorElement(rawValue: sender.tag) else { return }
-        textView?.editMarkdown(element)
+        guard let richEditor = textView, richEditor.isFirstResponder,
+            let element = MarkDownItem(rawValue: sender.tag) else { return }
+        richEditor.edit(with: element)
     }
 }
 
@@ -119,6 +118,31 @@ extension RichEditorToobar {
     }
 }
 
+extension MarkDownItem {
+    var name: String {
+        switch self {
+        case .header1:
+            return "header1"
+        case .header2:
+            return "header2"
+        case .header3:
+            return "header3"
+        case .unordered:
+            return "unordered"
+        case .ordered:
+            return "ordered"
+        case .separator:
+            return "line"
+        case .done, .undone:
+            return "todo"
+        }
+    }
+    
+    var image: UIImage? {
+        return UIImage(named: "editor_toolbar_" + name + "_normal")
+    }
+}
+
 public enum RichEditorElement: Int, CaseIterable {
     /// 黑体
     case bold = 10
@@ -148,35 +172,6 @@ public enum RichEditorElement: Int, CaseIterable {
     
     /// 图片
     case image
-    
-//    var index: Int {
-//        switch self {
-//        case .bold:
-//            return 10
-//        case .italic:
-//            return 12
-//        case .underline:
-//            return 13
-//        case .strikeThrough:
-//            return 14
-//        case .header1:
-//            return 15
-//        case .header2:
-//            return 15
-//        case .header3:
-//            return 17
-//        case .unordered:
-//            return 18
-//        case .ordered:
-//            return 19
-//        case .time:
-//            return 20
-//        case .line:
-//            return 21
-//        case .todo:
-//            return 22
-//        }
-//    }
     
     var name: String {
         switch self {

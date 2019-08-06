@@ -19,45 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RichEditor/MarkDown/New Group/MarkDownPaser.swift"
-            timestampString = "586433624.784717"
+            filePath = "RichEditor/MarkDown/New Group/AttributeProcessor.swift"
+            timestampString = "586693591.025259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "parseText(_:selectedRange:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RichEditor/MarkDown/New Group/MarkDownPaser.swift"
-            timestampString = "586433624.785895"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "parseText(_:selectedRange:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RichEditor/MarkDown/New Group/MarkDownPaser.swift"
-            timestampString = "586433624.786387"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "parseText(_:selectedRange:)"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "removeElement(with:in:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -20,7 +20,7 @@ class NextViewController: UIViewController {
         textView.style = style
         textView.isEditable = false
         textView.attributedText = attributedString
-        textView.textParser = MarkDownParse(style: style, textView: textView)
+//        textView.textParser = MarkDownParse(style: style, textView: textView)
         view.addSubview(textView)
     }
     

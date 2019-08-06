@@ -49,7 +49,7 @@ public class MDTextView: DynamicTextView {
         
         maxHeight = 10000
         
-        processor = AttributesProcessor(textView: self, style: style)
+//        processor = AttributesProcessor(textView: self, style: style)
         
     }
     
@@ -59,8 +59,6 @@ public class MDTextView: DynamicTextView {
     
     public func editMarkdown(_ element: RichEditorElement, isNewLine: Bool = true) {
         let currentAttributedString = attributedText ?? NSMutableAttributedString(string: "")
-        
-        let line = (!text.isEmpty && !text.hasSuffix("\n")) ? "\n" : ""
         switch element {
         case .bold:  // 黑体
             if let textRange = selectedTextRange {
@@ -144,7 +142,7 @@ public class MDTextView: DynamicTextView {
             let currentLocation = selectedRange.location + selectedRange.length
             text?.insert(attachment.attributedString!, at: currentLocation)
 //            text?.append(attachment.attributedString!)
-            text?.append(NSAttributedString(string: "\r\n"))
+            
             attributedText = text
             imageView.append(attachment) 
             attachment.textLayout = textLayout
@@ -226,23 +224,23 @@ public class MDTextView: DynamicTextView {
             attributedText = mutableAttributedString
             selectedRange = range
             elements.append(header)
-        case .ordered:  // 有序
-            let string = NSMutableAttributedString(attributedString: currentAttributedString)
-            if let state = processor?.style(range: selectedRange) {
-                if state.0 == .ordered {
-                    
-                } else { // 其他状态时 替换掉
-                    let ordered = MarkDownOrdered(style: style, index: 1)
-                    let paragraphRange = currentParagraph()
-                    let textRange = NSRange(location: 1, length: max(0, paragraphRange.length - 1))
-                    setAttributes(string, item: .ordered, range: textRange)
-                    string.replaceCharacters(in: NSRange(location: 0, length: 1), with: ordered.attributedString!)
-                    let range = selectedRange
-                    attributedText = string
-                    selectedRange = range
-                    elements.append(ordered)
-                }
-            }
+//        case .ordered:  // 有序
+//            let string = NSMutableAttributedString(attributedString: currentAttributedString)
+//            if let state = processor?.style(range: selectedRange) {
+//                if state.0 == .ordered {
+//
+//                } else { // 其他状态时 替换掉
+//                    let ordered = MarkDownOrdered(style: style, index: 1)
+//                    let paragraphRange = currentParagraph()
+//                    let textRange = NSRange(location: 1, length: max(0, paragraphRange.length - 1))
+//                    setAttributes(string, item: .ordered, range: textRange)
+//                    string.replaceCharacters(in: NSRange(location: 0, length: 1), with: ordered.attributedString!)
+//                    let range = selectedRange
+//                    attributedText = string
+//                    selectedRange = range
+//                    elements.append(ordered)
+//                }
+//            }
         default:
             return
         }
@@ -272,10 +270,6 @@ extension MDTextView: YYTextViewDelegate {
                          shouldChangeTextIn range: NSRange,
                          replacementText text: String) -> Bool {
         textView.typingAttributes = processor?.attributes
-//        print("typing attributes: \(typingAttributes)")
-        if text == "\n" {
-            isAddMD = true
-        }
         return true
     }
     

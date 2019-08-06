@@ -21,6 +21,7 @@
 		C69485B522F3D65E00D5CC02 /* MarkDownTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B422F3D65E00D5CC02 /* MarkDownTransform.swift */; };
 		C69485B722F3DF0600D5CC02 /* MarkDownTransformUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B622F3DF0600D5CC02 /* MarkDownTransformUtil.swift */; };
 		C69485B922F4424F00D5CC02 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B822F4424F00D5CC02 /* AppUtil.swift */; };
+		C69485BB22F4455400D5CC02 /* MarkDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485BA22F4455400D5CC02 /* MarkDownView.swift */; };
 		C6EAA6AC22D191C200896913 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6AB22D191C200896913 /* AppDelegate.swift */; };
 		C6EAA6AE22D191C200896913 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6AD22D191C200896913 /* ViewController.swift */; };
 		C6EAA6B122D191C200896913 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6EAA6AF22D191C200896913 /* Main.storyboard */; };
@@ -122,6 +123,7 @@
 		C69485B422F3D65E00D5CC02 /* MarkDownTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownTransform.swift; sourceTree = "<group>"; };
 		C69485B622F3DF0600D5CC02 /* MarkDownTransformUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownTransformUtil.swift; sourceTree = "<group>"; };
 		C69485B822F4424F00D5CC02 /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
+		C69485BA22F4455400D5CC02 /* MarkDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownView.swift; sourceTree = "<group>"; };
 		C6EAA6A822D191C100896913 /* RichEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RichEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6EAA6AB22D191C200896913 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6EAA6AD22D191C200896913 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 		C6EAA6C122D1923A00896913 /* MarkDown */ = {
 			isa = PBXGroup;
 			children = (
+				C69485BA22F4455400D5CC02 /* MarkDownView.swift */,
 				C67834F722D70AB200BE08B0 /* New Group */,
 				C6EAA6C222D1923A00896913 /* View */,
 				C62EBC4322E6F357005F3C12 /* MarkdownElement.swift */,
@@ -763,6 +766,7 @@
 				C6EAA78A22D1926600896913 /* NSString+YYAdd.m in Sources */,
 				C6EAA77922D1926600896913 /* UIScrollView+YYAdd.m in Sources */,
 				C6EAA76722D1926600896913 /* YYTextParser.m in Sources */,
+				C69485BB22F4455400D5CC02 /* MarkDownView.swift in Sources */,
 				C6EAA75E22D1926600896913 /* YYTextEffectWindow.m in Sources */,
 				C6EAA79622D1942B00896913 /* UIColorExt.swift in Sources */,
 				C6EAA79F22D1954700896913 /* DynamicTextView.swift in Sources */,

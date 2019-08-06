@@ -20,11 +20,22 @@ public class MarkDownStyle {
     var font: UIFont = UIFont.systemFont(ofSize: 15)
     /// 文本颜色
     var color: UIColor = UIColor(hex: 0x6D7278)
+    private(set) var normalStyle: [String: Any] = [ : ]
     
     init(attributes: Attributes = [ : ]) {
         self.attributes = attributes
-        paragraphStyle.lineSpacing = 5
-        paragraphStyle.paragraphSpacing = 10
+        paragraphStyle.lineSpacing = 10
+        paragraphStyle.paragraphSpacing = 20
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.headIndent = 0
+        let decoration = YYTextDecoration(style: .single, width: 0, color: .red)
+        normalStyle = [
+            .foregroundColor: color,
+            .font: font,
+            .paragraphStyle: paragraphStyle,
+            YYTextStrikethroughAttributeName: decoration
+        ]
     }
     
     public func attributes(with item: MarkDownItem) -> [String: Any]? {
@@ -80,7 +91,7 @@ public class MarkDownStyle {
             }
             return result
         case .separator:
-            return nil
+            return normalStyle
         case .unordered:
             let unorderedStyle = attributes[.unordered] as? MarkDownUnorderedStyle ?? MarkDownUnorderedStyle()
             paragraphStyle.headIndent = headIndent
