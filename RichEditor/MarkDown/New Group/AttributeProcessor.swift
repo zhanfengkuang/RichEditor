@@ -13,6 +13,7 @@ struct AttributesProcessor {
     weak var style: MarkDownStyle?
     
     var attributes: [String: Any]? {
+        if !markAttributes.isEmpty { return markAttributes }
         guard let textView = self.textView,
             let style = self.style,
             let textLayout = textView.textLayout,
@@ -37,6 +38,9 @@ struct AttributesProcessor {
         }
         return style.normalStyle
     }
+    
+    /// 手动设置 富文本样式
+    var markAttributes: [String: Any]  = [ : ]
     
     init(textView: MarkDownView?, style: MarkDownStyle) {
         self.textView = textView

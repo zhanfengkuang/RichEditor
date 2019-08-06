@@ -5,3 +5,4 @@
 #import "YYCategories.h"
 #import "YYImage.h"
 #import "YYText.h"
+#import "TZImagePickerController.h"

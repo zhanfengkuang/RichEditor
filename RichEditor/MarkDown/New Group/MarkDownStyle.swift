@@ -90,8 +90,6 @@ public class MarkDownStyle {
 //                result[.baselineOffset] = 0
             }
             return result
-        case .separator:
-            return normalStyle
         case .unordered:
             let unorderedStyle = attributes[.unordered] as? MarkDownUnorderedStyle ?? MarkDownUnorderedStyle()
             paragraphStyle.headIndent = headIndent
@@ -107,6 +105,14 @@ public class MarkDownStyle {
                 .font: orderedStyle.font,
                 .foregroundColor: orderedStyle.color,
                 .paragraphStyle: paragraphStyle
+            ]
+        case .separator, .image:
+            return normalStyle
+        case .bold:
+            let boldStyle = attributes[.bold] as? MarkDownBoldStyle ?? MarkDownBoldStyle()
+            return [
+                .foregroundColor: boldStyle.color,
+                .font: boldStyle.font,
             ]
         }
     }
@@ -184,7 +190,7 @@ struct MarkDownUnorderedStyle {
     /// 文本 字体
     var font: UIFont
     
-    init(dotColor: UIColor = UIColor(hex: 0x6D7278),
+    init(dotColor: UIColor = UIColor(hex: 0xC5C7C9),
          dotRadius: CGFloat = 3,
          color: UIColor = UIColor(hex: 0x6D7278),
          size: CGSize = CGSize(width: 25, height: 16),
@@ -207,7 +213,7 @@ struct MarkDownOrderedStyle: MarkDownElementStyle {
     var color: UIColor
     var font: UIFont
     
-    init(titleColor: UIColor = UIColor(hex: 0x6D7278),
+    init(titleColor: UIColor = UIColor(hex: 0xC5C7C9),
          titleFont: UIFont = UIFont.boldSystemFont(ofSize: 15),
          size: CGSize = CGSize(width: 25, height: 16),
          color: UIColor = UIColor(hex: 0x6D7278),
@@ -221,6 +227,28 @@ struct MarkDownOrderedStyle: MarkDownElementStyle {
 }
 
 // MARK: - image
+struct MarkDownImageStyle: MarkDownElementStyle {
+    /// 圆角 半径
+    var radius: CGFloat
+ 
+    init(radius: CGFloat = 8) {
+        self.radius = radius
+    }
+}
+
+// MARK: - bold
+struct MarkDownBoldStyle: MarkDownElementStyle {
+    /// 字体
+    var font: UIFont
+    /// color
+    var color: UIColor
+    
+    init(font: UIFont = UIFont.boldSystemFont(ofSize: 15),
+         color: UIColor = UIColor(hex: 0x6D7278)) {
+        self.font = font
+        self.color = color
+    }
+}
 
 
 extension MarkDownStyle.Key {
@@ -238,6 +266,8 @@ extension MarkDownStyle.Key {
     public static let unordered = MarkDownStyle.Key("mark_down_unordered")
     /// 有序
     public static let ordered = MarkDownStyle.Key("mark_down_ordered")
+    /// font
+    public static let bold = MarkDownStyle.Key("mark_down_bold")
 }
 
 extension MarkDownStyle {

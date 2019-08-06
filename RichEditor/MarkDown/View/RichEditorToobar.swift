@@ -17,7 +17,8 @@ public class RichEditorToobar: UIView {
         case todo
         
         var elements: [MarkDownItem] {
-            return [.header1, .header2, .header3, .undone, .separator, .ordered, .unordered]
+            return [.image, .header1, .header2, .header3, .undone,
+                    .separator, .ordered, .unordered, .bold]
         }
     }
     
@@ -69,7 +70,8 @@ extension RichEditorToobar {
         // 不是处于编辑状态 禁止编辑
         guard let richEditor = textView, richEditor.isFirstResponder,
             let element = MarkDownItem(rawValue: sender.tag) else { return }
-        richEditor.edit(with: element)
+        sender.isSelected.toggle()
+        richEditor.edit(with: element, isSelected: sender.isSelected)
     }
 }
 
@@ -95,6 +97,7 @@ extension RichEditorToobar {
             let btn = UIButton(type: .custom)
             btn.addTarget(self, action: #selector(editAction(_:)), for: .touchUpInside)
             btn.setImage(element.image, for: .normal)
+            btn.setImage(element.selectedImage, for: .selected)
             btn.imageView?.contentMode = .scaleAspectFit
             btn.tag = element.rawValue
             btn.frame = CGRect(x: jr_height*index.cgFloat, y: 0,
@@ -135,11 +138,19 @@ extension MarkDownItem {
             return "line"
         case .done, .undone:
             return "todo"
+        case .image:
+            return "image"
+        case .bold:
+            return "bold"
         }
     }
     
     var image: UIImage? {
         return UIImage(named: "editor_toolbar_" + name + "_normal")
+    }
+    
+    var selectedImage: UIImage? {
+        return UIImage(named: "editor_toolbar_" + name + "_selected")
     }
 }
 

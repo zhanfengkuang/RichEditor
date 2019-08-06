@@ -23,7 +23,9 @@ public enum MarkDownItem: Int {
     /// 有序
     case ordered = 63
     /// 图片
-//    case image
+    case image = 64
+    /// 黑体
+    case bold = 65
 }
 
 public protocol MarkDownElement {
@@ -254,15 +256,43 @@ class MarkDownUnordered: MarkDownElement {
     }
 }
 
-//// MARK: - Image
-//class MarkDownImage: MarkDownElement {
-//    var text: String { return "" }
-//    var style: MarkDownStyle
-//    var attributedString: NSMutableAttributedString?
-//
-//    var url: String?
-//
-//    required init(style: MarkDownStyle, size: CGSize) {
-//
-//    }
-//}
+// MARK: - Image
+class MarkDownImage: MarkDownElement {
+    var content: UIView?
+
+    var text: String { return "" }
+    var style: MarkDownStyle
+    var attributedString: NSMutableAttributedString?
+    var item: MarkDownItem { return .image }
+    var url: String?
+    
+    var tapBlock: ((UIButton) -> Void)?
+
+    required init(style: MarkDownStyle, size: CGSize, image: UIImage) {
+        self.style = style
+        let imageStyle = style.attributes[.image] as? MarkDownImageStyle ?? MarkDownImageStyle()
+
+        let imageView = UIButton(type: .custom)
+        imageView.imageView?.contentMode = .scaleAspectFill
+        imageView.setImage(image, for: .normal)
+        imageView.size = size
+        imageView.layer.cornerRadius = imageStyle.radius
+        imageView.layer.masksToBounds = true
+        imageView.addTarget(self, action: #selector(selectImage(_:)), for: .touchUpInside)
+        imageView.tag = item.rawValue
+        content = imageView
+        
+        attributedString = NSMutableAttributedString(string: "\n")
+        let string = NSMutableAttributedString.yy_attachmentString(withContent: imageView,
+                                                                   contentMode: .center,
+                                                                   attachmentSize: size,
+                                                                   alignTo: .systemFont(ofSize: 15),
+                                                                   alignment: .center)
+        string.append(NSAttributedString(string: "\n"))
+        attributedString?.append(string)
+    }
+    
+    @objc func selectImage(_ sender: UIButton) {
+        tapBlock?(sender)
+    }
+}

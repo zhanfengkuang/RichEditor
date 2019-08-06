@@ -3,18 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B59DC3CE50040418B49EA9D1 /* Pods_RichEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D09F41A2DA1D5A02A39642 /* Pods_RichEditor.framework */; };
-		C606DE3622D57B5600F425B3 /* MDImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606DE3522D57B5600F425B3 /* MDImage.swift */; };
-		C610CFF422E5B608001F9C35 /* WechatIMG4306.png in Resources */ = {isa = PBXBuildFile; fileRef = C610CFF322E5B607001F9C35 /* WechatIMG4306.png */; };
-		C610CFF622E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png in Resources */ = {isa = PBXBuildFile; fileRef = C610CFF522E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png */; };
-		C62EBC4422E6F357005F3C12 /* MarkdownElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62EBC4322E6F357005F3C12 /* MarkdownElement.swift */; };
+		7F238A11B96CC52F179E948C /* libPods-RichEditor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10028020BF0746A298D10289 /* libPods-RichEditor.a */; };
 		C633896422F0156A004F703B /* TextProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633896322F01569004F703B /* TextProcessor.swift */; };
 		C633896722F03B05004F703B /* MarkDownStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633896622F03B05004F703B /* MarkDownStyle.swift */; };
 		C633896922F05BAC004F703B /* AttributeProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633896822F05BAC004F703B /* AttributeProcessor.swift */; };
+		C6429AF322F9361F00E75FA8 /* MDImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6429AF022F9361E00E75FA8 /* MDImage.swift */; };
+		C6429AF422F9361F00E75FA8 /* MarkdownElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6429AF122F9361E00E75FA8 /* MarkdownElement.swift */; };
+		C6429AF522F9361F00E75FA8 /* MDControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6429AF222F9361F00E75FA8 /* MDControl.swift */; };
 		C67834E422D6D88E00BE08B0 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67834E322D6D88E00BE08B0 /* NextViewController.swift */; };
 		C67834F922D70ACD00BE08B0 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67834F822D70ACD00BE08B0 /* TextElement.swift */; };
 		C69485B322F3D54500D5CC02 /* MarkDownPaser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B222F3D54500D5CC02 /* MarkDownPaser.swift */; };
@@ -34,8 +33,6 @@
 		C6EAA6D022D1923B00896913 /* MDLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6C722D1923A00896913 /* MDLine.swift */; };
 		C6EAA6D122D1923B00896913 /* MDTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6C822D1923A00896913 /* MDTaskList.swift */; };
 		C6EAA6D222D1923B00896913 /* MDElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6C922D1923A00896913 /* MDElement.swift */; };
-		C6EAA6D322D1923B00896913 /* MDControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6CA22D1923A00896913 /* MDControl.swift */; };
-		C6EAA6D422D1923B00896913 /* MDTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6CB22D1923A00896913 /* MDTheme.swift */; };
 		C6EAA75622D1926600896913 /* YYSpriteSheetImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6DA22D1926600896913 /* YYSpriteSheetImage.m */; };
 		C6EAA75722D1926600896913 /* YYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6DC22D1926600896913 /* YYImage.m */; };
 		C6EAA75822D1926600896913 /* YYImageCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6DD22D1926600896913 /* YYImageCoder.m */; };
@@ -107,16 +104,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10028020BF0746A298D10289 /* libPods-RichEditor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RichEditor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2CB99E4AA93F1D6D425C565 /* Pods-RichEditor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RichEditor.release.xcconfig"; path = "Target Support Files/Pods-RichEditor/Pods-RichEditor.release.xcconfig"; sourceTree = "<group>"; };
 		A77C52299ACD51FC275CFB1C /* Pods-RichEditor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RichEditor.debug.xcconfig"; path = "Target Support Files/Pods-RichEditor/Pods-RichEditor.debug.xcconfig"; sourceTree = "<group>"; };
 		C60679B222F1249000D4CAF8 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		C606DE3522D57B5600F425B3 /* MDImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDImage.swift; sourceTree = "<group>"; };
-		C610CFF322E5B607001F9C35 /* WechatIMG4306.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WechatIMG4306.png; sourceTree = "<group>"; };
-		C610CFF522E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "屏幕快照 2019-07-22 16.18.15.png"; sourceTree = "<group>"; };
-		C62EBC4322E6F357005F3C12 /* MarkdownElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownElement.swift; sourceTree = "<group>"; };
 		C633896322F01569004F703B /* TextProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextProcessor.swift; sourceTree = "<group>"; };
 		C633896622F03B05004F703B /* MarkDownStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownStyle.swift; sourceTree = "<group>"; };
 		C633896822F05BAC004F703B /* AttributeProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeProcessor.swift; sourceTree = "<group>"; };
+		C6429AF022F9361E00E75FA8 /* MDImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDImage.swift; sourceTree = "<group>"; };
+		C6429AF122F9361E00E75FA8 /* MarkdownElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownElement.swift; sourceTree = "<group>"; };
+		C6429AF222F9361F00E75FA8 /* MDControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDControl.swift; sourceTree = "<group>"; };
 		C67834E322D6D88E00BE08B0 /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
 		C67834F822D70ACD00BE08B0 /* TextElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextElement.swift; sourceTree = "<group>"; };
 		C69485B222F3D54500D5CC02 /* MarkDownPaser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownPaser.swift; sourceTree = "<group>"; };
@@ -139,8 +136,6 @@
 		C6EAA6C722D1923A00896913 /* MDLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDLine.swift; sourceTree = "<group>"; };
 		C6EAA6C822D1923A00896913 /* MDTaskList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDTaskList.swift; sourceTree = "<group>"; };
 		C6EAA6C922D1923A00896913 /* MDElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDElement.swift; sourceTree = "<group>"; };
-		C6EAA6CA22D1923A00896913 /* MDControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDControl.swift; sourceTree = "<group>"; };
-		C6EAA6CB22D1923A00896913 /* MDTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDTheme.swift; sourceTree = "<group>"; };
 		C6EAA6D722D1926600896913 /* YYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImage.h; sourceTree = "<group>"; };
 		C6EAA6D822D1926600896913 /* YYImageCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImageCoder.h; sourceTree = "<group>"; };
 		C6EAA6D922D1926600896913 /* YYFrameImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYFrameImage.h; sourceTree = "<group>"; };
@@ -270,7 +265,6 @@
 		C6EAA7A022D195D100896913 /* KeyboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		C6EAA7A222D1974200896913 /* ArrayExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		C6EAA7A422D1976F00896913 /* StringExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
-		E2D09F41A2DA1D5A02A39642 /* Pods_RichEditor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RichEditor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,7 +272,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B59DC3CE50040418B49EA9D1 /* Pods_RichEditor.framework in Frameworks */,
+				7F238A11B96CC52F179E948C /* libPods-RichEditor.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +282,7 @@
 		4566808DB669B88335C2FECD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E2D09F41A2DA1D5A02A39642 /* Pods_RichEditor.framework */,
+				10028020BF0746A298D10289 /* libPods-RichEditor.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -305,7 +299,6 @@
 		C67834F722D70AB200BE08B0 /* New Group */ = {
 			isa = PBXGroup;
 			children = (
-				C69485B822F4424F00D5CC02 /* AppUtil.swift */,
 				C67834F822D70ACD00BE08B0 /* TextElement.swift */,
 				C633896322F01569004F703B /* TextProcessor.swift */,
 				C633896622F03B05004F703B /* MarkDownStyle.swift */,
@@ -339,10 +332,8 @@
 		C6EAA6AA22D191C100896913 /* RichEditor */ = {
 			isa = PBXGroup;
 			children = (
-				C610CFF322E5B607001F9C35 /* WechatIMG4306.png */,
-				C610CFF522E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png */,
 				C6EAA79922D194A300896913 /* Config */,
-				C6EAA79022D1927200896913 /* add */,
+				C6EAA79022D1927200896913 /* Extension */,
 				C6EAA6D522D1926600896913 /* YYKit */,
 				C6EAA6C122D1923A00896913 /* MarkDown */,
 				C6EAA6AB22D191C200896913 /* AppDelegate.swift */,
@@ -364,7 +355,6 @@
 				C69485BA22F4455400D5CC02 /* MarkDownView.swift */,
 				C67834F722D70AB200BE08B0 /* New Group */,
 				C6EAA6C222D1923A00896913 /* View */,
-				C62EBC4322E6F357005F3C12 /* MarkdownElement.swift */,
 			);
 			path = MarkDown;
 			sourceTree = "<group>";
@@ -372,6 +362,9 @@
 		C6EAA6C222D1923A00896913 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C6429AF122F9361E00E75FA8 /* MarkdownElement.swift */,
+				C6429AF222F9361F00E75FA8 /* MDControl.swift */,
+				C6429AF022F9361E00E75FA8 /* MDImage.swift */,
 				C6EAA79E22D1954600896913 /* DynamicTextView.swift */,
 				C6EAA6C422D1923A00896913 /* MDParser.swift */,
 				C6EAA6C522D1923A00896913 /* RichEditorToobar.swift */,
@@ -379,9 +372,6 @@
 				C6EAA6C722D1923A00896913 /* MDLine.swift */,
 				C6EAA6C822D1923A00896913 /* MDTaskList.swift */,
 				C6EAA6C922D1923A00896913 /* MDElement.swift */,
-				C6EAA6CA22D1923A00896913 /* MDControl.swift */,
-				C6EAA6CB22D1923A00896913 /* MDTheme.swift */,
-				C606DE3522D57B5600F425B3 /* MDImage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -584,7 +574,7 @@
 			path = Quartz;
 			sourceTree = "<group>";
 		};
-		C6EAA79022D1927200896913 /* add */ = {
+		C6EAA79022D1927200896913 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				C6EAA7A422D1976F00896913 /* StringExt.swift */,
@@ -595,7 +585,7 @@
 				C6EAA79322D1941D00896913 /* CGRectExt.swift */,
 				C6EAA79122D1929500896913 /* UIViewExt.swift */,
 			);
-			path = add;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		C6EAA79922D194A300896913 /* Config */ = {
@@ -603,6 +593,7 @@
 			children = (
 				C6EAA7A022D195D100896913 /* KeyboardManager.swift */,
 				C6EAA79A22D194AF00896913 /* UIConfig.swift */,
+				C69485B822F4424F00D5CC02 /* AppUtil.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -618,6 +609,7 @@
 				C6EAA6A422D191C100896913 /* Sources */,
 				C6EAA6A522D191C100896913 /* Frameworks */,
 				C6EAA6A622D191C100896913 /* Resources */,
+				AF9C98E3EBFF1883CCE54CFA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -667,10 +659,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C610CFF622E5BED4001F9C35 /* 屏幕快照 2019-07-22 16.18.15.png in Resources */,
 				C6EAA6B622D191C300896913 /* LaunchScreen.storyboard in Resources */,
 				C6EAA6B322D191C300896913 /* Assets.xcassets in Resources */,
-				C610CFF422E5B608001F9C35 /* WechatIMG4306.png in Resources */,
 				C6EAA6B122D191C200896913 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -698,6 +688,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF9C98E3EBFF1883CCE54CFA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RichEditor/Pods-RichEditor-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RichEditor/Pods-RichEditor-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RichEditor/Pods-RichEditor-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -734,10 +741,8 @@
 				C6EAA78822D1926600896913 /* NSTimer+YYAdd.m in Sources */,
 				C6EAA6CF22D1923B00896913 /* MDUtil.swift in Sources */,
 				C6EAA76E22D1926600896913 /* UIPasteboard+YYText.m in Sources */,
-				C62EBC4422E6F357005F3C12 /* MarkdownElement.swift in Sources */,
 				C6EAA75D22D1926600896913 /* YYTextContainerView.m in Sources */,
 				C6EAA77722D1926600896913 /* UIApplication+YYAdd.m in Sources */,
-				C606DE3622D57B5600F425B3 /* MDImage.swift in Sources */,
 				C6EAA78522D1926600896913 /* NSData+YYAdd.m in Sources */,
 				C633896922F05BAC004F703B /* AttributeProcessor.swift in Sources */,
 				C69485B922F4424F00D5CC02 /* AppUtil.swift in Sources */,
@@ -746,8 +751,8 @@
 				C6EAA77C22D1926600896913 /* UIBarButtonItem+YYAdd.m in Sources */,
 				C6EAA79422D1941D00896913 /* CGRectExt.swift in Sources */,
 				C633896422F0156A004F703B /* TextProcessor.swift in Sources */,
-				C6EAA6D422D1923B00896913 /* MDTheme.swift in Sources */,
 				C6EAA76D22D1926600896913 /* NSAttributedString+YYText.m in Sources */,
+				C6429AF522F9361F00E75FA8 /* MDControl.swift in Sources */,
 				C6EAA79D22D194C900896913 /* DoubleExt.swift in Sources */,
 				C6EAA75F22D1926600896913 /* YYTextInput.m in Sources */,
 				C6EAA78322D1926600896913 /* NSBundle+YYAdd.m in Sources */,
@@ -762,6 +767,7 @@
 				C6EAA76822D1926600896913 /* YYTextAttribute.m in Sources */,
 				C6EAA76222D1926600896913 /* YYTextSelectionView.m in Sources */,
 				C6EAA79222D1929600896913 /* UIViewExt.swift in Sources */,
+				C6429AF422F9361F00E75FA8 /* MarkdownElement.swift in Sources */,
 				C6EAA77A22D1926600896913 /* UIScreen+YYAdd.m in Sources */,
 				C6EAA78A22D1926600896913 /* NSString+YYAdd.m in Sources */,
 				C6EAA77922D1926600896913 /* UIScrollView+YYAdd.m in Sources */,
@@ -778,10 +784,10 @@
 				C6EAA7A522D1977000896913 /* StringExt.swift in Sources */,
 				C6EAA77222D1926600896913 /* YYTextWeakProxy.m in Sources */,
 				C69485B322F3D54500D5CC02 /* MarkDownPaser.swift in Sources */,
+				C6429AF322F9361F00E75FA8 /* MDImage.swift in Sources */,
 				C6EAA78D22D1926600896913 /* NSObject+YYAddForKVO.m in Sources */,
 				C6EAA6CD22D1923B00896913 /* MDParser.swift in Sources */,
 				C6EAA76622D1926600896913 /* YYTextRunDelegate.m in Sources */,
-				C6EAA6D322D1923B00896913 /* MDControl.swift in Sources */,
 				C6EAA76122D1926600896913 /* YYTextLine.m in Sources */,
 				C6EAA76F22D1926600896913 /* YYTextTransaction.m in Sources */,
 				C6EAA78622D1926600896913 /* NSThread+YYAdd.m in Sources */,

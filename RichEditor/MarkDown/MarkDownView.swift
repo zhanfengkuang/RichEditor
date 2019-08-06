@@ -29,6 +29,11 @@ class MarkDownView: YYTextView {
         textParser = MarkDownParagraphStyle(style: style)
         isScrollRangeToVisible = false
         isScrollEnabled = false
+        addListen()
+    }
+    
+    deinit {
+        removeListen()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,7 +44,7 @@ class MarkDownView: YYTextView {
 // MARK: - Public
 extension MarkDownView {
     /// 富文本编辑
-    public func edit(with item: MarkDownItem) {
+    public func edit(with item: MarkDownItem, isSelected: Bool) {
         let attributedString = attributedText ?? NSAttributedString(string: "")
         let string = NSMutableAttributedString(attributedString: attributedString)
         switch item {
@@ -114,6 +119,41 @@ extension MarkDownView {
             if let range = range {
                 selectedRange = range
             }
+        case .image:
+            guard let vc = TZImagePickerController(maxImagesCount: 1, delegate: self) else { return }
+            vc.didFinishPickingPhotosHandle = { [weak self] (photos, assets, isOriginal) in
+                guard let weakSelf = self else { return }
+                guard let photo = photos?.first else { return }
+                let image = MarkDownImage(style: weakSelf.style,
+                                          size: CGSize(width: weakSelf.jr_width - 10, height: 200),
+                                          image: photo)
+                image.tapBlock = { button in
+                    guard let vc = TZImagePickerController(maxImagesCount: 1, delegate: self) else { return }
+                    vc.didFinishPickingPhotosHandle = { (photos, _, _) in
+                        guard let photo = photos?.first else { return }
+                        button.setImage(photo, for: .normal)
+                    }
+                    AppUtil.fetchCurrentVC()?.present(vc, animated: true, completion: nil)
+                }
+                let range = NSRange(location: weakSelf.selectedRange.location + 3,
+                                    length: weakSelf.selectedRange.length)
+                string.insert(image.attributedString!, at: weakSelf.selectedRange.location)
+                weakSelf.attributedText = string
+                weakSelf.elements.append(image)
+                weakSelf.selectedRange = range
+                weakSelf.becomeFirstResponder()
+            }
+            AppUtil.fetchCurrentVC()?.present(vc, animated: true, completion: nil)
+            break
+        case .bold:
+            guard let boldStyle = style.attributes(with: .bold) else { return }
+            if isSelected {
+                processor?.markAttributes.merge(boldStyle) { return $1 }
+            } else {
+                boldStyle.forEach { (key, _) in
+                    processor?.markAttributes.removeValue(forKey: key)
+                }
+            }
         }
     }
     
@@ -142,6 +182,35 @@ extension MarkDownView {
         }
         return nil
     }
+    
+    // 监听 光标 移动
+    private func addListen() {
+        addObserver(self, forKeyPath: "selectedRange", options: .new, context: nil)
+    }
+    
+    // 移除监听
+    private func removeListen() {
+        removeObserver(self, forKeyPath: "selectedRange")
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?,
+                               of object: Any?, change: [NSKeyValueChangeKey : Any]?,
+                               context: UnsafeMutableRawPointer?) {
+        if keyPath == "selectedRange",
+            let range = change?[.newKey] as? NSRange {
+            print("update selected range: \(range)")
+            if let string = attributedText, string.length > 0 {
+                let location = max(0, range.location)
+                let length = 1
+                if location + length <= string.length {
+                    let last = string.attributedSubstring(from: NSRange(location: max(0, range.location), length: 1))
+                    if let style = last.yy_attributes {
+                        processor?.markAttributes.merge(style) { (_, new) in new }
+                    }
+                }
+            }
+        }
+    }
 }
 
 // MARK: - YYTextViewDelegate
@@ -149,7 +218,7 @@ extension MarkDownView: YYTextViewDelegate {
     func textView(_ textView: YYTextView,
                   shouldChangeTextIn range: NSRange,
                   replacementText text: String) -> Bool {
-        print("selectedRange: \(selectedRange), text: \(text)")
+//        print("selectedRange: \(selectedRange), text: \(text)")
         textView.typingAttributes = processor?.attributes
         if text == "\n", let element = processor?.element(range: currentParagraph()) {
             let attributedString = attributedText ?? NSAttributedString(string: "")
@@ -211,6 +280,25 @@ extension MarkDownView: YYTextViewDelegate {
     func textViewDidBeginEditing(_ textView: YYTextView) {
         mdDelegate?.textViewDidBeginEditing(self)
     }
+    
+    func textViewDidChangeSelection(_ textView: YYTextView) {
+        print("焦点 发生变化: \(selectedRange)")
+        if let string = attributedText, string.length > 0 {
+            let location = max(0, selectedRange.location)
+            let length = 1
+            if location + length <= string.length {
+                let last = string.attributedSubstring(from: NSRange(location: max(0, selectedRange.location), length: 1))
+                if let style = last.yy_attributes {
+                    processor?.markAttributes.merge(style) { (_, new) in new }
+                }
+            }
+        }
+    }
+}
+
+// MARK: - 照片 选择器
+extension MarkDownView: TZImagePickerControllerDelegate {
+    
 }
 
 // MARK: - TextViewDelegate
