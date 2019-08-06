@@ -184,6 +184,7 @@ class MarkDownSeparator: MarkDownElement {
                                                                          attachmentSize: separatorStyle.size,
                                                                          alignTo: .systemFont(ofSize: 15),
                                                                          alignment: .top)
+        string.append(NSAttributedString(string: "\n"))
         attributedString?.append(string)
     }
 }

@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RichEditor/MarkDown/New Group/AttributeProcessor.swift"
-            timestampString = "586693591.025259"
+            timestampString = "586750075.048136"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "removeElement(with:in:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -155,42 +155,26 @@ struct AttributesProcessor {
                     }
                     if isSameItem {  // 同一 标记 移除属性 并 移除标记
                         selectRange = removeElement(with: attributedString, in: range)
-//                        selectRange = NSRange(location: max(textView!.selectedRange.location - 1, 0),
-//                                              length: textView!.selectedRange.length)
-//                        attributedString.yy_removeAttributes(in: range)
-//                        style?.normalStyle.forEach {
-//                            attributedString.yy_setAttribute($0.key, value: $0.value, range: range)
-//                        }
-//                        attributedString.replaceCharacters(in: startRange, with: NSAttributedString(string: ""))
                     } else {  // 不是 同一标记  重置
                         selectRange = replaceElement(with: attributedString, element: element, in: range)
-//                        selectRange = textView!.selectedRange
-//                        addAttributed(attributedString, at: item, in: range)
-//                        attributedString.replaceCharacters(in: startRange, with: element.attributedString!)
                     }
                 } else {
                     selectRange = addElement(with: attributedString, element: element, in: range)
-//                    if let textView = textView {
-//                        selectRange = NSRange(location: textView.selectedRange.location + 1,
-//                                              length: textView.selectedRange.length)
-//                    }
-//                    addAttributed(attributedString, at: item, in: range)
-//                    attributedString.insert(element.attributedString!, at: range.location)
                 }
             } else {  // 不存在 直接标记
                 selectRange = addElement(with: attributedString, element: element, in: range)
-//                if let textView = textView {
-//                    selectRange = NSRange(location: textView.selectedRange.location + 1,
-//                                          length: textView.selectedRange.length)
-//                }
-//                addAttributed(attributedString, at: item, in: range)
-//                attributedString.insert(element.attributedString!, at: range.location)
             }
             selectRange?.length = 0
             if let selectedRange = selectRange {
                 textView?.selectedRange = selectedRange
             }
             return selectRange
+        case .separator:
+            guard let textView = textView else { return nil }
+            let range = NSRange(location: textView.selectedRange.location + 3,
+                                length: textView.selectedRange.length)
+            attributedString.insert(element.attributedString!, at: textView.selectedRange.location)
+            return range
         default:
             return nil
         }
