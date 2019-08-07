@@ -18,7 +18,8 @@ public class RichEditorToobar: UIView {
         
         var elements: [MarkDownItem] {
             return [.image, .header1, .header2, .header3, .undone,
-                    .separator, .ordered, .unordered, .bold]
+                    .separator, .ordered, .unordered, .bold, .highlighter,
+                    .italic, .underline, .strikethrough, .quote]
         }
     }
     
@@ -142,6 +143,16 @@ extension MarkDownItem {
             return "image"
         case .bold:
             return "bold"
+        case .highlighter:
+            return "highlighter"
+        case .strikethrough:
+            return "strikethrough"
+        case .italic:
+            return "italic"
+        case .underline:
+            return "underline"
+        case .quote:
+            return "quote"
         }
     }
     

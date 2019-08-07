@@ -1927,6 +1927,9 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
 - (void)_setSelectedRange:(NSRange)selectedRange {
     if (NSEqualRanges(_selectedRange, selectedRange)) return;
     [self willChangeValueForKey:@"selectedRange"];
+    if ([self.delegate respondsToSelector:@selector(textViewWillChangeSelection:)]) {
+        [self.delegate textViewWillChangeSelection:self];
+    }
     _selectedRange = selectedRange;
     [self didChangeValueForKey:@"selectedRange"];
     if ([self.delegate respondsToSelector:@selector(textViewDidChangeSelection:)]) {
@@ -2169,6 +2172,11 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
         [self replaceRange:[YYTextRange rangeWithRange:NSMakeRange(0, _innerText.length)] withText:@""];
         return;
     }
+    
+    if (![self textView:self shouldChangeTextInRange:NSMakeRange(0, _innerText.length) replacementText:text.string]) {
+        return;
+    }
+    
     if ([self.delegate respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)]) {
         BOOL should = [self.delegate textView:self shouldChangeTextInRange:NSMakeRange(0, _innerText.length) replacementText:text.string];
         if (!should) return;
@@ -2208,6 +2216,10 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
     if (!_state.insideUndoBlock) {
         [self _resetUndoAndRedoStack];
     }
+}
+
+- (BOOL)textView:(YYTextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    return YES;
 }
 
 - (void)setTextVerticalAlignment:(YYTextVerticalAlignment)textVerticalAlignment {
@@ -3327,8 +3339,12 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
     [self _endTouchTracking];
     [self _hideMenu];
     
+    NSRange range = _markedTextRange ? _markedTextRange.asRange : NSMakeRange(_selectedTextRange.end.offset, 0);
+    if (![self textView:self shouldChangeTextInRange:range replacementText:markedText]) {
+        return;
+    }
+    
     if ([self.delegate respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)]) {
-        NSRange range = _markedTextRange ? _markedTextRange.asRange : NSMakeRange(_selectedTextRange.end.offset, 0);
         BOOL should = [self.delegate textView:self shouldChangeTextInRange:range replacementText:markedText];
         if (!should) return;
     }
@@ -3409,6 +3425,10 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
     if (!text) text = @"";
     if (range.asRange.length == 0 && text.length == 0) return;
     range = [self _correctedTextRange:range];
+    
+    if (![self textView:self shouldChangeTextInRange:range.asRange replacementText:text]) {
+        return;
+    }
     
     if ([self.delegate respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)]) {
         BOOL should = [self.delegate textView:self shouldChangeTextInRange:range.asRange replacementText:text];

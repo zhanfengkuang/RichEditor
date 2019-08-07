@@ -26,6 +26,18 @@ public enum MarkDownItem: Int {
     case image = 64
     /// 黑体
     case bold = 65
+    /// 斜体
+    case italic = 66
+    /// 中划线
+    case strikethrough = 67
+    /// 下滑线
+    case underline = 68
+    /// 荧光笔
+    case highlighter = 69
+    /// 引用
+    case quote = 70
+//    /// 时间
+//    case time = 71
 }
 
 public protocol MarkDownElement {
@@ -207,8 +219,8 @@ class MarkDownOrdered: MarkDownElement {
         self.index = index
         let orderedStyle = style.attributes[.ordered] as? MarkDownOrderedStyle ?? MarkDownOrderedStyle()
         let ordered = UILabel()
-        ordered.font = orderedStyle.font
-        ordered.textColor = orderedStyle.color
+        ordered.font = orderedStyle.titleFont
+        ordered.textColor = orderedStyle.titleColor
         ordered.text = "\(index)."
         ordered.jr_size = orderedStyle.size
         ordered.textAlignment = .left
@@ -295,4 +307,35 @@ class MarkDownImage: MarkDownElement {
     @objc func selectImage(_ sender: UIButton) {
         tapBlock?(sender)
     }
+}
+
+// MARK: - Quote 引用
+class MarkDownQuote: MarkDownElement {
+    var text: String { return "> " }
+    var style: MarkDownStyle
+    var attributedString: NSMutableAttributedString?
+    var content: UIView? { return quote }
+    var item: MarkDownItem { return .quote }
+    
+    private let quote: UILabel
+    
+    required init(style: MarkDownStyle) {
+        self.style = style
+        let quoteStyle = style.attributes[.quote] as? MarkDownQuoteStyle ?? MarkDownQuoteStyle()
+        quote = UILabel()
+        quote.font = quoteStyle.titleFont
+        quote.textColor = quoteStyle.titleColor
+        quote.text = text
+        quote.jr_size = quoteStyle.size
+        quote.textAlignment = .left
+        quote.tag = item.rawValue
+        
+        attributedString = NSMutableAttributedString.yy_attachmentString(withContent: quote,
+                                                                         contentMode: .center,
+                                                                         attachmentSize: quoteStyle.size,
+                                                                         alignTo: .systemFont(ofSize: 15),
+                                                                         alignment: .center)
+    }
+    
+    
 }

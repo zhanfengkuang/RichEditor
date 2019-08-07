@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)textViewDidEndEditing:(YYTextView *)textView;
 - (BOOL)textView:(YYTextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
 - (void)textViewDidChange:(YYTextView *)textView;
+- (void)textViewWillChangeSelection:(YYTextView *)textView;
 - (void)textViewDidChangeSelection:(YYTextView *)textView;
 
 - (BOOL)textView:(YYTextView *)textView shouldTapHighlight:(YYTextHighlight *)highlight inRange:(NSRange)characterRange;
@@ -346,6 +347,8 @@ NS_ASSUME_NONNULL_BEGIN
  you may set the accessory view's height. It may used by auto scroll calculation.
  */
 @property (nonatomic) CGFloat extraAccessoryViewHeight;
+
+- (BOOL)textView:(YYTextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
 
 @end
 

@@ -13,13 +13,14 @@ struct AttributesProcessor {
     weak var style: MarkDownStyle?
     
     var attributes: [String: Any]? {
-        if !markAttributes.isEmpty { return markAttributes }
         guard let textView = self.textView,
             let style = self.style,
             let textLayout = textView.textLayout,
-            let attributedText = textView.attributedText else { return self.style?.normalStyle }
+            let attributedText = textView.attributedText
+            else { return self.style?.normalStyle.merging(markAttributes) { $1 } }
         let paragraph = (textView.text as NSString).paragraphRange(for: textView.selectedRange)
         let text = NSMutableAttributedString(attributedString: attributedText)
+        
         let prefixRange = NSRange(location: paragraph.location, length: 1)
         
         if let attachmentRanges = textLayout.attachmentRanges {
@@ -33,10 +34,10 @@ struct AttributesProcessor {
             let attachment = textLayout.attachments?.element(at: index!),
             let tag = (attachment.content as? UIView)?.tag,
             let item = MarkDownItem(rawValue: tag) {
-                return style.attributes(with: item)
+                return style.attributes(with: item)?.merging(markAttributes) { $1 }
             }
         }
-        return style.normalStyle
+        return style.normalStyle.merging(markAttributes) { $1 }
     }
     
     /// 手动设置 富文本样式
@@ -139,7 +140,7 @@ struct AttributesProcessor {
                     in range: NSRange) -> NSRange? {
         let startRange = NSRange(location: range.location, length: 1)
         switch item {
-        case .header1, .header2, .header3, .undone, .done, .unordered:
+        case .header1, .header2, .header3, .undone, .done, .unordered, .quote:
             var selectRange: NSRange?
             if let attachmentRanges = textView?.textLayout?.attachmentRanges,
                 let attachments = textView?.textLayout?.attachments {

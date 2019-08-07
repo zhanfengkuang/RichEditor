@@ -22,10 +22,11 @@ public class MarkDownStyle {
     var color: UIColor = UIColor(hex: 0x6D7278)
     private(set) var normalStyle: [String: Any] = [ : ]
     
+    
     init(attributes: Attributes = [ : ]) {
         self.attributes = attributes
-        paragraphStyle.lineSpacing = 10
-        paragraphStyle.paragraphSpacing = 20
+        paragraphStyle.lineSpacing = 6
+        paragraphStyle.paragraphSpacing = 12
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.headIndent = 0
@@ -106,6 +107,14 @@ public class MarkDownStyle {
                 .foregroundColor: orderedStyle.color,
                 .paragraphStyle: paragraphStyle
             ]
+        case .quote:
+            let quoteStyle = attributes[.quote] as? MarkDownQuoteStyle ?? MarkDownQuoteStyle()
+            paragraphStyle.headIndent = headIndent
+            return [
+                .font: quoteStyle.font,
+                .foregroundColor: quoteStyle.color,
+                .paragraphStyle: paragraphStyle
+            ]
         case .separator, .image:
             return normalStyle
         case .bold:
@@ -113,6 +122,29 @@ public class MarkDownStyle {
             return [
                 .foregroundColor: boldStyle.color,
                 .font: boldStyle.font,
+            ]
+        case .highlighter:
+            let highlightStyle = attributes[.highlight] as? MarkDownHighlighterStyle ?? MarkDownHighlighterStyle()
+            return [
+                .backgroundColor: highlightStyle.color
+            ]
+        case .italic:
+            let italicStyle = attributes[.italic] as? MarkDownItalicStyle ?? MarkDownItalicStyle()
+            return [
+                .foregroundColor: italicStyle.color,
+                .font: italicStyle.font,
+            ]
+        case .underline:
+            let underlineStyle = attributes[.underline] as? MarkDownUnderlineStyle ?? MarkDownUnderlineStyle()
+            let decoration = YYTextDecoration(style: .single, width: 1, color: underlineStyle.color)
+            return [
+                YYTextUnderlineAttributeName: decoration,
+            ]
+        case .strikethrough:
+            let underlineStyle = attributes[.underline] as? MarkDownUnderlineStyle ?? MarkDownUnderlineStyle()
+            let decoration = YYTextDecoration(style: .single, width: 1, color: underlineStyle.color)
+            return [
+                YYTextStrikethroughAttributeName: decoration,
             ]
         }
     }
@@ -226,7 +258,30 @@ struct MarkDownOrderedStyle: MarkDownElementStyle {
     }
 }
 
-// MARK: - image
+// MARK: - Quote
+struct MarkDownQuoteStyle: MarkDownElementStyle {
+    /// 引用 字体 颜色
+    var titleColor: UIColor
+    /// 引用 字体
+    var titleFont: UIFont
+    var size: CGSize
+    var color: UIColor
+    var font: UIFont
+    
+    init(titleColor: UIColor = UIColor(hex: 0xC4C4C4),
+         titleFont: UIFont = UIFont.boldSystemFont(ofSize: 15),
+         size: CGSize = CGSize(width: 25, height: 16),
+         color: UIColor = UIColor(hex: 0xC4C4C4),
+         font: UIFont = UIFont.systemFont(ofSize: 15)) {
+        self.titleFont = titleFont
+        self.titleColor = titleColor
+        self.size = size
+        self.color = color
+        self.font = font
+    }
+}
+
+// MARK: - Image
 struct MarkDownImageStyle: MarkDownElementStyle {
     /// 圆角 半径
     var radius: CGFloat
@@ -234,6 +289,11 @@ struct MarkDownImageStyle: MarkDownElementStyle {
     init(radius: CGFloat = 8) {
         self.radius = radius
     }
+}
+
+// MARK: - Link
+struct MarkDownLinkStyle: MarkDownElementStyle {
+    
 }
 
 // MARK: - bold
@@ -250,6 +310,38 @@ struct MarkDownBoldStyle: MarkDownElementStyle {
     }
 }
 
+// MARK: - highlighter
+struct MarkDownHighlighterStyle: MarkDownElementStyle {
+    /// color
+    var color: UIColor
+    
+    init(color: UIColor = UIColor(hex: 0xDDFFB7)) {
+        self.color = color
+    }
+}
+
+// MARK: - italic
+struct MarkDownItalicStyle: MarkDownElementStyle {
+    /// color
+    var color: UIColor
+    /// font
+    var font: UIFont
+    
+    init(color: UIColor = UIColor(hex: 0x6D7278),
+         font: UIFont = UIFont.italicSystemFont(ofSize: 15)) {
+        self.color = color
+        self.font = font
+    }
+}
+
+// MARK: - Underline
+struct MarkDownUnderlineStyle: MarkDownElementStyle {
+    /// color
+    var color: UIColor
+    init(color: UIColor = .red) {
+        self.color = color
+    }
+}
 
 extension MarkDownStyle.Key {
     /// 标题
@@ -266,8 +358,20 @@ extension MarkDownStyle.Key {
     public static let unordered = MarkDownStyle.Key("mark_down_unordered")
     /// 有序
     public static let ordered = MarkDownStyle.Key("mark_down_ordered")
+    /// 引用
+    public static let quote = MarkDownStyle.Key("mark_down_quote")
     /// font
     public static let bold = MarkDownStyle.Key("mark_down_bold")
+    /// highlight 荧光笔
+    public static let highlight = MarkDownStyle.Key("mark_down_highlight")
+    ///italic 斜体
+    public static let italic = MarkDownStyle.Key("mark_down_italic")
+    /// underline 下划线
+    public static let underline = MarkDownStyle.Key("mark_down_underline")
+    /// time 时间
+    public static let time = MarkDownStyle.Key("mark_down_time")
+    /// strikethrough 中划线
+    public static let strikethrough = MarkDownStyle.Key("mark_down_strikethrough")
 }
 
 extension MarkDownStyle {
@@ -291,5 +395,7 @@ extension String {
     static let underline: String = NSAttributedString.Key.underlineStyle.rawValue
     static let paragraphStyle: String = NSAttributedString.Key.paragraphStyle.rawValue
     static let baselineOffset: String = NSAttributedString.Key.baselineOffset.rawValue
+    /// 背景色
+    static let backgroundColor: String = NSAttributedString.Key.backgroundColor.rawValue
 }
 

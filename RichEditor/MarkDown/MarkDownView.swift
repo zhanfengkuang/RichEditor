@@ -25,15 +25,14 @@ class MarkDownView: YYTextView {
         self.style = style
         super.init(frame: frame)
         processor = AttributesProcessor(textView: self, style: self.style)
-        delegate = self
+//        delegate = self
         textParser = MarkDownParagraphStyle(style: style)
-        isScrollRangeToVisible = false
-        isScrollEnabled = false
-        addListen()
+//        isScrollRangeToVisible = false
+//        isScrollEnabled = false
     }
     
     deinit {
-        removeListen()
+//        removeListen()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -111,6 +110,14 @@ extension MarkDownView {
             }
             attributedText = string
             if let range = range { selectedRange = range }
+        case .quote:
+            let quote = MarkDownQuote(style: style)
+            let range = processor?.setElement(quote, with: string, at: item, in: currentParagraph())
+            attributedText = string
+            elements.append(quote)
+            if let range = range {
+                selectedRange = range
+            }
         case .separator:
             let separator = MarkDownSeparator(style: style)
             let range = processor?.setElement(separator, with: string, at: item, in: currentParagraph())
@@ -145,12 +152,12 @@ extension MarkDownView {
             }
             AppUtil.fetchCurrentVC()?.present(vc, animated: true, completion: nil)
             break
-        case .bold:
-            guard let boldStyle = style.attributes(with: .bold) else { return }
+        case .bold, .highlighter, .italic, .underline, .strikethrough:
+            guard let elementStyle = style.attributes(with: item) else { return }
             if isSelected {
-                processor?.markAttributes.merge(boldStyle) { return $1 }
+                processor?.markAttributes.merge(elementStyle) { return $1 }
             } else {
-                boldStyle.forEach { (key, _) in
+                elementStyle.forEach { (key, _) in
                     processor?.markAttributes.removeValue(forKey: key)
                 }
             }
@@ -214,13 +221,15 @@ extension MarkDownView {
 }
 
 // MARK: - YYTextViewDelegate
-extension MarkDownView: YYTextViewDelegate {
-    func textView(_ textView: YYTextView,
-                  shouldChangeTextIn range: NSRange,
-                  replacementText text: String) -> Bool {
-//        print("selectedRange: \(selectedRange), text: \(text)")
+//extension MarkDownView: YYTextViewDelegate {
+extension MarkDownView {
+    override func textView(_ textView: YYTextView,
+                           shouldChangeTextIn range: NSRange,
+                           replacementText text: String) -> Bool {
         textView.typingAttributes = processor?.attributes
+        print("typing attributes: \(typingAttributes)")
         if text == "\n", let element = processor?.element(range: currentParagraph()) {
+            processor?.markAttributes.removeAll()
             let attributedString = attributedText ?? NSAttributedString(string: "")
             let string = NSMutableAttributedString(attributedString: attributedString)
             string.insert(NSAttributedString(string: "\n"), at: selectedRange.location)
@@ -278,21 +287,25 @@ extension MarkDownView: YYTextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: YYTextView) {
-        mdDelegate?.textViewDidBeginEditing(self)
+//        mdDelegate?.textViewDidBeginEditing(self)
     }
-    
-    func textViewDidChangeSelection(_ textView: YYTextView) {
-        print("焦点 发生变化: \(selectedRange)")
-        if let string = attributedText, string.length > 0 {
-            let location = max(0, selectedRange.location)
-            let length = 1
-            if location + length <= string.length {
-                let last = string.attributedSubstring(from: NSRange(location: max(0, selectedRange.location), length: 1))
-                if let style = last.yy_attributes {
-                    processor?.markAttributes.merge(style) { (_, new) in new }
-                }
-            }
-        }
+}
+
+// MARK: - Touch
+extension MarkDownView {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+//        if let string = attributedText, string.length > 0 {
+//            let location = max(0, selectedRange.location - 1)
+//            let length = 1
+//            if location + length <= string.length {
+//                let last = string.attributedSubstring(from: NSRange(location: location, length: length))
+//                if let attributes = last.yy_attributes {
+//                    var newAttributes: [String: Any] = [ : ]
+//                    processor?.markAttributes.merge(attributes) { (_, new) in new }
+//                }
+//            }
+//        }
     }
 }
 

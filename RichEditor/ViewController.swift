@@ -17,15 +17,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+        
         richEditorToolbar = RichEditorToobar(frame: CGRect(x: 0, y: screenHeight - 80, width: screenWidth, height: 40), module: .todo)
         view.addSubview(richEditorToolbar)
         richEditorToolbar.show()
         KeyboardManager.shared.heightChange = { [weak self] height in
             self?.richEditorToolbar.jr_y = screenHeight - 60 - height
         }
+        
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.editor = MarkDownView(frame: CGRect(x: 50, y: 54, width: screenWidth - 70, height: 300), style: .init())
-            self.view.addSubview(self.editor)
+            self.editor = MarkDownView(frame: CGRect(x: 50, y: 54, width: screenWidth - 70, height: screenHeight - 120), style: .init())
+//            self.view.addSubview(self.editor)
+            self.view.insertSubview(self.editor, belowSubview: self.richEditorToolbar)
             self.richEditorToolbar.textView = self.editor
         }
     }

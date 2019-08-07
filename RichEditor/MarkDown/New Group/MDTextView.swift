@@ -38,7 +38,7 @@ public class MDTextView: DynamicTextView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.delegate = self
+//        self.delegate = self
         isScrollRangeToVisible = false
         placeholderFont = .systemFont(ofSize: 15)
         placeholderText = "请输入详情描述"
@@ -264,31 +264,31 @@ public class MDTextView: DynamicTextView {
     }
     
 }
-
-extension MDTextView: YYTextViewDelegate {
-    public func textView(_ textView: YYTextView,
-                         shouldChangeTextIn range: NSRange,
-                         replacementText text: String) -> Bool {
-        textView.typingAttributes = processor?.attributes
-        return true
-    }
-    
-    public func textViewDidChange(_ textView: YYTextView) {
-        if isAddMD, let element = state {
-            isAddMD = false
-            editMarkdown(element, isNewLine: false)
-        }
-        updateCaret()
-        isAddMD = false
-    }
-    
-    public func textViewDidBeginEditing(_ textView: YYTextView) {
-        updateCaret()
-    }
-    
-    private func updateCaret() {
-        let rect = self.caretRect ?? .zero
-        self.caretBlock?(rect)
-    }
-}
+//
+//extension MDTextView: YYTextViewDelegate {
+//    public func textView(_ textView: YYTextView,
+//                         shouldChangeTextIn range: NSRange,
+//                         replacementText text: String) -> Bool {
+//        textView.typingAttributes = processor?.attributes
+//        return true
+//    }
+//
+//    public func textViewDidChange(_ textView: YYTextView) {
+//        if isAddMD, let element = state {
+//            isAddMD = false
+//            editMarkdown(element, isNewLine: false)
+//        }
+//        updateCaret()
+//        isAddMD = false
+//    }
+//
+//    public func textViewDidBeginEditing(_ textView: YYTextView) {
+//        updateCaret()
+//    }
+//
+//    private func updateCaret() {
+//        let rect = self.caretRect ?? .zero
+//        self.caretBlock?(rect)
+//    }
+//}
 

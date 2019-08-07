@@ -8,23 +8,6 @@
 
 import Foundation
 
-//public enum MarkdownElement {
-//    /// 链接
-//    case link
-//    /// 图片
-//    case image
-//    /// todo
-//    case todo
-//    /// 标题
-//    case header1
-//    case header2
-//    case header3
-//    /// 中划线
-//    case strikeThroungh
-//    /// 斜体
-//    case italic
-//}
-
 public protocol MarkdownItem {
     /// 编辑状态 所占的长度
     var count: Int { get }
@@ -44,17 +27,5 @@ public class MarkdownHeader: MarkdownItem {
         index = 1
     }
 }
-
-//public class MarkdownImage: MarkdownItem {
-//
-//}
-//
-//public class MarkdownTodo: MarkdownItem {
-//
-//}
-//
-//public class MarkdownLinke: MarkdownItem {
-//
-//}
 
 
