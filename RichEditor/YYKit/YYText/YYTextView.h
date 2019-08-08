@@ -352,6 +352,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic) CGFloat extraAccessoryViewHeight;
 
+- (void)unmarkText;
+
 - (BOOL)textView:(YYTextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
 
 @end

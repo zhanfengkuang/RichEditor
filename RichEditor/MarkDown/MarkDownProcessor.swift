@@ -177,7 +177,7 @@ struct MarkDownProcessor {
         case .separator:
             guard let textView = textView else { return nil }
             let range = NSRange(location: textView.selectedRange.location + 3,
-                                length: textView.selectedRange.length)
+                                length: 0)
             attributedString.insert(element.attributedString!, at: textView.selectedRange.location)
             return range
         default:
@@ -203,7 +203,7 @@ struct MarkDownProcessor {
         var selectedRange: NSRange?
         if let textView = textView {
             selectedRange = NSRange(location: textView.selectedRange.location + 1,
-                                  length: textView.selectedRange.length)
+                                  length: 0)
         }
         addAttributed(attributedString, at: element.item, in: range)
         attributedString.insert(element.attributedString!, at: range.location)
@@ -214,7 +214,7 @@ struct MarkDownProcessor {
     func removeElement(with attributedString: NSMutableAttributedString, in range: NSRange) -> NSRange {
         let startRange = NSRange(location: range.location, length: 1)
         let selectRange = NSRange(location: max(textView!.selectedRange.location - 1, 0),
-                                  length: textView!.selectedRange.length)
+                                  length: 0)
         attributedString.yy_removeAttributes(in: range)
         style?.normalStyle.forEach {
             attributedString.yy_setAttribute($0.key, value: $0.value, range: range)

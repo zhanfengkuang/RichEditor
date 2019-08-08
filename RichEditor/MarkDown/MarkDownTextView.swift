@@ -48,15 +48,18 @@ extension MarkDownTextView {
         switch item {
         case .header1, .header2, .header3:
             guard let level = MarkDownHeader.Level(item) else { return }
+            unmarkText()
             let header = MarkDownHeader(level: level, style: style)
             let range = processor?.setElement(header, with: string, at: item, in: currentParagraph())
             setAttributedText(string, range)
             elements.append(header)
         case .done, .undone:
+            unmarkText()
             let todo = MarkDownTodo(style: style, state: .undone)
             todo.tapBlock = { [weak self] button in
                 guard let weakSelf = self,
                     let paragraphRange = weakSelf.processor?.findElementRange(at: button) else { return }
+                weakSelf.unmarkText()
                 let oldRange = weakSelf.selectedRange
                 let item: MarkDownItem = button.isSelected ? .done : .undone
                 let attributedString = weakSelf.attributedText ?? NSAttributedString(string: "")
@@ -72,11 +75,13 @@ extension MarkDownTextView {
             setAttributedText(string, range)
             elements.append(todo)
         case .unordered:
+            unmarkText()
             let unorderd = MarkDownUnordered(style: style)
             let range = processor?.setElement(unorderd, with: string, at: item, in: currentParagraph())
             setAttributedText(string, range)
             elements.append(unorderd)
         case .ordered:
+            unmarkText()
             var range: NSRange?
             var lastElement: MarkDownElement?
             if let range = lastParagraphRange() {
@@ -100,16 +105,19 @@ extension MarkDownTextView {
             }
             setAttributedText(string, range)
         case .quote:
+            unmarkText()
             let quote = MarkDownQuote(style: style)
             let range = processor?.setElement(quote, with: string, at: item, in: currentParagraph())
             setAttributedText(string, range)
             elements.append(quote)
         case .separator:
+            unmarkText()
             let separator = MarkDownSeparator(style: style)
             let range = processor?.setElement(separator, with: string, at: item, in: currentParagraph())
             setAttributedText(string, range)
             elements.append(separator)
         case .image:
+            unmarkText()
             guard let vc = TZImagePickerController(maxImagesCount: 1, delegate: self) else { return }
             vc.didFinishPickingPhotosHandle = { [weak self] (photos, assets, isOriginal) in
                 guard let weakSelf = self else { return }
@@ -126,7 +134,7 @@ extension MarkDownTextView {
                     AppUtil.fetchCurrentVC()?.present(vc, animated: true, completion: nil)
                 }
                 let range = NSRange(location: weakSelf.selectedRange.location + 3,
-                                    length: weakSelf.selectedRange.length)
+                                    length: 0)
                 string.insert(image.attributedString!, at: weakSelf.selectedRange.location)
                 weakSelf.attributedText = string
                 weakSelf.elements.append(image)
@@ -323,18 +331,21 @@ extension MarkDownTextView {
                 string.insert(NSAttributedString(string: "\n"), at: selectedRange.location)
                 switch element.item {
                 case .unordered:
+                    unmarkText()
                     let unordered = MarkDownUnordered(style: style)
                     string.insert(unordered.attributedString!, at: selectedRange.location + 1)
                     let range = NSRange(location: selectedRange.location + 2,
-                                        length: selectedRange.length)
+                                        length: 0)
                     setAttributedText(string, range)
                     elements.append(unordered)
                     return false
                 case .done, .undone:
+                    unmarkText()
                     let todo = MarkDownTodo(style: style, state: .undone)
                     todo.tapBlock = { [weak self] button in
                         guard let weakSelf = self,
                             let paragraphRange = weakSelf.processor?.findElementRange(at: button) else { return }
+                        weakSelf.unmarkText()
                         let oldRange = weakSelf.selectedRange
                         let item: MarkDownItem = button.isSelected ? .done : .undone
                         let attributedString = weakSelf.attributedText ?? NSAttributedString(string: "")
@@ -349,15 +360,16 @@ extension MarkDownTextView {
                     }
                     string.insert(todo.attributedString!, at: selectedRange.location + 1)
                     let range = NSRange(location: selectedRange.location + 2,
-                                        length: selectedRange.length)
+                                        length: 0)
                     setAttributedText(string, range)
                     elements.append(todo)
                     return false
                 case .ordered:
+                    unmarkText()
                     let ordered = MarkDownOrdered(style: style, index: (element as! MarkDownOrdered).index + 1)
                     string.insert(ordered.attributedString!, at: selectedRange.location + 1)
                     let range = NSRange(location: selectedRange.location + 2,
-                                        length: selectedRange.length)
+                                        length: 0)
                     setAttributedText(string, range)
                     elements.append(ordered)
                     return false
