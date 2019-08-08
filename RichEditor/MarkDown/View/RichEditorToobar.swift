@@ -122,6 +122,16 @@ extension RichEditorToobar {
     }
 }
 
+// MARK: - Public
+extension RichEditorToobar {
+    /// 重置 所有标记 属性
+    public func resetMark() {
+        scrollView.subviews.forEach {
+            ($0 as? UIButton)?.isSelected = false
+        }
+    }
+}
+
 extension MarkDownItem {
     var name: String {
         switch self {
@@ -162,94 +172,5 @@ extension MarkDownItem {
     
     var selectedImage: UIImage? {
         return UIImage(named: "editor_toolbar_" + name + "_selected")
-    }
-}
-
-public enum RichEditorElement: Int, CaseIterable {
-    /// 黑体
-    case bold = 10
-    /// 斜体
-    case italic
-    /// 下划线
-    case underline
-    /// 中划线
-    case strikeThrough
-    /// 标题1
-    case header1
-    /// 标题2
-    case header2
-    /// 标题3
-    case header3
-    /// 无序
-    case unordered
-    /// 有序
-    case ordered
-    /// 时间
-    case time
-    /// 分割线
-    case line
-    /// task list
-    case todo
-    /// 无序
-    
-    /// 图片
-    case image
-    
-    var name: String {
-        switch self {
-        case .bold:
-            return "bold"
-        case .italic:
-            return "italic"
-        case .underline:
-            return "underline"
-        case .strikeThrough:
-            return "strikeThrough"
-        case .header1:
-            return "header1"
-        case .header2:
-            return "header2"
-        case .header3:
-            return "header3"
-        case .unordered:
-            return "unordered"
-        case .ordered:
-            return "ordered"
-        case .time:
-            return "time"
-        case .line:
-            return "line"
-        case .todo:
-            return "todo"
-        case .image:
-            return "image"
-        }
-        
-    }
-    var md: String {
-        switch self {
-        case .bold:
-            return "****"
-        case .todo:
-            return "- [ ] "
-        case .line:
-            return "----"
-        case .unordered:
-            return "• "
-        case .header1:
-            return "# "
-        case .header2:
-            return "## "
-        case .header3:
-            return "### "
-        case .ordered:
-            return ". "
-        default:
-            return ""
-        }
-    }
-    
-    var image: UIImage? {
-        return UIImage(named: "editor_toolbar_" + name + "_normal")
     }
 }

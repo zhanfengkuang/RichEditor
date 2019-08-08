@@ -19,6 +19,7 @@ class MarkDownTextView: YYTextView {
     private var processor: MarkDownProcessor?
     /// Delegate
     weak var mdDelegate: TextViewDelegate?
+    weak var toolBar: RichEditorToobar?
     
     required init(frame: CGRect,
                   style: MarkDownStyle) {
@@ -28,6 +29,7 @@ class MarkDownTextView: YYTextView {
         processor = MarkDownProcessor(textView: self, style: self.style)
         showsVerticalScrollIndicator = false
         textParser = MarkDownParagraphStyle(style: style)
+        // 处理 图片无法滑动
         delaysContentTouches = true
         canCancelContentTouches = true
     }
@@ -51,7 +53,6 @@ extension MarkDownTextView {
             setAttributedText(string, range)
             elements.append(header)
         case .done, .undone:
-            
             let todo = MarkDownTodo(style: style, state: .undone)
             todo.tapBlock = { [weak self] button in
                 guard let weakSelf = self,
@@ -138,15 +139,28 @@ extension MarkDownTextView {
             }
             AppUtil.fetchCurrentVC()?.present(vc, animated: true, completion: nil)
             break
-        case .bold, .highlighter, .italic, .underline, .strikethrough:
+        case .bold, .highlighter, .italic:
             guard let elementStyle = style.attributes(with: item) else { return }
             if isSelected {
                 processor?.markAttributes.merge(elementStyle) { return $1 }
+                addSelectedAttributes(at: item)
             } else {
                 elementStyle.forEach { (key, _) in
                     processor?.markAttributes.removeValue(forKey: key)
                 }
+                removeSelectedAttributes(at: item)
             }
+        case .strikethrough:
+            let strikethrounghStyle = style.attributes[.strikethrough] as? MarkDownStrikethroughStyle ?? MarkDownStrikethroughStyle()
+            let decoration = YYTextDecoration(style: .single, width: 1, color: isSelected ? strikethrounghStyle.color : .clear )
+            processor?.markAttributes.updateValue(decoration, forKey: YYTextStrikethroughAttributeName)
+            isSelected ? addSelectedAttributes(at: item) : removeSelectedAttributes(at: item)
+        case .underline:
+            let underlineStyle = style.attributes[.strikethrough] as? MarkDownUnderlineStyle ?? MarkDownUnderlineStyle()
+            let color: UIColor = isSelected ? underlineStyle.color : .clear
+            let decoration = YYTextDecoration(style: .single, width: 1, color:  color)
+            processor?.markAttributes.updateValue(decoration, forKey: YYTextUnderlineAttributeName)
+            isSelected ? addSelectedAttributes(at: item) : removeSelectedAttributes(at: item)
         }
     }
     
@@ -160,6 +174,86 @@ extension MarkDownTextView {
 
 // MARK: - Private
 extension MarkDownTextView {
+    /// 给选中的 文本添加属性
+    private func addSelectedAttributes(at item: MarkDownItem) {
+        guard selectedRange.length > 0,
+            let string = attributedText,
+            var attributes = style.attributes(with: item) else { return }
+        let range = selectedRange
+        let selectedString = string.attributedSubstring(from: selectedRange)
+        if let originalAttributes = selectedString.yy_attributes {
+            attributes.merge(originalAttributes) { (current, _) in current }
+        }
+        let mutableSelectedString = NSMutableAttributedString(attributedString: selectedString)
+        for attribute in attributes.enumerated() {
+            if mutableSelectedString.length <= range.length {
+                mutableSelectedString.yy_setAttribute(attribute.element.key,
+                                                      value: attribute.element.value,
+                                                      range: NSRange(location: 0, length: range.length))
+            }
+        }
+        let originalString = NSMutableAttributedString(attributedString: string)
+        originalString.replaceCharacters(in: range, with: mutableSelectedString)
+        attributedText = originalString
+        selectedRange = range
+    }
+    
+    /// 移除 选中 文本的属性
+    private func removeSelectedAttributes(at item: MarkDownItem) {
+        guard selectedRange.length > 0,
+            let string = attributedText else { return }
+        let range = selectedRange
+        let selectedString = string.attributedSubstring(from: selectedRange)
+        var attributes: [String: Any] = [ : ]
+        let mutableSelectedString = NSMutableAttributedString(attributedString: selectedString)
+        switch item {
+        case .bold:
+            if let value = processor?.attributes?[.font] {
+                attributes[.font] = value
+            } else {
+                attributes[.font] = style.font
+            }
+        case .italic:
+            attributes[.font] = style.font
+        case .highlighter:
+            attributes[.backgroundColor] = UIColor.clear
+        case .strikethrough:
+            if let value = processor?.attributes?[YYTextStrikethroughAttributeName] {
+                attributes[YYTextStrikethroughAttributeName] = value
+            } else {
+                let decoration = YYTextDecoration(style: .single, width: 0, color:  .clear)
+                attributes[YYTextStrikethroughAttributeName] = decoration
+            }
+            mutableSelectedString.yy_removeAttributes(YYTextStrikethroughAttributeName,
+                                                      range: NSRange(location: 0, length: mutableSelectedString.length))
+        case .underline:
+            if let value = processor?.attributes?[YYTextUnderlineAttributeName] {
+                attributes[YYTextUnderlineAttributeName] = value
+            } else {
+                let decoration = YYTextDecoration(style: .single, width: 0, color:  .clear)
+                attributes[YYTextUnderlineAttributeName] = decoration
+            }
+            mutableSelectedString.yy_removeAttributes(YYTextUnderlineAttributeName,
+                                                      range: NSRange(location: 0, length: mutableSelectedString.length))
+        default:
+            return
+        }
+        if let originalAttributes = selectedString.yy_attributes {
+            attributes.merge(originalAttributes) { (current, _) in current }
+        }
+        for attribute in attributes.enumerated() {
+            if mutableSelectedString.length <= range.length {
+                mutableSelectedString.yy_setAttribute(attribute.element.key,
+                                                      value: attribute.element.value,
+                                                      range: NSRange(location: 0, length: range.length))
+            }
+        }
+        let originalString = NSMutableAttributedString(attributedString: string)
+        originalString.replaceCharacters(in: range, with: mutableSelectedString)
+        attributedText = originalString
+        selectedRange = range
+    }
+    
     private func setAttributedText(_ text: NSAttributedString, _ selectedRange: NSRange?) {
         // 处理 设置 标记点 时 屏幕会上下滚动
         isScrollRangeToVisible = false
@@ -201,7 +295,7 @@ extension MarkDownTextView {
                                context: UnsafeMutableRawPointer?) {
         if keyPath == "selectedRange",
             let range = change?[.newKey] as? NSRange {
-            print("update selected range: \(range)")
+//            print("update selected range: \(range)")
             if let string = attributedText, string.length > 0 {
                 let location = max(0, range.location)
                 let length = 1
@@ -217,62 +311,65 @@ extension MarkDownTextView {
 }
 
 // MARK: - YYTextViewDelegate
-//extension MarkDownTextView: YYTextViewDelegate {
 extension MarkDownTextView {
     override func textView(_ textView: YYTextView,
                            shouldChangeTextIn range: NSRange,
                            replacementText text: String) -> Bool {
         textView.typingAttributes = processor?.attributes
-        print("typing attributes: \(typingAttributes)")
-        if text == "\n", let element = processor?.element(range: currentParagraph()) {
+//        print("typing attributes: \(typingAttributes)")
+        if text == "\n" {
             processor?.markAttributes.removeAll()
-            let attributedString = attributedText ?? NSAttributedString(string: "")
-            let string = NSMutableAttributedString(attributedString: attributedString)
-            string.insert(NSAttributedString(string: "\n"), at: selectedRange.location)
-            switch element.item {
-            case .unordered:
-                let unordered = MarkDownUnordered(style: style)
-                string.insert(unordered.attributedString!, at: selectedRange.location + 1)
-                let range = NSRange(location: selectedRange.location + 2,
-                                    length: selectedRange.length)
-                attributedText = string
-                selectedRange = range
-                elements.append(unordered)
-                return false
-            case .done, .undone:
-                let todo = MarkDownTodo(style: style, state: .undone)
-                todo.tapBlock = { [weak self] button in
-                    guard let weakSelf = self,
-                        let paragraphRange = weakSelf.processor?.findElementRange(at: button) else { return }
-                    let oldRange = weakSelf.selectedRange
-                    let item: MarkDownItem = button.isSelected ? .done : .undone
-                    let attributedString = weakSelf.attributedText ?? NSAttributedString(string: "")
-                    let string = NSMutableAttributedString(attributedString: attributedString)
-                    weakSelf.processor?.addAttributed(string, at: item, in: paragraphRange)
-                    if item == .undone {
-                        string.yy_removeAttributes(YYTextStrikethroughAttributeName, range: paragraphRange)
+            // 换行清掉原有的 属性
+            toolBar?.resetMark()
+            if let element = processor?.element(range: currentParagraph()) {
+                let attributedString = attributedText ?? NSAttributedString(string: "")
+                let string = NSMutableAttributedString(attributedString: attributedString)
+                string.insert(NSAttributedString(string: "\n"), at: selectedRange.location)
+                switch element.item {
+                case .unordered:
+                    let unordered = MarkDownUnordered(style: style)
+                    string.insert(unordered.attributedString!, at: selectedRange.location + 1)
+                    let range = NSRange(location: selectedRange.location + 2,
+                                        length: selectedRange.length)
+                    attributedText = string
+                    selectedRange = range
+                    elements.append(unordered)
+                    return false
+                case .done, .undone:
+                    let todo = MarkDownTodo(style: style, state: .undone)
+                    todo.tapBlock = { [weak self] button in
+                        guard let weakSelf = self,
+                            let paragraphRange = weakSelf.processor?.findElementRange(at: button) else { return }
+                        let oldRange = weakSelf.selectedRange
+                        let item: MarkDownItem = button.isSelected ? .done : .undone
+                        let attributedString = weakSelf.attributedText ?? NSAttributedString(string: "")
+                        let string = NSMutableAttributedString(attributedString: attributedString)
+                        weakSelf.processor?.addAttributed(string, at: item, in: paragraphRange)
+                        if item == .undone {
+                            string.yy_removeAttributes(YYTextStrikethroughAttributeName, range: paragraphRange)
+                        }
+                        weakSelf.attributedText = string
+                        weakSelf.selectedRange = oldRange
                     }
-                    weakSelf.attributedText = string
-                    weakSelf.selectedRange = oldRange
+                    string.insert(todo.attributedString!, at: selectedRange.location + 1)
+                    let range = NSRange(location: selectedRange.location + 2,
+                                        length: selectedRange.length)
+                    attributedText = string
+                    selectedRange = range
+                    elements.append(todo)
+                    return false
+                case .ordered:
+                    let ordered = MarkDownOrdered(style: style, index: (element as! MarkDownOrdered).index + 1)
+                    string.insert(ordered.attributedString!, at: selectedRange.location + 1)
+                    let range = NSRange(location: selectedRange.location + 2,
+                                        length: selectedRange.length)
+                    attributedText = string
+                    selectedRange = range
+                    elements.append(ordered)
+                    return false
+                default:
+                    break
                 }
-                string.insert(todo.attributedString!, at: selectedRange.location + 1)
-                let range = NSRange(location: selectedRange.location + 2,
-                                    length: selectedRange.length)
-                attributedText = string
-                selectedRange = range
-                elements.append(todo)
-                return false
-            case .ordered:
-                let ordered = MarkDownOrdered(style: style, index: (element as! MarkDownOrdered).index + 1)
-                string.insert(ordered.attributedString!, at: selectedRange.location + 1)
-                let range = NSRange(location: selectedRange.location + 2,
-                                    length: selectedRange.length)
-                attributedText = string
-                selectedRange = range
-                elements.append(ordered)
-                return false
-            default:
-                break
             }
         }
         if let mdDelegate = mdDelegate {

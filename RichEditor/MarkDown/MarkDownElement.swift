@@ -38,6 +38,8 @@ public enum MarkDownItem: Int {
     case quote = 70
 //    /// 时间
 //    case time = 71
+//    /// 链接
+//    case link = 72
 }
 
 public protocol MarkDownElement {

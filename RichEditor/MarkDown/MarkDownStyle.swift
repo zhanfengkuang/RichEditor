@@ -30,12 +30,13 @@ public class MarkDownStyle {
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.headIndent = 0
-        let decoration = YYTextDecoration(style: .single, width: 0, color: .red)
+        let decoration = YYTextDecoration(style: .single, width: 0, color: .clear)
         normalStyle = [
             .foregroundColor: color,
             .font: font,
             .paragraphStyle: paragraphStyle,
-            YYTextStrikethroughAttributeName: decoration
+            YYTextStrikethroughAttributeName: decoration,
+            YYTextUnderlineAttributeName: decoration
         ]
     }
     
@@ -81,7 +82,7 @@ public class MarkDownStyle {
                 .paragraphStyle: paragraphStyle,
             ]
             
-            let decoration = YYTextDecoration(style: .single, width: 1, color: .red)
+            let decoration = YYTextDecoration(style: .single, width: 1, color: todoStyle.strikethroughColor)
             
             if strikethrough != nil {
                 result[YYTextStrikethroughAttributeName] = decoration
@@ -141,7 +142,7 @@ public class MarkDownStyle {
                 YYTextUnderlineAttributeName: decoration,
             ]
         case .strikethrough:
-            let underlineStyle = attributes[.underline] as? MarkDownUnderlineStyle ?? MarkDownUnderlineStyle()
+            let underlineStyle = attributes[.strikethrough] as? MarkDownStrikethroughStyle ?? MarkDownStrikethroughStyle()
             let decoration = YYTextDecoration(style: .single, width: 1, color: underlineStyle.color)
             return [
                 YYTextStrikethroughAttributeName: decoration,
@@ -182,17 +183,21 @@ struct MarkDownTodoStyle: MarkDownElementStyle {
     var undoneFont: UIFont
     var undoneColor: UIColor
     var size: CGSize
+    /// 中滑 线 颜色
+    var strikethroughColor: UIColor
     
     init(doneFont: UIFont = UIFont.systemFont(ofSize: 15),
          doneColor: UIColor = UIColor(hex: 0xC4C4C4),
          undoneFont: UIFont = UIFont.systemFont(ofSize: 15),
          undoneColor: UIColor = UIColor(hex: 0x6D7278),
-         size: CGSize = CGSize(width: 25, height: 17)) {
+         size: CGSize = CGSize(width: 25, height: 17),
+         strikethroughColor: UIColor = UIColor(hex: 0xC4C4C4)) {
         self.doneFont = doneFont
         self.undoneFont = undoneFont
         self.doneColor = doneColor
         self.undoneColor = undoneColor
         self.size = size
+        self.strikethroughColor = strikethroughColor
     }
 }
 
@@ -338,7 +343,17 @@ struct MarkDownItalicStyle: MarkDownElementStyle {
 struct MarkDownUnderlineStyle: MarkDownElementStyle {
     /// color
     var color: UIColor
-    init(color: UIColor = .red) {
+    init(color: UIColor = UIColor(hex: 0x6D7278)) {
+        self.color = color
+    }
+}
+
+// MARK: - Strikethrough
+struct MarkDownStrikethroughStyle: MarkDownElementStyle {
+    /// color
+    /// color
+    var color: UIColor
+    init(color: UIColor = UIColor(hex: 0x6D7278)) {
         self.color = color
     }
 }

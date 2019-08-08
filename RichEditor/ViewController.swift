@@ -29,6 +29,7 @@ class ViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.editor = MarkDownTextView(frame: CGRect(x: 50, y: 54, width: screenWidth - 70, height: screenHeight - 120), style: .init())
+            self.editor.toolBar = self.richEditorToolbar
             self.view.insertSubview(self.editor, belowSubview: self.richEditorToolbar)
             self.richEditorToolbar.textView = self.editor
         }
