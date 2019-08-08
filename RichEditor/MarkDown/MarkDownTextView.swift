@@ -27,10 +27,9 @@ class MarkDownTextView: YYTextView {
         bottomOffset = 100
         processor = MarkDownProcessor(textView: self, style: self.style)
         showsVerticalScrollIndicator = false
-//        delegate = self
         textParser = MarkDownParagraphStyle(style: style)
-//        isScrollRangeToVisible = false
-//        isScrollEnabled = false
+        delaysContentTouches = true
+        canCancelContentTouches = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -121,6 +120,7 @@ extension MarkDownTextView {
                                           size: CGSize(width: weakSelf.jr_width - 10, height: 200),
                                           image: photo)
                 image.tapBlock = { button in
+                    print("更换图片")
                     guard let vc = TZImagePickerController(maxImagesCount: 1, delegate: self) else { return }
                     vc.didFinishPickingPhotosHandle = { (photos, _, _) in
                         guard let photo = photos?.first else { return }

@@ -292,6 +292,8 @@ class MarkDownImage: MarkDownElement {
         imageView.layer.masksToBounds = true
         imageView.addTarget(self, action: #selector(selectImage(_:)), for: .touchUpInside)
         imageView.tag = item.rawValue
+        imageView.adjustsImageWhenDisabled = false
+        imageView.adjustsImageWhenHighlighted = false
         content = imageView
         
         attributedString = NSMutableAttributedString(string: "\n")
@@ -305,6 +307,7 @@ class MarkDownImage: MarkDownElement {
     }
     
     @objc func selectImage(_ sender: UIButton) {
+        print("是否")
         tapBlock?(sender)
     }
 }
