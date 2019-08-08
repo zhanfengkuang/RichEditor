@@ -10,18 +10,9 @@ import UIKit
 
 class NextViewController: UIViewController {
     
-    var textView: MDTextView!
-    
     required init(attributedString: NSAttributedString) {
         super.init(nibName: nil, bundle: nil)
-        let style = MarkDownStyle()
         
-        textView = MDTextView(frame: CGRect(x: 20, y: 100, width: screenWidth - 40, height: 300))
-        textView.style = style
-        textView.isEditable = false
-        textView.attributedText = attributedString
-//        textView.textParser = MarkDownParse(style: style, textView: textView)
-        view.addSubview(textView)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,14 +23,8 @@ class NextViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        
-//        let textView = UITextView()
-//        textView.frame = CGRect(x: 0, y: 100, width: 375, height: 200)
-//        view.addSubview(textView)
-        
-        
         let btn = UIButton(type: .custom)
-        btn.setTitle("next", for: .normal)
+        btn.setTitle("back", for: .normal)
         btn.setTitleColor(.red, for: .normal)
         btn.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
         view.addSubview(btn)

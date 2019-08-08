@@ -27,7 +27,7 @@ public class RichEditorToobar: UIView {
     private var closeBtn: UIButton!
     private var scrollView: UIScrollView!
     private(set) var module: Module
-    weak var textView: MarkDownView?
+    weak var textView: MarkDownTextView?
     
     required init(frame: CGRect, module: Module) {
         self.module = module

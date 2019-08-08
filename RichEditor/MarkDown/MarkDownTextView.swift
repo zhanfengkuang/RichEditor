@@ -1,5 +1,5 @@
 //
-//  MarkDownView.swift
+//  MarkDownTextView.swift
 //  RichEditor
 //
 //  Created by Maple on 2019/8/2.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MarkDownView: YYTextView {
+class MarkDownTextView: YYTextView {
     // 转为 mark down 格式文本
     var string: String = ""
     // 持有 所有 添加的 控件
@@ -16,7 +16,7 @@ class MarkDownView: YYTextView {
     /// 文本 风格
     private let style: MarkDownStyle
     /// 文本 编辑时 处理器
-    private var processor: AttributesProcessor?
+    private var processor: MarkDownProcessor?
     /// Delegate
     weak var mdDelegate: TextViewDelegate?
     
@@ -24,15 +24,12 @@ class MarkDownView: YYTextView {
                   style: MarkDownStyle) {
         self.style = style
         super.init(frame: frame)
-        processor = AttributesProcessor(textView: self, style: self.style)
+        processor = MarkDownProcessor(textView: self, style: self.style)
+        showsVerticalScrollIndicator = false
 //        delegate = self
         textParser = MarkDownParagraphStyle(style: style)
 //        isScrollRangeToVisible = false
 //        isScrollEnabled = false
-    }
-    
-    deinit {
-//        removeListen()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,7 +38,7 @@ class MarkDownView: YYTextView {
 }
 
 // MARK: - Public
-extension MarkDownView {
+extension MarkDownTextView {
     /// 富文本编辑
     public func edit(with item: MarkDownItem, isSelected: Bool) {
         let attributedString = attributedText ?? NSAttributedString(string: "")
@@ -173,7 +170,7 @@ extension MarkDownView {
 }
 
 // MARK: - Private
-extension MarkDownView {
+extension MarkDownTextView {
     /// 光标位置 段落 的 范围
     private func currentParagraph() -> NSRange {
         print("Current Paragraph Range: \((text as NSString).paragraphRange(for: selectedRange))")
@@ -221,8 +218,8 @@ extension MarkDownView {
 }
 
 // MARK: - YYTextViewDelegate
-//extension MarkDownView: YYTextViewDelegate {
-extension MarkDownView {
+//extension MarkDownTextView: YYTextViewDelegate {
+extension MarkDownTextView {
     override func textView(_ textView: YYTextView,
                            shouldChangeTextIn range: NSRange,
                            replacementText text: String) -> Bool {
@@ -292,7 +289,7 @@ extension MarkDownView {
 }
 
 // MARK: - Touch
-extension MarkDownView {
+extension MarkDownTextView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
 //        if let string = attributedText, string.length > 0 {
@@ -310,25 +307,25 @@ extension MarkDownView {
 }
 
 // MARK: - 照片 选择器
-extension MarkDownView: TZImagePickerControllerDelegate {
+extension MarkDownTextView: TZImagePickerControllerDelegate {
     
 }
 
 // MARK: - TextViewDelegate
 protocol TextViewDelegate: NSObjectProtocol {
-    func textView(_ textView: MarkDownView,
+    func textView(_ textView: MarkDownTextView,
                   shouldChangeTextIn range: NSRange,
                   replacementText text: String) -> Bool
     
-    func textViewDidBeginEditing(_ textView: MarkDownView)
+    func textViewDidBeginEditing(_ textView: MarkDownTextView)
 }
 
 extension TextViewDelegate {
-    func textView(_ textView: MarkDownView,
+    func textView(_ textView: MarkDownTextView,
                   shouldChangeTextIn range: NSRange,
                   replacementText text: String) -> Bool { return true }
     
-    func textViewDidBeginEditing(_ textView: MarkDownView) { }
+    func textViewDidBeginEditing(_ textView: MarkDownTextView) { }
 }
 
 

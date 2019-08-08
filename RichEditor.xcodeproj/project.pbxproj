@@ -8,31 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		7F238A11B96CC52F179E948C /* libPods-RichEditor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10028020BF0746A298D10289 /* libPods-RichEditor.a */; };
-		C633896422F0156A004F703B /* TextProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633896322F01569004F703B /* TextProcessor.swift */; };
 		C633896722F03B05004F703B /* MarkDownStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633896622F03B05004F703B /* MarkDownStyle.swift */; };
-		C633896922F05BAC004F703B /* AttributeProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633896822F05BAC004F703B /* AttributeProcessor.swift */; };
-		C6429AF322F9361F00E75FA8 /* MDImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6429AF022F9361E00E75FA8 /* MDImage.swift */; };
-		C6429AF422F9361F00E75FA8 /* MarkdownElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6429AF122F9361E00E75FA8 /* MarkdownElement.swift */; };
-		C6429AF522F9361F00E75FA8 /* MDControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6429AF222F9361F00E75FA8 /* MDControl.swift */; };
+		C633896922F05BAC004F703B /* MarkDownProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633896822F05BAC004F703B /* MarkDownProcessor.swift */; };
 		C67834E422D6D88E00BE08B0 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67834E322D6D88E00BE08B0 /* NextViewController.swift */; };
-		C67834F922D70ACD00BE08B0 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67834F822D70ACD00BE08B0 /* TextElement.swift */; };
+		C67834F922D70ACD00BE08B0 /* MarkDownElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67834F822D70ACD00BE08B0 /* MarkDownElement.swift */; };
 		C69485B322F3D54500D5CC02 /* MarkDownPaser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B222F3D54500D5CC02 /* MarkDownPaser.swift */; };
 		C69485B522F3D65E00D5CC02 /* MarkDownTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B422F3D65E00D5CC02 /* MarkDownTransform.swift */; };
 		C69485B722F3DF0600D5CC02 /* MarkDownTransformUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B622F3DF0600D5CC02 /* MarkDownTransformUtil.swift */; };
 		C69485B922F4424F00D5CC02 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485B822F4424F00D5CC02 /* AppUtil.swift */; };
-		C69485BB22F4455400D5CC02 /* MarkDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485BA22F4455400D5CC02 /* MarkDownView.swift */; };
+		C69485BB22F4455400D5CC02 /* MarkDownTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69485BA22F4455400D5CC02 /* MarkDownTextView.swift */; };
 		C6EAA6AC22D191C200896913 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6AB22D191C200896913 /* AppDelegate.swift */; };
 		C6EAA6AE22D191C200896913 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6AD22D191C200896913 /* ViewController.swift */; };
 		C6EAA6B122D191C200896913 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6EAA6AF22D191C200896913 /* Main.storyboard */; };
 		C6EAA6B322D191C300896913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6EAA6B222D191C300896913 /* Assets.xcassets */; };
 		C6EAA6B622D191C300896913 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6EAA6B422D191C300896913 /* LaunchScreen.storyboard */; };
-		C6EAA6CC22D1923B00896913 /* MDTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6C322D1923A00896913 /* MDTextView.swift */; };
-		C6EAA6CD22D1923B00896913 /* MDParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6C422D1923A00896913 /* MDParser.swift */; };
 		C6EAA6CE22D1923B00896913 /* RichEditorToobar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6C522D1923A00896913 /* RichEditorToobar.swift */; };
 		C6EAA6CF22D1923B00896913 /* MDUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6C622D1923A00896913 /* MDUtil.swift */; };
-		C6EAA6D022D1923B00896913 /* MDLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6C722D1923A00896913 /* MDLine.swift */; };
-		C6EAA6D122D1923B00896913 /* MDTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6C822D1923A00896913 /* MDTaskList.swift */; };
-		C6EAA6D222D1923B00896913 /* MDElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6C922D1923A00896913 /* MDElement.swift */; };
 		C6EAA75622D1926600896913 /* YYSpriteSheetImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6DA22D1926600896913 /* YYSpriteSheetImage.m */; };
 		C6EAA75722D1926600896913 /* YYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6DC22D1926600896913 /* YYImage.m */; };
 		C6EAA75822D1926600896913 /* YYImageCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA6DD22D1926600896913 /* YYImageCoder.m */; };
@@ -97,7 +88,6 @@
 		C6EAA79822D1945A00896913 /* IntExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA79722D1945A00896913 /* IntExt.swift */; };
 		C6EAA79B22D194AF00896913 /* UIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA79A22D194AF00896913 /* UIConfig.swift */; };
 		C6EAA79D22D194C900896913 /* DoubleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA79C22D194C900896913 /* DoubleExt.swift */; };
-		C6EAA79F22D1954700896913 /* DynamicTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA79E22D1954600896913 /* DynamicTextView.swift */; };
 		C6EAA7A122D195D100896913 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA7A022D195D100896913 /* KeyboardManager.swift */; };
 		C6EAA7A322D1974200896913 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA7A222D1974200896913 /* ArrayExt.swift */; };
 		C6EAA7A522D1977000896913 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA7A422D1976F00896913 /* StringExt.swift */; };
@@ -108,19 +98,15 @@
 		A2CB99E4AA93F1D6D425C565 /* Pods-RichEditor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RichEditor.release.xcconfig"; path = "Target Support Files/Pods-RichEditor/Pods-RichEditor.release.xcconfig"; sourceTree = "<group>"; };
 		A77C52299ACD51FC275CFB1C /* Pods-RichEditor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RichEditor.debug.xcconfig"; path = "Target Support Files/Pods-RichEditor/Pods-RichEditor.debug.xcconfig"; sourceTree = "<group>"; };
 		C60679B222F1249000D4CAF8 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		C633896322F01569004F703B /* TextProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextProcessor.swift; sourceTree = "<group>"; };
 		C633896622F03B05004F703B /* MarkDownStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownStyle.swift; sourceTree = "<group>"; };
-		C633896822F05BAC004F703B /* AttributeProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeProcessor.swift; sourceTree = "<group>"; };
-		C6429AF022F9361E00E75FA8 /* MDImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDImage.swift; sourceTree = "<group>"; };
-		C6429AF122F9361E00E75FA8 /* MarkdownElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownElement.swift; sourceTree = "<group>"; };
-		C6429AF222F9361F00E75FA8 /* MDControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDControl.swift; sourceTree = "<group>"; };
+		C633896822F05BAC004F703B /* MarkDownProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownProcessor.swift; sourceTree = "<group>"; };
 		C67834E322D6D88E00BE08B0 /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
-		C67834F822D70ACD00BE08B0 /* TextElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextElement.swift; sourceTree = "<group>"; };
+		C67834F822D70ACD00BE08B0 /* MarkDownElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownElement.swift; sourceTree = "<group>"; };
 		C69485B222F3D54500D5CC02 /* MarkDownPaser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownPaser.swift; sourceTree = "<group>"; };
 		C69485B422F3D65E00D5CC02 /* MarkDownTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownTransform.swift; sourceTree = "<group>"; };
 		C69485B622F3DF0600D5CC02 /* MarkDownTransformUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownTransformUtil.swift; sourceTree = "<group>"; };
 		C69485B822F4424F00D5CC02 /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
-		C69485BA22F4455400D5CC02 /* MarkDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownView.swift; sourceTree = "<group>"; };
+		C69485BA22F4455400D5CC02 /* MarkDownTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownTextView.swift; sourceTree = "<group>"; };
 		C6EAA6A822D191C100896913 /* RichEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RichEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6EAA6AB22D191C200896913 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6EAA6AD22D191C200896913 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -129,13 +115,8 @@
 		C6EAA6B522D191C300896913 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C6EAA6B722D191C300896913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6EAA6BD22D1921700896913 /* RichEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RichEditor-Bridging-Header.h"; sourceTree = "<group>"; };
-		C6EAA6C322D1923A00896913 /* MDTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDTextView.swift; sourceTree = "<group>"; };
-		C6EAA6C422D1923A00896913 /* MDParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDParser.swift; sourceTree = "<group>"; };
 		C6EAA6C522D1923A00896913 /* RichEditorToobar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichEditorToobar.swift; sourceTree = "<group>"; };
 		C6EAA6C622D1923A00896913 /* MDUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDUtil.swift; sourceTree = "<group>"; };
-		C6EAA6C722D1923A00896913 /* MDLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDLine.swift; sourceTree = "<group>"; };
-		C6EAA6C822D1923A00896913 /* MDTaskList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDTaskList.swift; sourceTree = "<group>"; };
-		C6EAA6C922D1923A00896913 /* MDElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDElement.swift; sourceTree = "<group>"; };
 		C6EAA6D722D1926600896913 /* YYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImage.h; sourceTree = "<group>"; };
 		C6EAA6D822D1926600896913 /* YYImageCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImageCoder.h; sourceTree = "<group>"; };
 		C6EAA6D922D1926600896913 /* YYFrameImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYFrameImage.h; sourceTree = "<group>"; };
@@ -261,7 +242,6 @@
 		C6EAA79722D1945A00896913 /* IntExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntExt.swift; sourceTree = "<group>"; };
 		C6EAA79A22D194AF00896913 /* UIConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIConfig.swift; sourceTree = "<group>"; };
 		C6EAA79C22D194C900896913 /* DoubleExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleExt.swift; sourceTree = "<group>"; };
-		C6EAA79E22D1954600896913 /* DynamicTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicTextView.swift; sourceTree = "<group>"; };
 		C6EAA7A022D195D100896913 /* KeyboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		C6EAA7A222D1974200896913 /* ArrayExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		C6EAA7A422D1976F00896913 /* StringExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
@@ -294,21 +274,6 @@
 				A2CB99E4AA93F1D6D425C565 /* Pods-RichEditor.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		C67834F722D70AB200BE08B0 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-				C67834F822D70ACD00BE08B0 /* TextElement.swift */,
-				C633896322F01569004F703B /* TextProcessor.swift */,
-				C633896622F03B05004F703B /* MarkDownStyle.swift */,
-				C633896822F05BAC004F703B /* AttributeProcessor.swift */,
-				C6EAA6C322D1923A00896913 /* MDTextView.swift */,
-				C69485B222F3D54500D5CC02 /* MarkDownPaser.swift */,
-				C69485B422F3D65E00D5CC02 /* MarkDownTransform.swift */,
-				C69485B622F3DF0600D5CC02 /* MarkDownTransformUtil.swift */,
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		C6EAA69F22D191C100896913 = {
@@ -352,8 +317,13 @@
 		C6EAA6C122D1923A00896913 /* MarkDown */ = {
 			isa = PBXGroup;
 			children = (
-				C69485BA22F4455400D5CC02 /* MarkDownView.swift */,
-				C67834F722D70AB200BE08B0 /* New Group */,
+				C69485BA22F4455400D5CC02 /* MarkDownTextView.swift */,
+				C67834F822D70ACD00BE08B0 /* MarkDownElement.swift */,
+				C633896622F03B05004F703B /* MarkDownStyle.swift */,
+				C633896822F05BAC004F703B /* MarkDownProcessor.swift */,
+				C69485B222F3D54500D5CC02 /* MarkDownPaser.swift */,
+				C69485B422F3D65E00D5CC02 /* MarkDownTransform.swift */,
+				C69485B622F3DF0600D5CC02 /* MarkDownTransformUtil.swift */,
 				C6EAA6C222D1923A00896913 /* View */,
 			);
 			path = MarkDown;
@@ -362,16 +332,8 @@
 		C6EAA6C222D1923A00896913 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C6429AF122F9361E00E75FA8 /* MarkdownElement.swift */,
-				C6429AF222F9361F00E75FA8 /* MDControl.swift */,
-				C6429AF022F9361E00E75FA8 /* MDImage.swift */,
-				C6EAA79E22D1954600896913 /* DynamicTextView.swift */,
-				C6EAA6C422D1923A00896913 /* MDParser.swift */,
 				C6EAA6C522D1923A00896913 /* RichEditorToobar.swift */,
 				C6EAA6C622D1923A00896913 /* MDUtil.swift */,
-				C6EAA6C722D1923A00896913 /* MDLine.swift */,
-				C6EAA6C822D1923A00896913 /* MDTaskList.swift */,
-				C6EAA6C922D1923A00896913 /* MDElement.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -721,8 +683,6 @@
 				C6EAA78222D1926600896913 /* NSNumber+YYAdd.m in Sources */,
 				C6EAA77622D1926600896913 /* UIDevice+YYAdd.m in Sources */,
 				C6EAA75622D1926600896913 /* YYSpriteSheetImage.m in Sources */,
-				C6EAA6CC22D1923B00896913 /* MDTextView.swift in Sources */,
-				C6EAA6D222D1923B00896913 /* MDElement.swift in Sources */,
 				C6EAA76322D1926600896913 /* YYTextKeyboardManager.m in Sources */,
 				C6EAA79822D1945A00896913 /* IntExt.swift in Sources */,
 				C6EAA75A22D1926600896913 /* YYAnimatedImageView.m in Sources */,
@@ -744,15 +704,12 @@
 				C6EAA75D22D1926600896913 /* YYTextContainerView.m in Sources */,
 				C6EAA77722D1926600896913 /* UIApplication+YYAdd.m in Sources */,
 				C6EAA78522D1926600896913 /* NSData+YYAdd.m in Sources */,
-				C633896922F05BAC004F703B /* AttributeProcessor.swift in Sources */,
+				C633896922F05BAC004F703B /* MarkDownProcessor.swift in Sources */,
 				C69485B922F4424F00D5CC02 /* AppUtil.swift in Sources */,
 				C6EAA7A322D1974200896913 /* ArrayExt.swift in Sources */,
-				C6EAA6D122D1923B00896913 /* MDTaskList.swift in Sources */,
 				C6EAA77C22D1926600896913 /* UIBarButtonItem+YYAdd.m in Sources */,
 				C6EAA79422D1941D00896913 /* CGRectExt.swift in Sources */,
-				C633896422F0156A004F703B /* TextProcessor.swift in Sources */,
 				C6EAA76D22D1926600896913 /* NSAttributedString+YYText.m in Sources */,
-				C6429AF522F9361F00E75FA8 /* MDControl.swift in Sources */,
 				C6EAA79D22D194C900896913 /* DoubleExt.swift in Sources */,
 				C6EAA75F22D1926600896913 /* YYTextInput.m in Sources */,
 				C6EAA78322D1926600896913 /* NSBundle+YYAdd.m in Sources */,
@@ -767,15 +724,13 @@
 				C6EAA76822D1926600896913 /* YYTextAttribute.m in Sources */,
 				C6EAA76222D1926600896913 /* YYTextSelectionView.m in Sources */,
 				C6EAA79222D1929600896913 /* UIViewExt.swift in Sources */,
-				C6429AF422F9361F00E75FA8 /* MarkdownElement.swift in Sources */,
 				C6EAA77A22D1926600896913 /* UIScreen+YYAdd.m in Sources */,
 				C6EAA78A22D1926600896913 /* NSString+YYAdd.m in Sources */,
 				C6EAA77922D1926600896913 /* UIScrollView+YYAdd.m in Sources */,
 				C6EAA76722D1926600896913 /* YYTextParser.m in Sources */,
-				C69485BB22F4455400D5CC02 /* MarkDownView.swift in Sources */,
+				C69485BB22F4455400D5CC02 /* MarkDownTextView.swift in Sources */,
 				C6EAA75E22D1926600896913 /* YYTextEffectWindow.m in Sources */,
 				C6EAA79622D1942B00896913 /* UIColorExt.swift in Sources */,
-				C6EAA79F22D1954700896913 /* DynamicTextView.swift in Sources */,
 				C6EAA78E22D1926600896913 /* YYCGUtilities.m in Sources */,
 				C633896722F03B05004F703B /* MarkDownStyle.swift in Sources */,
 				C6EAA6CE22D1923B00896913 /* RichEditorToobar.swift in Sources */,
@@ -784,9 +739,7 @@
 				C6EAA7A522D1977000896913 /* StringExt.swift in Sources */,
 				C6EAA77222D1926600896913 /* YYTextWeakProxy.m in Sources */,
 				C69485B322F3D54500D5CC02 /* MarkDownPaser.swift in Sources */,
-				C6429AF322F9361F00E75FA8 /* MDImage.swift in Sources */,
 				C6EAA78D22D1926600896913 /* NSObject+YYAddForKVO.m in Sources */,
-				C6EAA6CD22D1923B00896913 /* MDParser.swift in Sources */,
 				C6EAA76622D1926600896913 /* YYTextRunDelegate.m in Sources */,
 				C6EAA76122D1926600896913 /* YYTextLine.m in Sources */,
 				C6EAA76F22D1926600896913 /* YYTextTransaction.m in Sources */,
@@ -798,9 +751,8 @@
 				C6EAA77422D1926600896913 /* UIBezierPath+YYAdd.m in Sources */,
 				C6EAA78422D1926600896913 /* NSObject+YYAdd.m in Sources */,
 				C6EAA77E22D1926600896913 /* UIImage+YYAdd.m in Sources */,
-				C6EAA6D022D1923B00896913 /* MDLine.swift in Sources */,
 				C6EAA78B22D1926600896913 /* NSNotificationCenter+YYAdd.m in Sources */,
-				C67834F922D70ACD00BE08B0 /* TextElement.swift in Sources */,
+				C67834F922D70ACD00BE08B0 /* MarkDownElement.swift in Sources */,
 				C6EAA78122D1926600896913 /* NSArray+YYAdd.m in Sources */,
 				C6EAA76422D1926600896913 /* YYTextDebugOption.m in Sources */,
 				C69485B722F3DF0600D5CC02 /* MarkDownTransformUtil.swift in Sources */,

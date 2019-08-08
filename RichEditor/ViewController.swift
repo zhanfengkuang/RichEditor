@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     /// rich editor toolbar
     var richEditorToolbar: RichEditorToobar!
     /// text view
-    var editor: MarkDownView!
+    var editor: MarkDownTextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +28,7 @@ class ViewController: UIViewController {
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.editor = MarkDownView(frame: CGRect(x: 50, y: 54, width: screenWidth - 70, height: screenHeight - 120), style: .init())
-//            self.view.addSubview(self.editor)
+            self.editor = MarkDownTextView(frame: CGRect(x: 50, y: 54, width: screenWidth - 70, height: screenHeight - 120), style: .init())
             self.view.insertSubview(self.editor, belowSubview: self.richEditorToolbar)
             self.richEditorToolbar.textView = self.editor
         }

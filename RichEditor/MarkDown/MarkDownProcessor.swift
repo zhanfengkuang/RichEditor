@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct AttributesProcessor {
-    weak var textView: MarkDownView?
+struct MarkDownProcessor {
+    weak var textView: MarkDownTextView?
     weak var style: MarkDownStyle?
     
     var attributes: [String: Any]? {
@@ -43,7 +43,7 @@ struct AttributesProcessor {
     /// 手动设置 富文本样式
     var markAttributes: [String: Any]  = [ : ]
     
-    init(textView: MarkDownView?, style: MarkDownStyle) {
+    init(textView: MarkDownTextView?, style: MarkDownStyle) {
         self.textView = textView
         self.style = style
     }

@@ -10,7 +10,7 @@ import Foundation
 
 struct MarkDownTransform {
     
-    static func text(at textView: MDTextView) -> String {
+    static func text(at textView: MarkDownTextView) -> String {
         var string = ""
         if let textLayout = textView.textLayout {
             // 不包含 控件 文本
