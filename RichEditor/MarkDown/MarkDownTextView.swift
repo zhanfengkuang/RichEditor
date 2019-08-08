@@ -48,12 +48,10 @@ extension MarkDownTextView {
             guard let level = MarkDownHeader.Level(item) else { return }
             let header = MarkDownHeader(level: level, style: style)
             let range = processor?.setElement(header, with: string, at: item, in: currentParagraph())
-            attributedText = string
+            setAttributedText(string, range)
             elements.append(header)
-            if let range = range {
-                selectedRange = range
-            }
         case .done, .undone:
+            
             let todo = MarkDownTodo(style: style, state: .undone)
             todo.tapBlock = { [weak self] button in
                 guard let weakSelf = self,
@@ -70,19 +68,13 @@ extension MarkDownTextView {
                 weakSelf.selectedRange = oldRange
             }
             let range = processor?.setElement(todo, with: string, at: item, in: currentParagraph())
-            attributedText = string
+            setAttributedText(string, range)
             elements.append(todo)
-            if let range = range {
-                selectedRange = range
-            }
         case .unordered:
             let unorderd = MarkDownUnordered(style: style)
             let range = processor?.setElement(unorderd, with: string, at: item, in: currentParagraph())
-            attributedText = string
+            setAttributedText(string, range)
             elements.append(unorderd)
-            if let range = range {
-                selectedRange = range
-            }
         case .ordered:
             var range: NSRange?
             var lastElement: MarkDownElement?
@@ -105,16 +97,12 @@ extension MarkDownTextView {
                 }
                 elements.append(ordered)
             }
-            attributedText = string
-            if let range = range { selectedRange = range }
+            setAttributedText(string, range)
         case .quote:
             let quote = MarkDownQuote(style: style)
             let range = processor?.setElement(quote, with: string, at: item, in: currentParagraph())
-            attributedText = string
+            setAttributedText(string, range)
             elements.append(quote)
-            if let range = range {
-                selectedRange = range
-            }
         case .separator:
             let separator = MarkDownSeparator(style: style)
             let range = processor?.setElement(separator, with: string, at: item, in: currentParagraph())
@@ -171,6 +159,15 @@ extension MarkDownTextView {
 
 // MARK: - Private
 extension MarkDownTextView {
+    private func setAttributedText(_ text: NSAttributedString, _ selectedRange: NSRange?) {
+        isScrollRangeToVisible = false
+        attributedText = text
+        if let range = selectedRange {
+            self.selectedRange = range
+            isScrollRangeToVisible = true
+        }
+    }
+    
     /// 光标位置 段落 的 范围
     private func currentParagraph() -> NSRange {
         print("Current Paragraph Range: \((text as NSString).paragraphRange(for: selectedRange))")
