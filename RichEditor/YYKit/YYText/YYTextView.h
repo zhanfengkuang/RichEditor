@@ -84,7 +84,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name Configuring the Text Attributes
 ///=============================================================================
 
+/// 是否可以自动滚动文本框
 @property (nonatomic, assign) BOOL isScrollRangeToVisible;
+
+/// 自动滚动 时 距离键盘的位置
+@property (nonatomic, assign) CGFloat bottomOffset;
 
 /**
  The text displayed by the text view.

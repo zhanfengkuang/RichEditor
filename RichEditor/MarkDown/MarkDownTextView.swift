@@ -24,6 +24,7 @@ class MarkDownTextView: YYTextView {
                   style: MarkDownStyle) {
         self.style = style
         super.init(frame: frame)
+        bottomOffset = 100
         processor = MarkDownProcessor(textView: self, style: self.style)
         showsVerticalScrollIndicator = false
 //        delegate = self
@@ -160,6 +161,7 @@ extension MarkDownTextView {
 // MARK: - Private
 extension MarkDownTextView {
     private func setAttributedText(_ text: NSAttributedString, _ selectedRange: NSRange?) {
+        // 处理 设置 标记点 时 屏幕会上下滚动
         isScrollRangeToVisible = false
         attributedText = text
         if let range = selectedRange {

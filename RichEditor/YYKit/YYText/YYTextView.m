@@ -724,8 +724,8 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
         CGRect bounds = self.bounds;
         bounds.origin = CGPointZero;
         CGRect kbRect = [mgr convertRect:mgr.keyboardFrame toView:self];
-        kbRect.origin.y -= _extraAccessoryViewHeight;
-        kbRect.size.height += _extraAccessoryViewHeight;
+        kbRect.origin.y -= _extraAccessoryViewHeight + _bottomOffset;
+        kbRect.size.height += _extraAccessoryViewHeight + _bottomOffset ;
         
         kbRect.origin.x -= self.contentOffset.x;
         kbRect.origin.y -= self.contentOffset.y;
@@ -1217,8 +1217,8 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
     YYTextKeyboardManager *mgr = [YYTextKeyboardManager defaultManager];
     if (mgr.keyboardVisible && self.window && self.superview && self.isFirstResponder && !_verticalForm) {
         CGRect kbRect = [mgr convertRect:mgr.keyboardFrame toView:self];
-        kbRect.origin.y -= _extraAccessoryViewHeight;
-        kbRect.size.height += _extraAccessoryViewHeight;
+        kbRect.origin.y -= _extraAccessoryViewHeight + _bottomOffset;
+        kbRect.size.height += _extraAccessoryViewHeight + _bottomOffset;
         
         kbRect.origin.x -= self.contentOffset.x;
         kbRect.origin.y -= self.contentOffset.y;
@@ -1953,6 +1953,7 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
     self.clipsToBounds = YES;
     [super setDelegate:self];
     self.isScrollRangeToVisible = YES;
+    self.bottomOffset = 0;
     
     _text = @"";
     _attributedText = [NSAttributedString new];
