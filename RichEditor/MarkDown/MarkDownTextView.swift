@@ -107,11 +107,8 @@ extension MarkDownTextView {
         case .separator:
             let separator = MarkDownSeparator(style: style)
             let range = processor?.setElement(separator, with: string, at: item, in: currentParagraph())
-            attributedText = string
+            setAttributedText(string, range)
             elements.append(separator)
-            if let range = range {
-                selectedRange = range
-            }
         case .image:
             guard let vc = TZImagePickerController(maxImagesCount: 1, delegate: self) else { return }
             vc.didFinishPickingPhotosHandle = { [weak self] (photos, assets, isOriginal) in
@@ -121,7 +118,6 @@ extension MarkDownTextView {
                                           size: CGSize(width: weakSelf.jr_width - 10, height: 200),
                                           image: photo)
                 image.tapBlock = { button in
-                    print("更换图片")
                     guard let vc = TZImagePickerController(maxImagesCount: 1, delegate: self) else { return }
                     vc.didFinishPickingPhotosHandle = { (photos, _, _) in
                         guard let photo = photos?.first else { return }
@@ -331,8 +327,7 @@ extension MarkDownTextView {
                     string.insert(unordered.attributedString!, at: selectedRange.location + 1)
                     let range = NSRange(location: selectedRange.location + 2,
                                         length: selectedRange.length)
-                    attributedText = string
-                    selectedRange = range
+                    setAttributedText(string, range)
                     elements.append(unordered)
                     return false
                 case .done, .undone:
@@ -348,14 +343,14 @@ extension MarkDownTextView {
                         if item == .undone {
                             string.yy_removeAttributes(YYTextStrikethroughAttributeName, range: paragraphRange)
                         }
-                        weakSelf.attributedText = string
-                        weakSelf.selectedRange = oldRange
+                        weakSelf.setAttributedText(string, oldRange)
+//                        weakSelf.attributedText = string
+//                        weakSelf.selectedRange = oldRange
                     }
                     string.insert(todo.attributedString!, at: selectedRange.location + 1)
                     let range = NSRange(location: selectedRange.location + 2,
                                         length: selectedRange.length)
-                    attributedText = string
-                    selectedRange = range
+                    setAttributedText(string, range)
                     elements.append(todo)
                     return false
                 case .ordered:
@@ -363,8 +358,7 @@ extension MarkDownTextView {
                     string.insert(ordered.attributedString!, at: selectedRange.location + 1)
                     let range = NSRange(location: selectedRange.location + 2,
                                         length: selectedRange.length)
-                    attributedText = string
-                    selectedRange = range
+                    setAttributedText(string, range)
                     elements.append(ordered)
                     return false
                 default:

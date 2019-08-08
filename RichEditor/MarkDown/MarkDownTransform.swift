@@ -10,7 +10,7 @@ import Foundation
 
 struct MarkDownTransform {
     
-    static func text(at textView: MarkDownTextView) -> String {
+    static func text(at textView: MarkDownTextView, style: MarkDownStyle) -> String {
         var string = ""
         if let textLayout = textView.textLayout {
             // 不包含 控件 文本
@@ -25,6 +25,15 @@ struct MarkDownTransform {
                         string.insert(contentsOf: element.text, at: string.index(string.startIndex, offsetBy: location))
                         offset += element.text.count
                     }
+                }
+            }
+            
+        }
+        if let attributedString = textView.attributedText,
+            let font = style.attributes(with: .bold)?[.font] as? UIFont {
+            attributedString.enumerateAttribute(.font, in: attributedString.yy_rangeOfAll(), options: []) { (result, range, stop) in
+                if (result as? UIFont) == font {
+                    print("\(range), \(attributedString.attributedSubstring(from: range).string)")
                 }
             }
         }
