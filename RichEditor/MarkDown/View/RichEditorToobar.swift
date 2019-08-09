@@ -17,9 +17,20 @@ public class RichEditorToobar: UIView {
         case todo
         
         var elements: [MarkDownItem] {
-            return [.image, .header1, .header2, .header3, .undone,
-                    .separator, .ordered, .unordered, .bold, .highlighter,
-                    .italic, .underline, .strikethrough, .quote]
+            return [
+                .image,
+                .header1,
+                .header2,
+                .header3,
+                .undone,
+                .separator,
+                .ordered,
+                .unordered,
+                .bold,
+                .underline,
+                .strikethrough,
+                .quote
+            ]
         }
     }
     
