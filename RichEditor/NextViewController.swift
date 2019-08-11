@@ -10,9 +10,11 @@ import UIKit
 
 class NextViewController: UIViewController {
     
-    required init(attributedString: NSAttributedString) {
+    var string: String = ""
+    
+    required init(string: String) {
         super.init(nibName: nil, bundle: nil)
-        
+        self.string = string
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -22,6 +24,17 @@ class NextViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        let style = MarkDownStyle()
+        
+        
+        
+        let textView = MarkDownTextView(frame: CGRect(x: 50, y: 54, width: screenWidth - 70,
+                                                      height: screenHeight - 120), style: style)
+        view.addSubview(textView)
+        let parser = MarkDownParser(style: style)
+        textView.parseText(string, parser: parser)
+        
         
         let btn = UIButton(type: .custom)
         btn.setTitle("back", for: .normal)

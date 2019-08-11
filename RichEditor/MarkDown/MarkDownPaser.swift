@@ -8,43 +8,116 @@
 
 import Foundation
 
-class MarkDownParse: NSObject {
+class MarkDownParser: NSObject {
     let style: MarkDownStyle
     /// header
     var regexHeader: NSRegularExpression!
+    /// underline
+    var regexUnderline: NSRegularExpression!
+    /// separator
+    var regexSeparator: NSRegularExpression!
+    /// bold
+    var regexBold: NSRegularExpression!
+    /// strikethrough
+    var regexStrikethrough: NSRegularExpression!
+    /// ordered unordered
+    var regexList: NSRegularExpression!
+    /// quote
+    var regexQuote: NSRegularExpression!
     var elements: [MarkDownElement] = [ ]
     
     
     required init(style: MarkDownStyle) {
         self.style = style
-        regexHeader = try! NSRegularExpression(pattern: "^((\\#{1,6}[^#].*)|(\\#{6}.+))$", options: .anchorsMatchLines)
+        regexHeader = try! NSRegularExpression(pattern: "^((\\#{1,6}[^#].*)|(\\#{6}.+))$",
+                                               options: .anchorsMatchLines)
+        regexUnderline = try! NSRegularExpression(pattern: "(?<!_)__(?=[^ \\t_])(.+?)(?<=[^ \\t_])\\__(?!_)",
+                                                  options: .anchorsMatchLines)
+        regexSeparator = try! NSRegularExpression(pattern: "^[ \\t]*([*-])[ \\t]*((\\1)[ \\t]*){2,}[ \\t]*$",
+                                                  options: .anchorsMatchLines)
+        regexList = try! NSRegularExpression(pattern: "^[ \\t]*([*+-]|\\d+[.])[ \\t]+",
+                                                  options: .anchorsMatchLines)
+        regexQuote = try! NSRegularExpression(pattern: "^[ \\t]*>[ \\t>]", options: .anchorsMatchLines)
     }
     
     func parseText(_ text: String) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: text)
-        return attributedString
-    }
-    
-    func parseText(_ text: NSMutableAttributedString?,
-                   selectedRange: NSRangePointer?) -> Bool {
-        guard let text = text, text.length > 0 else { return false }
-        text.yy_font = style.font
-        text.yy_color = style.color
+        attributedString.yy_setAttributes(style.normalStyle)
         
-        regexHeader.enumerateMatches(in: text.string,
-                                     options: .init(rawValue: 0),
-                                     range: text.yy_rangeOfAll()) { [weak self] (result, flags, poniter) in
-                                        guard let weakSelf = self else { return }
-                                        if let resultRange = result?.range {
-                                            let header = MarkDownHeader(level: .header1, style: weakSelf.style)
-                                            weakSelf.setAttributes(text, item: .header1, range: NSRange(location: 0, length: 2))
-                                            text.replaceCharacters(in: NSRange(location: 0, length: 2),
-                                                                   with: header.attributedString!)
-                                            weakSelf.elements.append(header)
-                                        }
+        // header 标题
+        var headerOffset: Int = 0
+        regexHeader.enumerateMatches(in: attributedString.string, options: .init(rawValue: 0), range: attributedString.yy_rangeOfAll()) { (result, flags, poniter) in
+            if let resultRange = result?.range {
+                print(resultRange)
+                let location = resultRange.location + headerOffset
+                let string = attributedString.attributedSubstring(from: NSRange(location: location,
+                                                                                length: resultRange.length)).string
+                var raw = prefixLengh(of: Character("#"), in: string)
+                raw = min(raw, 3)
+                guard let item = MarkDownItem(rawValue: raw + 55) else { return }
+                print(item)
+                style.attributes(with: item)?.forEach({ (key, value) in
+                    attributedString.yy_setAttribute(key, value: value,
+                                                     range: NSRange(location: location, length: resultRange.length))
+                })
+                guard let level = MarkDownHeader.Level(item) else { return }
+                let header = MarkDownHeader(level: level, style: style)
+                attributedString.replaceCharacters(in: NSRange(location: location, length: raw + 1),
+                                                   with: header.attributedString!)
+
+                elements.append(header)
+                headerOffset -= raw
+            }
         }
         
-        return true
+        // ordered   unordered
+        var listOffset: Int = 0
+        regexList.enumerateMatches(in: attributedString.string, options: [], range: attributedString.yy_rangeOfAll()) { (result, flags, stop) in
+            if let range = result?.range {
+                print("有序 无序: \(range)")
+                
+                let location = range.location + listOffset
+                let list: MarkDownElement
+                if range.length > 2 {  // 有序
+                    let index = attributedString.attributedSubstring(from: NSRange(location: location, length: range.length)).string.dropLast(2).string.intValue
+                    list = MarkDownOrdered(style: style, index: index ?? 1)
+                } else {  // 无序
+                    list = MarkDownUnordered(style: style)
+                }
+                attributedString.replaceCharacters(in: NSRange(location: location, length: range.length),
+                                                   with: list.attributedString!)
+                elements.append(list)
+                listOffset = listOffset - range.length + 1
+            }
+        }
+        
+        // separator
+        var separatorOffset: Int = 0
+        regexSeparator.enumerateMatches(in: attributedString.string, options: [], range: attributedString.yy_rangeOfAll()) { (result, flags, stop) in
+            if let range = result?.range {
+                print("分割线: \(range)")
+                let location = range.location + separatorOffset
+                let separator = MarkDownSeparator(style: style, startLine: false, endLine: false)
+                attributedString.replaceCharacters(in: NSRange(location: location, length: range.length),
+                                                   with: separator.attributedString!)
+                elements.append(separator)
+                separatorOffset = separatorOffset - range.length + 1
+            }
+        }
+        
+        // Quote
+        var quoteOffset: Int = 0
+        regexQuote.enumerateMatches(in: attributedString.string, options: [], range: attributedString.yy_rangeOfAll()) { (result, flags, stop) in
+            if let range = result?.range {
+                let location = range.location + quoteOffset
+                let quote = MarkDownQuote(style: style)
+                attributedString.replaceCharacters(in: NSRange(location: location, length: range.length),
+                                                   with: quote.attributedString!)
+                elements.append(quote)
+                quoteOffset -= range.length - 1
+            }
+        }
+        return attributedString
     }
     
     func setAttributes(_ attributedString: NSMutableAttributedString,
@@ -59,6 +132,13 @@ class MarkDownParse: NSObject {
         }
     }
     
+    func prefixLengh(of char: Character, in string: String) -> Int {
+        for (offset, c) in string.enumerated() {
+            if c != char { return offset }
+        }
+        return string.count
+    }
+    
     func lenghOfBeginWhite(in string: String, with range: NSRange) -> Int {
         for index in 0..<range.length {
             let char = String((string as NSString).character(at: index + range.location))
@@ -69,5 +149,11 @@ class MarkDownParse: NSObject {
             }
         }
         return string.count
+    }
+}
+
+extension Substring {
+    var string: String {
+        return String(self)
     }
 }

@@ -169,7 +169,7 @@ extension MarkDownTextView {
     }
     
     /// 设置 mark down 文本
-    public func parseText(_ text: String, parser: MarkDownParse) {
+    public func parseText(_ text: String, parser: MarkDownParser) {
         let attributedString = parser.parseText(text)
         elements = parser.elements
         attributedText = attributedString

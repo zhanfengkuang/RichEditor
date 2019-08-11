@@ -186,7 +186,7 @@ class MarkDownSeparator: MarkDownElement {
     
     private var separator: UIView!
     
-    required init(style: MarkDownStyle) {
+    required init(style: MarkDownStyle, startLine: Bool = true, endLine: Bool = true) {
         self.style = style
         let separatorStyle = style.attributes[.separator] as? MarkDownSeparatorStyle ?? MarkDownSeparatorStyle()
         
@@ -194,13 +194,14 @@ class MarkDownSeparator: MarkDownElement {
         separator.tag = MarkDownItem.separator.rawValue
         separator.backgroundColor = separatorStyle.color
         separator.size = separatorStyle.size
-        attributedString = NSMutableAttributedString(string: "\n")
+        attributedString = NSMutableAttributedString(string: "")
         let string = NSMutableAttributedString.yy_attachmentString(withContent: separator,
                                                                          contentMode: .center,
                                                                          attachmentSize: separatorStyle.size,
                                                                          alignTo: .systemFont(ofSize: 15),
                                                                          alignment: .top)
-        string.append(NSAttributedString(string: "\n"))
+        if startLine { attributedString?.insert(NSAttributedString(string: "\n"), at: 0) }
+        if endLine { string.append(NSAttributedString(string: "\n")) }
         attributedString?.append(string)
     }
 }

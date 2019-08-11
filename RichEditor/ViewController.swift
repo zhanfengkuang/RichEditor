@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     /// text view
     var editor: MarkDownTextView!
     
+    var style: MarkDownStyle!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -26,9 +28,9 @@ class ViewController: UIViewController {
             self?.richEditorToolbar.jr_y = screenHeight - 60 - height
         }
         
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.editor = MarkDownTextView(frame: CGRect(x: 50, y: 54, width: screenWidth - 70, height: screenHeight - 120), style: .init())
+            self.style = MarkDownStyle()
+            self.editor = MarkDownTextView(frame: CGRect(x: 50, y: 54, width: screenWidth - 70, height: screenHeight - 120), style: self.style)
             self.editor.toolBar = self.richEditorToolbar
             self.view.insertSubview(self.editor, belowSubview: self.richEditorToolbar)
             self.richEditorToolbar.textView = self.editor
@@ -40,5 +42,8 @@ extension ViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
+        let string = MarkDownTransform.text(at: editor, style: style)
+        let vc = NextViewController(string: string)
+        present(vc, animated: true, completion: nil)
     }
 }
