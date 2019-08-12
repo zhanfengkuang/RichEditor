@@ -163,9 +163,9 @@ public struct MarkDownHeaderStyle: MarkDownElementStyle {
     var color: UIColor
     var size: CGSize
     
-    init(header1Font: UIFont = .boldSystemFont(ofSize: 17),
-         header2Font: UIFont = .boldSystemFont(ofSize: 16),
-         header3Font: UIFont = .boldSystemFont(ofSize: 15),
+    init(header1Font: UIFont = .boldSystemFont(ofSize: 18),
+         header2Font: UIFont = .boldSystemFont(ofSize: 17),
+         header3Font: UIFont = .boldSystemFont(ofSize: 16),
          color: UIColor = UIColor(hex: 0x6D7278),
          size: CGSize = CGSize(width: 25, height: 17)) {
         self.header1Font = header1Font

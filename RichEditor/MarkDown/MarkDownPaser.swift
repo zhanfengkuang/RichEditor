@@ -24,6 +24,10 @@ class MarkDownParser: NSObject {
     var regexList: NSRegularExpression!
     /// quote
     var regexQuote: NSRegularExpression!
+    /// done
+    var regexDone: NSRegularExpression!
+    /// undone
+    var regexUndone: NSRegularExpression!
     var elements: [MarkDownElement] = [ ]
     
     
@@ -37,7 +41,15 @@ class MarkDownParser: NSObject {
                                                   options: .anchorsMatchLines)
         regexList = try! NSRegularExpression(pattern: "^[ \\t]*([*+-]|\\d+[.])[ \\t]+",
                                                   options: .anchorsMatchLines)
-        regexQuote = try! NSRegularExpression(pattern: "^[ \\t]*>[ \\t>]", options: .anchorsMatchLines)
+        regexQuote = try! NSRegularExpression(pattern: "^((\\>{1,6}[^>].*)|(\\>{6}.+))$",
+                                              options: .anchorsMatchLines)
+//        regexDone = try! NSRegularExpression(pattern: "^((\\- [ ]{1,6}[^- [ ]].*)|(\\- [ ]{6}.+))$",
+//                                             options: .anchorsMatchLines)
+//        regexUndone = try! NSRegularExpression(pattern: "", options: .anchorsMatchLines)
+        regexBold = try! NSRegularExpression(pattern: "(?<!\\*)\\*{2}(?=[^ \\t*])(.+?)(?<=[^ \\t*])\\*{2}(?!\\*)",
+                                             options: .init(rawValue: 0))
+        regexStrikethrough = try! NSRegularExpression(pattern: "(?<!~)~~(?=[^ \\t~])(.+?)(?<=[^ \\t~])\\~~(?!~)",
+                                                      options: .init(rawValue: 0))
     }
     
     func parseText(_ text: String) -> NSAttributedString {
@@ -64,7 +76,7 @@ class MarkDownParser: NSObject {
                 let header = MarkDownHeader(level: level, style: style)
                 attributedString.replaceCharacters(in: NSRange(location: location, length: raw + 1),
                                                    with: header.attributedString!)
-
+                
                 elements.append(header)
                 headerOffset -= raw
             }
@@ -110,13 +122,86 @@ class MarkDownParser: NSObject {
         regexQuote.enumerateMatches(in: attributedString.string, options: [], range: attributedString.yy_rangeOfAll()) { (result, flags, stop) in
             if let range = result?.range {
                 let location = range.location + quoteOffset
+                let string = attributedString.attributedSubstring(from: NSRange(location: location, length: range.length)).string
+                let raw = prefixLengh(of: Character(">"), in: string)
+                // > 为引用 >> 不算引用
+                if raw > 1 { return }
                 let quote = MarkDownQuote(style: style)
-                attributedString.replaceCharacters(in: NSRange(location: location, length: range.length),
+                style.attributes(with: .quote)?.forEach({ (key, value) in
+                    attributedString.yy_setAttribute(key, value: value,
+                                                     range: NSRange(location: location, length: range.length))
+                })
+                attributedString.replaceCharacters(in: NSRange(location: location, length: 2),
                                                    with: quote.attributedString!)
                 elements.append(quote)
-                quoteOffset -= range.length - 1
+                quoteOffset -= 1
             }
         }
+        
+        // done
+//        regexDone.enumerateMatches(in: attributedString.string, options: [], range: attributedString.yy_rangeOfAll()) { (result, flags, stop) in
+//            if let range = result?.range {
+//                var location = range.location + boldOffset
+//                style.attributes(with: .bold)?.forEach({ (key, value) in
+//                    attributedString.yy_setAttribute(key, value: value, range: range)
+//                })
+//                attributedString.deleteCharacters(in: NSRange(location: location, length: 2))
+//                location -= 2
+//                var lenght: Int = location + range.length
+//                attributedString.deleteCharacters(in: NSRange(location: location - 2, length: ))
+//            }
+//        }
+        
+        //  !!!!!      underline  strikethrough bold  处理的顺序不能变   !!!!!
+        // underline
+        var underlineOffset: Int = 0
+        regexUnderline.enumerateMatches(in: attributedString.string, options: [], range: attributedString.yy_rangeOfAll()) { (result, flags, stop) in
+            if let range = result?.range {
+                let location = range.location + underlineOffset
+                style.attributes(with: .underline)?.forEach({ (key, value) in
+                    attributedString.yy_setAttribute(key, value: value, range: NSRange(location: location, length: range.length))
+                })
+                let firstRange = NSRange(location: location, length: 2)
+                attributedString.deleteCharacters(in: firstRange)
+                let secondRange = NSRange(location: location - 4 + range.length, length: 2)
+                attributedString.deleteCharacters(in: secondRange)
+                underlineOffset -= 4
+            }
+        }
+        
+        // strikethrough
+        var strikethroughOffset: Int = 0
+        regexStrikethrough.enumerateMatches(in: attributedString.string, options: [], range: attributedString.yy_rangeOfAll()) { (result, flags, stop) in
+            if let range = result?.range {
+                let location = range.location + strikethroughOffset
+                style.attributes(with: .strikethrough)?.forEach({ (key, value) in
+                    attributedString.yy_setAttribute(key, value: value, range: NSRange(location: location, length: range.length))
+                })
+                let firstRange = NSRange(location: location, length: 2)
+                attributedString.deleteCharacters(in: firstRange)
+                let secondRange = NSRange(location: location - 4 + range.length, length: 2)
+                attributedString.deleteCharacters(in: secondRange)
+                strikethroughOffset -= 4
+            }
+        }
+        
+        // bold
+        var boldOffset: Int = 0
+        regexBold.enumerateMatches(in: attributedString.string, options: [], range: attributedString.yy_rangeOfAll()) { (result, flags, stop) in
+            if let range = result?.range {
+                let location = range.location + boldOffset
+                style.attributes(with: .bold)?.forEach({ (key, value) in
+                    attributedString.yy_setAttribute(key, value: value,
+                                                     range: NSRange(location: location, length: range.length))
+                })
+                let firstRange = NSRange(location: location, length: 2)
+                attributedString.deleteCharacters(in: firstRange)
+                let secondRange = NSRange(location: location - 4 + range.length, length: 2)
+                attributedString.deleteCharacters(in: secondRange)
+                boldOffset -= 4
+            }
+        }
+        
         return attributedString
     }
     

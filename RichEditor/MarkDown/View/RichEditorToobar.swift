@@ -29,7 +29,8 @@ public class RichEditorToobar: UIView {
                 .bold,
                 .underline,
                 .strikethrough,
-                .quote
+                .quote,
+                
             ]
         }
     }

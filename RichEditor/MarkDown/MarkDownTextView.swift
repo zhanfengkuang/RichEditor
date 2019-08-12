@@ -323,6 +323,7 @@ extension MarkDownTextView {
 //        print("typing attributes: \(typingAttributes)")
         if text == "\n" {
             processor?.markAttributes.removeAll()
+            textView.typingAttributes = processor?.attributes
             // 换行清掉原有的 属性
             toolBar?.resetMark()
             if let element = processor?.element(range: currentParagraph()) {
