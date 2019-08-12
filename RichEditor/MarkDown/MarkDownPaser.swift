@@ -41,11 +41,12 @@ class MarkDownParser: NSObject {
                                                   options: .anchorsMatchLines)
         regexList = try! NSRegularExpression(pattern: "^[ \\t]*([*+-]|\\d+[.])[ \\t]+",
                                                   options: .anchorsMatchLines)
-        regexQuote = try! NSRegularExpression(pattern: "^((\\>{1,6}[^>].*)|(\\>{6}.+))$",
+        regexQuote = try! NSRegularExpression(pattern: "^[ \\t]>([>+-]|\\d+[.])[ \\t]+",
                                               options: .anchorsMatchLines)
-//        regexDone = try! NSRegularExpression(pattern: "^((\\- [ ]{1,6}[^- [ ]].*)|(\\- [ ]{6}.+))$",
-//                                             options: .anchorsMatchLines)
-//        regexUndone = try! NSRegularExpression(pattern: "", options: .anchorsMatchLines)
+        regexDone = try! NSRegularExpression(pattern: "((//|#|<!--|;|/\\*)\\s*($TAGS))|(^\\s*(-|\\*|\\+) \\[ \\] )",
+                                             options: .anchorsMatchLines)
+        regexUndone = try! NSRegularExpression(pattern: "((//|#|<!--|;|/\\*)\\s*($TAGS))|(^\\s*(-|\\*|\\+) \\[x\\] )",
+                                               options: .anchorsMatchLines)
         regexBold = try! NSRegularExpression(pattern: "(?<!\\*)\\*{2}(?=[^ \\t*])(.+?)(?<=[^ \\t*])\\*{2}(?!\\*)",
                                              options: .init(rawValue: 0))
         regexStrikethrough = try! NSRegularExpression(pattern: "(?<!~)~~(?=[^ \\t~])(.+?)(?<=[^ \\t~])\\~~(?!~)",
@@ -79,6 +80,32 @@ class MarkDownParser: NSObject {
                 
                 elements.append(header)
                 headerOffset -= raw
+            }
+        }
+        
+        // undone 未完成
+        var undoneOffset: Int = 0
+        regexUndone.enumerateMatches(in: attributedString.string, options: [], range: attributedString.yy_rangeOfAll()) { (result, flags, stop) in
+            if let range = result?.range {
+                let location = range.location + undoneOffset
+                let undone = MarkDownTodo(style: style, state: .undone)
+                attributedString.replaceCharacters(in: NSRange(location: location, length: range.length),
+                                                   with: undone.attributedString!)
+                elements.append(undone)
+                undoneOffset -= range.length - 1
+            }
+        }
+        
+        // done 已完成
+        var doneOffset: Int = 0
+        regexDone.enumerateMatches(in: attributedString.string, options: [], range: attributedString.yy_rangeOfAll()) { (result, flags, stop) in
+            if let range = result?.range {
+                let location = range.location + doneOffset
+                let done = MarkDownTodo(style: style, state: .done)
+                attributedString.replaceCharacters(in: NSRange(location: location, length: range.length),
+                                                   with: done.attributedString!)
+                elements.append(done)
+                doneOffset -= range.length - 1
             }
         }
         
