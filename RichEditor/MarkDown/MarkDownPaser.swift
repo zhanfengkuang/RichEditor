@@ -41,11 +41,11 @@ class MarkDownParser: NSObject {
                                                   options: .anchorsMatchLines)
         regexList = try! NSRegularExpression(pattern: "^[ \\t]*([*+-]|\\d+[.])[ \\t]+",
                                                   options: .anchorsMatchLines)
-        regexQuote = try! NSRegularExpression(pattern: "^[ \\t]>([>+-]|\\d+[.])[ \\t]+",
+        regexQuote = try! NSRegularExpression(pattern: "^((\\>{1,6}[^>].*)|(\\>{6}.+))$",
                                               options: .anchorsMatchLines)
-        regexDone = try! NSRegularExpression(pattern: "((//|#|<!--|;|/\\*)\\s*($TAGS))|(^\\s*(-|\\*|\\+) \\[ \\] )",
+        regexDone = try! NSRegularExpression(pattern: "((//|#|<!--|;|/\\*)\\s*($TAGS))|(^\\s*(-|\\*|\\+) \\[x\\] )",
                                              options: .anchorsMatchLines)
-        regexUndone = try! NSRegularExpression(pattern: "((//|#|<!--|;|/\\*)\\s*($TAGS))|(^\\s*(-|\\*|\\+) \\[x\\] )",
+        regexUndone = try! NSRegularExpression(pattern: "((//|#|<!--|;|/\\*)\\s*($TAGS))|(^\\s*(-|\\*|\\+) \\[ \\] )",
                                                options: .anchorsMatchLines)
         regexBold = try! NSRegularExpression(pattern: "(?<!\\*)\\*{2}(?=[^ \\t*])(.+?)(?<=[^ \\t*])\\*{2}(?!\\*)",
                                              options: .init(rawValue: 0))
@@ -68,7 +68,6 @@ class MarkDownParser: NSObject {
                 var raw = prefixLengh(of: Character("#"), in: string)
                 raw = min(raw, 3)
                 guard let item = MarkDownItem(rawValue: raw + 55) else { return }
-                print(item)
                 style.attributes(with: item)?.forEach({ (key, value) in
                     attributedString.yy_setAttribute(key, value: value,
                                                      range: NSRange(location: location, length: resultRange.length))
@@ -102,6 +101,10 @@ class MarkDownParser: NSObject {
             if let range = result?.range {
                 let location = range.location + doneOffset
                 let done = MarkDownTodo(style: style, state: .done)
+                let paragraphRange = (attributedString.string as NSString).paragraphRange(for: range)
+                if let value = style.attributes(with: .done)?[.foregroundColor] {
+                    attributedString.yy_setAttribute(.foregroundColor, value: value, range: paragraphRange)
+                }
                 attributedString.replaceCharacters(in: NSRange(location: location, length: range.length),
                                                    with: done.attributedString!)
                 elements.append(done)
@@ -164,20 +167,6 @@ class MarkDownParser: NSObject {
                 quoteOffset -= 1
             }
         }
-        
-        // done
-//        regexDone.enumerateMatches(in: attributedString.string, options: [], range: attributedString.yy_rangeOfAll()) { (result, flags, stop) in
-//            if let range = result?.range {
-//                var location = range.location + boldOffset
-//                style.attributes(with: .bold)?.forEach({ (key, value) in
-//                    attributedString.yy_setAttribute(key, value: value, range: range)
-//                })
-//                attributedString.deleteCharacters(in: NSRange(location: location, length: 2))
-//                location -= 2
-//                var lenght: Int = location + range.length
-//                attributedString.deleteCharacters(in: NSRange(location: location - 2, length: ))
-//            }
-//        }
         
         //  !!!!!      underline  strikethrough bold  处理的顺序不能变   !!!!!
         // underline

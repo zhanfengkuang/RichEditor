@@ -173,6 +173,27 @@ extension MarkDownTextView {
         let attributedString = parser.parseText(text)
         elements = parser.elements
         attributedText = attributedString
+        elements.forEach { (element) in
+            if let todo = element as? MarkDownTodo {
+                todo.tapBlock = { [weak self] button in
+                    guard let weakSelf = self,
+                        let paragraphRange = weakSelf.processor?.findElementRange(at: button) else { return }
+                    weakSelf.unmarkText()
+                    let oldRange = weakSelf.selectedRange
+                    let item: MarkDownItem = button.isSelected ? .done : .undone
+                    let attributedString = weakSelf.attributedText ?? NSAttributedString(string: "")
+                    let string = NSMutableAttributedString(attributedString: attributedString)
+                    weakSelf.processor?.addAttributed(string, at: item, in: paragraphRange)
+                    if item == .undone {
+                        string.yy_removeAttributes(YYTextStrikethroughAttributeName, range: paragraphRange)
+                    }
+                    weakSelf.attributedText = string
+                    weakSelf.selectedRange = oldRange
+                }
+            } else if let image = element as? MarkDownImage {
+                
+            }
+        }
     }
 }
 
